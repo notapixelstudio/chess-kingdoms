@@ -1,1 +1,2 @@
-# chess-kingdoms
+# Chess Kingdoms
+A game about chess
