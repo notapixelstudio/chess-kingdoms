@@ -13,6 +13,10 @@ config_version=3
 config/name="Chess Kingdoms"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "godot-git-control.funabab", "net.kivano.fsm", "vnen.tiled_importer" )
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

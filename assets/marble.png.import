@@ -7,10 +7,10 @@ path="res://.import/marble.png-a9006c85f620170fb5ed3057cd0581eb.stex"
 [deps]
 
 source_file="res://assets/marble.png"
-source_md5="415172582f4738d1d9f83201cd28a1a7"
+source_md5="b7af0f5855ae6168230e113ddbf1aade"
 
 dest_files=[ "res://.import/marble.png-a9006c85f620170fb5ed3057cd0581eb.stex" ]
-dest_md5="ae7b80122fe581ccb94cd13715b89581"
+dest_md5="70b9ae18683df98172f8a5caf7b719e1"
 
 [params]
 

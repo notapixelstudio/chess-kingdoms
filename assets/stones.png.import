@@ -7,10 +7,10 @@ path="res://.import/stones.png-5884876e6468d5369a94e31fba24afd3.stex"
 [deps]
 
 source_file="res://assets/stones.png"
-source_md5="dab40ccaf22de6c0eb0dd9a20e320002"
+source_md5="939ec4fe70a96d03e971a3fdebc271d3"
 
 dest_files=[ "res://.import/stones.png-5884876e6468d5369a94e31fba24afd3.stex" ]
-dest_md5="598165d83a97cbeb5d6d94432809a960"
+dest_md5="655e1b1b88bda23392e33f45aab3b968"
 
 [params]
 

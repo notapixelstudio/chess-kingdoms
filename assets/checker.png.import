@@ -7,10 +7,10 @@ path="res://.import/checker.png-7dcf8ccb90954474f03b6153c771f4ea.stex"
 [deps]
 
 source_file="res://assets/checker.png"
-source_md5="46d311ff299bf8465ffdeab691059306"
+source_md5="4b310ec4d52a2cbe1f749f14d8f1878a"
 
 dest_files=[ "res://.import/checker.png-7dcf8ccb90954474f03b6153c771f4ea.stex" ]
-dest_md5="2edc5a6a4c67ca95f323f36515661a1a"
+dest_md5="1639e6b34939241d043f7f4948599f2b"
 
 [params]
 

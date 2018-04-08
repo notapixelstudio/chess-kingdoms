@@ -1,0 +1,23 @@
+[remap]
+
+importer="vnen.tiled_importer"
+type="PackedScene"
+path="res://.import/chess-board.tmx-05211934eba010a518ecf9ab90759a45.scn"
+
+[deps]
+
+source_file="res://assets/chess-board.tmx"
+source_md5="ccd3127b148d366df90224a242c0942f"
+
+dest_files=[ "res://.import/chess-board.tmx-05211934eba010a518ecf9ab90759a45.scn" ]
+dest_md5="f6def0b11c77dd9230d1730152d8014e"
+
+[params]
+
+custom_properties=true
+tile_metadata=true
+uv_clip=true
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=true
+post_import_script=""

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://TileMap.gd" type="Script" id=1]
-[ext_resource path="res://GridVisualizer.gd" type="Script" id=2]
+[ext_resource path="res://assets/chess-board.tmx" type="PackedScene" id=2]
+[ext_resource path="res://GridVisualizer.gd" type="Script" id=3]
 
 [sub_resource type="TileSet" id=1]
 
@@ -31,8 +32,10 @@ tile_data = PoolIntArray(  )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Cell" ]
 
-[node name="Node2D" type="Node2D" parent="TileMap" index="0"]
+[node name="chess-board" parent="." index="1" instance=ExtResource( 2 )]
 
-script = ExtResource( 2 )
+[node name="Node2D" type="Node2D" parent="chess-board" index="1"]
+
+script = ExtResource( 3 )
 
 
