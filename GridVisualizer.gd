@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var grid = get_parent()
+onready var grid = get_parent().get_parent()
 
 func _draw():
 	var LINE_COLOR = Color(255, 255, 255)

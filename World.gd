@@ -1,6 +1,9 @@
-extends TileMap
+extends Node
 
 
+onready var tile_size = $ChessBoard/board.get_cell_size()
+var half_tile_size
+var grid_size = Vector2(8, 8)
 
 func _ready():
 	# Called every time the node is added to the scene.
