@@ -19,6 +19,7 @@ Examples: Steel Plating (2x1 targeted spell, affected pieces with no shield gain
 
 ### Kingdom
 Available kingdoms: Ruby, Emerald, Sapphire, Amber
+
 Cards can also be Neutral
 
 [TBD]
