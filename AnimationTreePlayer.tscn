@@ -1,0 +1,93 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends AnimationTreePlayer
+
+const BLEND2 = \"blend2\"
+const SPEED = \"speed\"
+
+var tween
+
+var transitioning = false
+
+var current_anim
+var next_anim = \"\"
+
+func _ready():
+	active = true
+	current_anim = node_get_input_source(BLEND2, 0)	
+	tween = Tween.new()
+	add_child(tween)		
+	tween.connect(\"tween_completed\", self, \"_transition_completed\")
+
+func set_animation(anim, time = 1.0, speed = 1.0):
+	if transitioning || anim.to_lower() == current_anim:
+		return false
+	next_anim = anim.to_lower()
+	
+	timescale_node_set_scale(SPEED, speed)
+	set_blend(0.0)
+	connect_nodes(current_anim, BLEND2, 0)
+	connect_nodes(next_anim, BLEND2, 1)
+	transitioning = true
+	tween.interpolate_method(self, \"set_blend\", 0.0, 1.0, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	return true
+
+func override_animation(anim, speed):
+	timescale_node_set_scale(SPEED, speed)
+	current_anim = anim
+	connect_nodes(current_anim, BLEND2, 0)
+	set_blend(0.0)
+
+func set_blend(x):
+	blend2_node_set_amount(BLEND2, x)
+
+func _transition_completed(obj, key):
+	transitioning = false
+	current_anim = next_anim
+	next_anim = null"
+
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" index="0"]
+
+playback_process_mode = 1
+master_player = NodePath("")
+base_path = NodePath("..")
+active = false
+data = {
+"active": false,
+"connections": [ "blend2", "speed", 0, "speed", "out", 0, "idle", "blend2", 0, "rest", "blend2", 1 ],
+"master": NodePath(""),
+"nodes": [ {
+"id": "speed",
+"position": Vector2( 326, 66 ),
+"scale": 1.0,
+"type": "timescale"
+}, {
+"animation": null,
+"filter": [  ],
+"id": "idle",
+"position": Vector2( 34, 47 ),
+"type": "animation"
+}, {
+"animation": null,
+"filter": [  ],
+"id": "rest",
+"position": Vector2( 32, 172 ),
+"type": "animation"
+}, {
+"id": "out",
+"position": Vector2( 495, 66 ),
+"type": "output"
+}, {
+"blend": 0.0,
+"filter": [  ],
+"id": "blend2",
+"position": Vector2( 196, 56 ),
+"type": "blend2"
+} ]
+}
+script = SubResource( 1 )
+
+
