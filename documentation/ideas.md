@@ -26,8 +26,8 @@ Cards can also be Neutral
 Per ogni reame ci vogliono uno o due temi, da sviluppare in un punto di forza e uno di debolezza
 Tipo  La meccanica potrebbe essere che molti suoi pezzi hanno due unità tempo (quindi fanno due azioni per turno). La debolezza potrebbe essere che le mosse sono complessivamente più "corte" in termini di numero di caselle attraversate. Dato il legame giallo-velocità-fulmini farei molto pezzi con mosse oblique, e quindi un altra debolezza potrebbe essere che il giallo tende ad essere colorbound come il classico alfiere
 (a partire dal Re... Immaginati un Re che muove solo di uno in obliquo ma che ha un'altra abilità tipo che usa una sua unità tempo per muovere un altro pezzo... Boom)
----
-Scrivo qui la mia attuale idea per i reami:
+
+Esempio per i reami:
 - amber (giallo - Elettrico): il giallo per me ha velocità e flessibilità come tema. veloci (2 TU in molti pezzi), obliqui, corti, colorbound - reame di gente furba e atletica
 - ruby (rosso - Terra): tough (2 HP in molti pezzi), dritti tipo torre, corti, non-leaping (niente mosse stile cavallo) - reame di gente grossa e forte
 - emerald (verde - Erba): swarming (gioca più pezzi del normale), pezzi spesso deboli o addirittura immobili (piante), pezzi che richiedono altri pezzi per funzionare - reame in contatto con la natura stile elfi
