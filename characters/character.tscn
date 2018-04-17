@@ -139,9 +139,11 @@ playback/speed = 1.0
 
 [node name="Pivot" type="Position2D" parent="." index="2"]
 
+_sections_unfolded = [ "Transform" ]
+
 [node name="Body" type="Sprite" parent="Pivot" index="0"]
 
-position = Vector2( 0.0858154, -0.196381 )
+position = Vector2( 0, -11.6835 )
 texture = ExtResource( 2 )
 offset = Vector2( -0.544521, -55.6007 )
 
