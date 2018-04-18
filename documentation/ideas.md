@@ -40,6 +40,21 @@ nitaku - Yesterday at 13:00
 
 [TBD]
 
+### Fairy Pieces
+
+- [Camel](https://en.wikipedia.org/wiki/Camel_(chess))
+- [Kamikaze piece](http://www.mayhematics.com/v/gm.htm)
+- [Locust](http://www.chessvariants.com/piececlopedia.dir/locust.html) - The Locust can not move without capturing
+- [Squirrel](http://www.chessvariants.com/piececlopedia.dir/squirrel.html)
+- [Joker](http://www.mayhematics.com/v/gm.htm) Piece that has no move of its own but takes the powers of the last piece moved (by the opponent).
+- Wall - piece that cannot move
+- [AMPHIBIAN](http://www.mayhematics.com/v/gm.htm) - Combined piece with greater teritorial range than its components. The simplest cases are {0,3} combined with {1,1}, {0,2}, {2,2} or {1,3}. See Frog.
+- [Immobilizer](http://www.chessvariants.com/piececlopedia.dir/immobilizer.html)  - Pieces standing near an immobilizer may not move 
+- The eye - Immobilizer in a straight line
+- [Griffon](http://www.chessvariants.com/piececlopedia.dir/griffon.html) -  Historic piece that steps one space diagonally then slides like a Rook.
+- [Gold General](http://www.chessvariants.com/piececlopedia.dir/goldgeneral.html). Shogi piece that moves one square but not diagonally backwards.
+
+
 ### Side
 Available sides: White, Black
 
