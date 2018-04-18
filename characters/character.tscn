@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://characters/character.gd" type="Script" id=1]
-[ext_resource path="res://characters/npc/body.png" type="Texture" id=2]
+[ext_resource path="res://assets/chess/chess_piece_2_black_knight.png" type="Texture" id=2]
 [ext_resource path="res://characters/shadow.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
@@ -94,9 +94,9 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 0.466516, 2.28288 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -1 ), Vector2( 0, -11.83 ) ]
+"values": [ Vector2( -0.526489, 41.1203 ), Vector2( 0.52652, 35.5554 ) ]
 }
 
 [sub_resource type="RectangleShape2D" id=6]
@@ -143,9 +143,11 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Body" type="Sprite" parent="Pivot" index="0"]
 
-position = Vector2( 0, -11.8117 )
+position = Vector2( -0.292561, 39.8841 )
+scale = Vector2( 1.45501, 1.40664 )
 texture = ExtResource( 2 )
 offset = Vector2( -0.544521, -55.6007 )
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
 
 [node name="Shadow" type="Sprite" parent="." index="3"]
 

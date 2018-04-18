@@ -16,7 +16,12 @@ config/icon="res://assets/chess/chess_piece_2_black_queen.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "godot-git-control.funabab", "godot-inheritance-dock", "net.kivano.fsm", "vnen.tiled_importer" )
+enabled=PoolStringArray( "godot-git-control.funabab", "net.kivano.fsm", "vnen.tiled_importer" )
+
+[input]
+
+pause=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"unicode":0,"echo":false,"script":null)
+ ]
 
 [rendering]
 
