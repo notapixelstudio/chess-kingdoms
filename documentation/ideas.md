@@ -53,6 +53,13 @@ nitaku - Yesterday at 13:00
 - The eye - Immobilizer in a straight line
 - [Griffon](http://www.chessvariants.com/piececlopedia.dir/griffon.html) -  Historic piece that steps one space diagonally then slides like a Rook.
 - [Gold General](http://www.chessvariants.com/piececlopedia.dir/goldgeneral.html). Shogi piece that moves one square but not diagonally backwards.
+- [Mine](https://retro-gamer.deviantart.com/art/Fairy-Chess-Pieces-350585748): The Mine can move 1 square at a time in any direction. At any time, during your turn, you can choose to "dentonate" the mine which takes the mine out of the game and any other pieces (including your own) that may be in the surrounding 8 squares.
+- [Doppelganger](https://retro-gamer.deviantart.com/art/Fairy-Chess-Pieces-350585748): The Doppelganger acts just like a pawn and is hidden amongst your set of 8 pawns. (The only thing distinguishing the doppelganger from any other pawn is a dot on the bottom of the piece hidden from the other player) When an opponent's piece goes to capture this piece, their piece is removed from the board instead. (This only works for the first time)
+- Paladin: The Paladin has a very interesting move-set. The Paladin can move two squares diagonally in any direction and then move one square either vertically or horizontally. (Somewhat confusing.)
+- Wizard: The Wizard has two moves in which it can use. It can either move in a (3,1) or (1,3) "L" shaped pattern. (like a knight, but extended) or it can move one square diagonally in any direction.
+- Dragon: The Dragon can "fly" to any unoccupied square on the board. This takes up one turn. On the next turn, the Dragon can attack move one square in any direction to capture any piece. (This piece cannot check.)
+- Assassin: The assassin moves exactly like a bishop. But, this piece has the ability to hop over pieces (like a knight) and after capturing a piece it can move one square diagonally in any direction as a sort of "get-away".
+- Wall: The Wall takes up a 2x2 square on the board and it does not move. After a certain number of moves (maybe 5? 10?) the Wall is placed anywhere on your side of the board. (It cannot take up any occupied squares and it cannot be captured. It is only used to get in the way of other's pieces.)
 
 
 ### Side
