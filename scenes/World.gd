@@ -69,10 +69,34 @@ func _input(event):
 			cursor_map.set_cellv(pos, 11)
 			last_cursor_pos = pos
 		
-		
-	
 	if event.is_action_pressed("pause"):
 		if get_tree().is_paused():
 			get_tree().set_pause(false)
 		else:
 			get_tree().set_pause(true)
+
+func get_legal_moves():
+	# function that get the json for the legal moves. 
+	# return array of cells where the piece can move.
+	pass
+
+func move():
+	pass
+
+func update_board():
+	pass
+
+func load(file_path):
+	# example of file path: "res://Ress/panelTextn2.json"
+	# ref: https://godotengine.org/qa/8291/how-to-parse-a-json-file-i-wrote-myself
+	
+	var dict = {}	
+	var file = File.new()
+	file.open(file_path, file.READ)
+	var text = file.get_as_text()
+	dict.parse_json(text)
+	file.close()
+	return dict
+
+func save():
+	pass
