@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shadow.png-9b88bc6b24165e21f04edb7eaa0e0cce.stex"
+path="res://.import/body.png-ce8059061909318edd66b271d5485f45.stex"
 
 [deps]
 
-source_file="res://characters/shadow.png"
-source_md5="ba1c3f4ef3a93dcd980bc4d020c4a22c"
+source_file="res://scenes/characters/npc/body.png"
+source_md5="dc50cbfceb38e32c39942236ea83815c"
 
-dest_files=[ "res://.import/shadow.png-9b88bc6b24165e21f04edb7eaa0e0cce.stex" ]
-dest_md5="7dd3fb33b53c00ce76edd77833bce15d"
+dest_files=[ "res://.import/body.png-ce8059061909318edd66b271d5485f45.stex" ]
+dest_md5="b5f4838605195e5009d24d70f85f86cb"
 
 [params]
 
