@@ -14,6 +14,10 @@ config/name="Kingdoms of Shadoran"
 run/main_scene="res://scenes/World.tscn"
 config/icon="res://assets/chess/chess_piece_2_black_queen.png"
 
+[autoload]
+
+controller="*res://scenes/Controller.gd"
+
 [editor_plugins]
 
 enabled=PoolStringArray( "godot-git-control.funabab", "net.kivano.fsm", "vnen.tiled_importer" )

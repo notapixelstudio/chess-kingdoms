@@ -60,3 +60,5 @@ func _physics_process(delta):
 			is_moving = false
 		move_and_collide(velocity)
 	
+def move():
+		
