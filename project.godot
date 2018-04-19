@@ -16,7 +16,7 @@ config/icon="res://assets/chess/chess_piece_2_black_queen.png"
 
 [autoload]
 
-controller="*res://scenes/Controller.gd"
+model="*res://scenes/Model.gd"
 
 [editor_plugins]
 

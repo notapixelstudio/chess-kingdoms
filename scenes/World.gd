@@ -1,3 +1,5 @@
+# World.gd
+# This is the controller. It will handle the state, getting data and modifying the model
 extends Node2D
 
 # cursor
@@ -8,8 +10,6 @@ var cursor_map
 var tile_size
 var half_tile_size
 
-var grid_size = Vector2(8, 8)
-var grid = []
 var map
 var tiledict
 
@@ -24,12 +24,6 @@ func _ready():
 	# in order to put the object at the center
 	half_tile_size = tile_size / 2
 	
-	# 1. Create the grid Array
-	for x in range(grid_size.x):
-		grid.append([])
-		for y in range(grid_size.y):
-			grid[x].append(null)
-	
 	var start_pos = update_child_pos($Character)
 	$Character.position = start_pos
 	
@@ -43,9 +37,9 @@ func is_cell_vacant(pos, direction):
 	var solid = tile_id in tiledict and tiledict[tile_id]["solid"]
 	
 	# world boundaries
-	if grid_pos.x < grid_size.x and grid_pos.x >=0:
-		if grid_pos.y < grid_size.y and grid_pos.y >=0:
-			return grid[grid_pos.x][grid_pos.y] == null and not solid
+	if grid_pos.x < controller.grid_size.x and grid_pos.x >=0:
+		if grid_pos.y < controller.grid_size.y and grid_pos.y >=0:
+			return model.grid[grid_pos.x][grid_pos.y] == null and not solid
 			
 	return false
 	
@@ -53,10 +47,10 @@ func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
 	# Returns the new target world position of the child
 	var grid_pos = map.world_to_map(child_node.position)
-	grid[grid_pos.x][grid_pos.y] = null
+	model.grid[grid_pos.x][grid_pos.y] = null
 	
 	var new_grid_pos = grid_pos + child_node.direction
-	grid[new_grid_pos.x][new_grid_pos.y] = child_node.type
+	model.grid[new_grid_pos.x][new_grid_pos.y] = child_node.type
 	
 	var target_pos = map.map_to_world(new_grid_pos) + half_tile_size
 	return target_pos
@@ -74,29 +68,3 @@ func _input(event):
 			get_tree().set_pause(false)
 		else:
 			get_tree().set_pause(true)
-
-func get_legal_moves():
-	# function that get the json for the legal moves. 
-	# return array of cells where the piece can move.
-	pass
-
-func move():
-	pass
-
-func update_board():
-	pass
-
-func load(file_path):
-	# example of file path: "res://Ress/panelTextn2.json"
-	# ref: https://godotengine.org/qa/8291/how-to-parse-a-json-file-i-wrote-myself
-	
-	var dict = {}	
-	var file = File.new()
-	file.open(file_path, file.READ)
-	var text = file.get_as_text()
-	dict.parse_json(text)
-	file.close()
-	return dict
-
-func save():
-	pass
