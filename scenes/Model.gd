@@ -19,7 +19,6 @@ func _ready():
 	# load the piece definition
 	piece_defs = load_JSON(PIECE_DEF_JSON)
 	
-	
 	king = Piece.instance()
 	king.piece_name = "king"
 	grid[king.position.x][king.position.y] = king.piece_name

@@ -23,10 +23,14 @@ func _ready():
 	
 	# in order to put the object at the center
 	half_tile_size = tile_size / 2
-	
+	print(model.king.position)
+	model.king.position = map.map_to_world(Vector2(4,7))
+	print(model.king.position)
 	var start_pos = update_child_pos(model.king)
+	print(start_pos)
 	model.king.position = start_pos
 	add_child(model.king)
+	print(model.grid)
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -51,7 +55,7 @@ func update_child_pos(child_node):
 	model.grid[grid_pos.x][grid_pos.y] = null
 	
 	var new_grid_pos = grid_pos + child_node.direction
-	model.grid[new_grid_pos.x][new_grid_pos.y] = child_node.type
+	model.grid[new_grid_pos.x][new_grid_pos.y] = child_node.piece_name
 	
 	var target_pos = map.map_to_world(new_grid_pos) + half_tile_size
 	return target_pos
