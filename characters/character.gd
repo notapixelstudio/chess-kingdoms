@@ -9,7 +9,7 @@ const DOWN = Vector2(0, -1)
 const LEFT = Vector2(-1, 0)
 
 
-const MAX_SPEED = 400
+const MAX_SPEED = 4
 
 var speed = 0
 var velocity = Vector2()

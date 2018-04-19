@@ -1,10 +1,14 @@
-extends Node
+extends Node2D
 
+# cursor
+var cursor_shape = [Vector2(0,-1),Vector2(0,0),Vector2(0,1)]
+var last_cursor_pos = Vector2(0,0)
+var cursor_map
 
 var tile_size
 var half_tile_size
 
-var grid_size = Vector2(33, 25)
+var grid_size = Vector2(8, 8)
 var grid = []
 var map
 var tiledict
@@ -15,6 +19,7 @@ func _ready():
 	map = get_node("ChessBoard/board")
 	tiledict = map.get_tileset().get_meta('tile_meta')
 	tile_size = map.get_cell_size()
+	cursor_map = get_node("ChessBoard/cursor")
 	
 	# in order to put the object at the center
 	half_tile_size = tile_size / 2
@@ -57,6 +62,15 @@ func update_child_pos(child_node):
 	return target_pos
 
 func _input(event):
+	
+	if event is InputEventMouseButton:
+		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
+		if pos != last_cursor_pos:	
+			cursor_map.set_cellv(pos, 11)
+			last_cursor_pos = pos
+		
+		
+	
 	if event.is_action_pressed("pause"):
 		if get_tree().is_paused():
 			get_tree().set_pause(false)
