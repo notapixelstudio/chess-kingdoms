@@ -2,6 +2,12 @@ extends KinematicBody2D
 
 var direction = Vector2()
 
+const WALK = "walk"
+const IDLE = "idle"
+const SETUP = "setup"
+const ATTACK = "attack"
+const DIE = "die"
+const STAGGER = "stagger"
 
 const TOP = Vector2(0, -1)
 const RIGHT = Vector2(1, 0)
@@ -19,13 +25,30 @@ var target_direction = Vector2()
 var is_moving = false
 
 var type
+var side
 var battlefield
 
+# Structure of the piece
+var piece_name
+
+export var baseScale = 1
+onready var representation = get_node("AnimationPlayer")
+onready var pivot = get_node("Pivot")
 
 func _ready():
+	representation.play(SETUP)
 	battlefield = get_parent()
-	type = battlefield.PLAYER
+	representation.play("summon")
 
+func animate(keyword, repeat=false):
+	if representation.has_animation(keyword) and not representation.is_playing():
+		representation.play(keyword)
+
+func face_left():
+	pivot.scale = Vector2(-baseScale, baseScale)
+
+func face_right():
+	pivot.scale = Vector2(baseScale, baseScale)
 	
 func _physics_process(delta):
 	direction = Vector2()
@@ -59,6 +82,10 @@ func _physics_process(delta):
 			velocity.y = distance_to_target.y * target_direction.y
 			is_moving = false
 		move_and_collide(velocity)
-	
-def move():
-		
+
+func move():
+	pass
+
+func _on_Character_mouse_entered():
+	model.get_legal_moves()
+	print("eccoti qua player")

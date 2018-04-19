@@ -7,11 +7,11 @@ func _draw():
 	var LINE_WIDTH = 2
 	var window_size = OS.get_window_size()
 
-	for x in range(grid.grid_size.x + 1):
+	for x in range(model.grid_size.x + 1):
 		var col_pos = x * grid.tile_size.x
-		var limit = grid.grid_size.y * grid.tile_size.y
+		var limit = model.grid_size.y * grid.tile_size.y
 		draw_line(Vector2(col_pos, 0), Vector2(col_pos, limit), LINE_COLOR, LINE_WIDTH)
-	for y in range(grid.grid_size.y + 1):
+	for y in range(model.grid_size.y + 1):
 		var row_pos = y * grid.tile_size.y
-		var limit = grid.grid_size.x * grid.tile_size.x
+		var limit = model.grid_size.x * grid.tile_size.x
 		draw_line(Vector2(0, row_pos), Vector2(limit, row_pos), LINE_COLOR, LINE_WIDTH)

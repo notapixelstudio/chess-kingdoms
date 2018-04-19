@@ -1,5 +1,5 @@
 # World.gd
-# This is the controller. It will handle the state, getting data and modifying the model
+# This is the model. It will handle the state, getting data and modifying the model
 extends Node2D
 
 # cursor
@@ -24,8 +24,9 @@ func _ready():
 	# in order to put the object at the center
 	half_tile_size = tile_size / 2
 	
-	var start_pos = update_child_pos($Character)
-	$Character.position = start_pos
+	var start_pos = update_child_pos(model.king)
+	model.king.position = start_pos
+	add_child(model.king)
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -37,8 +38,8 @@ func is_cell_vacant(pos, direction):
 	var solid = tile_id in tiledict and tiledict[tile_id]["solid"]
 	
 	# world boundaries
-	if grid_pos.x < controller.grid_size.x and grid_pos.x >=0:
-		if grid_pos.y < controller.grid_size.y and grid_pos.y >=0:
+	if grid_pos.x < model.grid_size.x and grid_pos.x >=0:
+		if grid_pos.y < model.grid_size.y and grid_pos.y >=0:
 			return model.grid[grid_pos.x][grid_pos.y] == null and not solid
 			
 	return false

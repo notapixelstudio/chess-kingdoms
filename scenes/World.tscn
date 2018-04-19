@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/World.gd" type="Script" id=1]
 [ext_resource path="res://assets/chess-board.tmx" type="PackedScene" id=2]
 [ext_resource path="res://assets/chess-board.gd" type="Script" id=3]
 [ext_resource path="res://scenes/GridVisualizer.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Camera2D.gd" type="Script" id=5]
-[ext_resource path="res://scenes/characters/character.tscn" type="PackedScene" id=6]
 
 [node name="World" type="Node2D" index="0"]
 
@@ -46,10 +45,5 @@ editor_draw_limits = false
 editor_draw_drag_margin = false
 script = ExtResource( 5 )
 _sections_unfolded = [ "Limit", "Smoothing" ]
-
-[node name="Character" parent="." index="2" instance=ExtResource( 6 )]
-
-position = Vector2( 289.203, 417.886 )
-scale = Vector2( 1, 0.94889 )
 
 
