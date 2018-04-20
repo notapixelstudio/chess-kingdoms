@@ -3,7 +3,7 @@
 extends Node2D
 
 # cursor
-var cursor_shape = [Vector2(0,-1),Vector2(0,0),Vector2(0,1)]
+var cursor_shape
 var last_cursor_pos = Vector2(0,0)
 var cursor_map
 
@@ -25,6 +25,7 @@ func _ready():
 	half_tile_size = tile_size / 2
 	print(model.king.position)
 	model.king.position = map.map_to_world(Vector2(4,7))
+	model.grid[4][7] = model.king.piece_name
 	print(model.king.position)
 	var start_pos = update_child_pos(model.king)
 	print(start_pos)
@@ -60,6 +61,30 @@ func update_child_pos(child_node):
 	var target_pos = map.map_to_world(new_grid_pos) + half_tile_size
 	return target_pos
 
+func show_legal_moves(piece, legal_moves):
+	var grid_pos = map.world_to_map(piece.position)
+	for cell in legal_moves:
+		cursor_map.set_cellv(cell + grid_pos, 11)
+	
+func reset_cells(piece):
+	var grid_pos = map.world_to_map(piece.position)
+	for cell in cursor_shape:
+		cursor_map.set_cellv(cell + grid_pos, -1)
+	cursor_shape= []
+	
+func get_legal_moves(piece):
+	var legal_moves = []
+	for pos in piece.moves:
+		var step = Vector2(pos["step"].front(), pos["step"].back())
+		if is_cell_vacant(piece.position, step):
+			legal_moves.append(step)
+	show_legal_moves(piece, legal_moves)
+	cursor_shape = legal_moves
+	return legal_moves
+
+func is_within_the_grid(pos):
+	return pos.x >= 0 and pos.x < model.grid_size.x and pos.y >= 0 and pos.y < model.grid_size.y
+	
 func _input(event):
 	
 	if event is InputEventMouseButton:

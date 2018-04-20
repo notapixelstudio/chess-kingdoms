@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/characters/character.gd" type="Script" id=1]
-[ext_resource path="res://assets/chess/chess_piece_2_black_knight.png" type="Texture" id=2]
+[ext_resource path="res://assets/chess/chess_piece_2_black_queen.png" type="Texture" id=2]
 [ext_resource path="res://scenes/characters/shadow.png" type="Texture" id=3]
 [ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=4]
 [ext_resource path="res://addons/net.kivano.fsm/assets/ico2d.png" type="Texture" id=5]
@@ -49,7 +49,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=3]
 
 resource_name = "idle"
-length = 1.0
+length = 2.0
 loop = true
 step = 0.1
 tracks/0/type = "value"
@@ -59,10 +59,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -1 ), Vector2( 0, 8 ) ]
+"values": [ Vector2( 0, 43 ), Vector2( 0, 34 ), Vector2( 0, 43 ) ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -144,9 +144,9 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=6]
 
 custom_solver_bias = 0.0
-extents = Vector2( 13.6319, 5.50682 )
+extents = Vector2( 7.15493, 34.6039 )
 
-[node name="Piece" type="KinematicBody2D" groups=[
+[node name="Piece" type="KinematicBody2D" index="0" groups=[
 "character",
 ]]
 
@@ -188,7 +188,7 @@ _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
 [node name="Body" type="Sprite" parent="Pivot" index="0"]
 
-position = Vector2( 0, 3.70166 )
+position = Vector2( 0, 38.9431 )
 scale = Vector2( 1.45501, 1.40664 )
 texture = ExtResource( 2 )
 offset = Vector2( -0.544521, -55.6007 )
@@ -203,14 +203,18 @@ texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
 
-position = Vector2( -1, -7.69296 )
+position = Vector2( -0.860466, -36.8646 )
+scale = Vector2( 4.22328, 1 )
 shape = SubResource( 6 )
 
 [node name="FSM2D" type="Node2D" parent="." index="5"]
 
+editor/display_folded = true
+position = Vector2( 0, -15.975 )
 script = ExtResource( 4 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
+"_edit_group_": true,
 "_editor_icon": ExtResource( 5 )
 }
 path2LogicRoot = NodePath("..")
@@ -275,6 +279,8 @@ GraphData = {
 
 [node name="States" type="Node2D" parent="FSM2D" index="0"]
 
+editor/display_folded = true
+
 [node name="Idle" type="Node" parent="FSM2D/States" index="0" instance=ExtResource( 6 )]
 
 script = ExtResource( 7 )
@@ -296,6 +302,9 @@ script = ExtResource( 13 )
 script = ExtResource( 15 )
 
 [node name="Transitions" type="Node2D" parent="FSM2D" index="1"]
+
+editor/display_folded = true
+position = Vector2( -0.69458, -11.8076 )
 
 [node name="onMovement" type="Node" parent="FSM2D/Transitions" index="0" instance=ExtResource( 16 )]
 
@@ -340,6 +349,8 @@ path2TargetState = NodePath("../../States/Dead")
 intervalBetweenChecks = -1.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_Character_mouse_entered"]
+
+[connection signal="mouse_exited" from="." to="." method="_on_Piece_mouse_exited"]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="FSM2D/Transitions/onAnimationEnd" method="_on_AnimationPlayer_animation_finished"]
 

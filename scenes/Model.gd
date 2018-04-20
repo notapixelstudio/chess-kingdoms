@@ -6,6 +6,7 @@ var grid_size = Vector2(8, 8)
 var grid = []
 var piece_defs = {}
 
+const MOVES = "moves"
 const PIECE_DEF_JSON = "res://assets/logic/piece_def.json"
 
 onready var Piece = preload("res://scenes/characters/character.tscn")
@@ -21,16 +22,15 @@ func _ready():
 	
 	king = Piece.instance()
 	king.piece_name = "king"
-	grid[king.position.x][king.position.y] = king.piece_name
+	# grid[king.position.x][king.position.y] = king.piece_name
 	print(piece_defs[king.piece_name])
 	# REMEMBER to add_child to the root
             
-func get_legal_moves(piece):
+func get_legal_moves(piece_name):
 	# function that get the json for the legal moves. 
 	# return array of cells where the piece can move.
-	var d = load(PIECE_DEF_JSON)
-	d[piece]
-	pass
+	return piece_defs[piece_name][MOVES]
+	
 
 func move():
 	pass

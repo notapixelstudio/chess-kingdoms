@@ -30,6 +30,8 @@ var battlefield
 
 # Structure of the piece
 var piece_name
+var moves
+var legal_moves
 
 export var baseScale = 1
 onready var representation = get_node("AnimationPlayer")
@@ -39,6 +41,7 @@ func _ready():
 	representation.play(SETUP)
 	battlefield = get_parent()
 	representation.play("summon")
+	moves = model.get_legal_moves(self.piece_name)
 
 func animate(keyword, repeat=false):
 	if representation.has_animation(keyword) and not representation.is_playing():
@@ -87,5 +90,12 @@ func move():
 	pass
 
 func _on_Character_mouse_entered():
-	model.get_legal_moves()
-	print("eccoti qua player")
+	print("hover " + self.piece_name)
+	legal_moves = get_node("/root/World").get_legal_moves(self)
+	print(legal_moves)
+	
+	
+func _on_Piece_mouse_exited():
+	print("hover " + self.piece_name)
+	legal_moves = get_node("/root/World").reset_cells(self)
+	print(legal_moves)
