@@ -32,6 +32,7 @@ var battlefield
 var piece_name
 var moves
 var legal_moves
+var pos_in_the_grid
 
 export var baseScale = 1
 onready var representation = get_node("AnimationPlayer")
@@ -90,12 +91,8 @@ func move():
 	pass
 
 func _on_Character_mouse_entered():
-	print("hover " + self.piece_name)
 	legal_moves = get_node("/root/World").get_legal_moves(self)
-	print(legal_moves)
 	
 	
 func _on_Piece_mouse_exited():
-	print("hover " + self.piece_name)
-	legal_moves = get_node("/root/World").reset_cells(self)
-	print(legal_moves)
+	legal_moves = get_node("/root/World").reset_cells()

@@ -6,6 +6,7 @@ var grid_size = Vector2(8, 8)
 var grid = []
 var piece_defs = {}
 
+var battlefield
 const MOVES = "moves"
 const PIECE_DEF_JSON = "res://assets/logic/piece_def.json"
 
@@ -30,10 +31,19 @@ func get_legal_moves(piece_name):
 	# function that get the json for the legal moves. 
 	# return array of cells where the piece can move.
 	return piece_defs[piece_name][MOVES]
-	
 
-func move():
-	pass
+
+func move(piece, new_pos):
+	# this function needs to exist . but I need the grid! and the map! 
+	# maybe we need the grid position for the piece?
+	print(piece.piece_name + " is going to move")
+	print(piece.pos_in_the_grid)
+	print(new_pos)
+	grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = null
+	grid[new_pos.x][new_pos.y] = piece
+	piece.pos_in_the_grid = new_pos
+	print(grid)
+	
 
 func summon():
 	pass

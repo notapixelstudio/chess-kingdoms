@@ -4,8 +4,11 @@ extends Node2D
 
 # cursor
 var cursor_shape
-var last_cursor_pos = Vector2(0,0)
 var cursor_map
+var last_cursor_pos
+var possible_moves
+
+var selected_piece
 
 var tile_size
 var half_tile_size
@@ -23,15 +26,11 @@ func _ready():
 	
 	# in order to put the object at the center
 	half_tile_size = tile_size / 2
-	print(model.king.position)
 	model.king.position = map.map_to_world(Vector2(4,7))
-	model.grid[4][7] = model.king.piece_name
-	print(model.king.position)
+	model.grid[4][7] = model.king
 	var start_pos = update_child_pos(model.king)
-	print(start_pos)
 	model.king.position = start_pos
 	add_child(model.king)
-	print(model.grid)
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -56,8 +55,9 @@ func update_child_pos(child_node):
 	model.grid[grid_pos.x][grid_pos.y] = null
 	
 	var new_grid_pos = grid_pos + child_node.direction
-	model.grid[new_grid_pos.x][new_grid_pos.y] = child_node.piece_name
+	model.grid[new_grid_pos.x][new_grid_pos.y] = child_node
 	
+	child_node.pos_in_the_grid = new_grid_pos
 	var target_pos = map.map_to_world(new_grid_pos) + half_tile_size
 	return target_pos
 
@@ -66,10 +66,12 @@ func show_legal_moves(piece, legal_moves):
 	for cell in legal_moves:
 		cursor_map.set_cellv(cell + grid_pos, 11)
 	
-func reset_cells(piece):
-	var grid_pos = map.world_to_map(piece.position)
-	for cell in cursor_shape:
-		cursor_map.set_cellv(cell + grid_pos, -1)
+func reset_cells(force = false):
+	if not selected_piece or force:
+		possible_moves = []
+		for x in range(model.grid_size.x):
+			for y in range(model.grid_size.y):
+				cursor_map.set_cellv(Vector2(x,y), -1)
 	cursor_shape= []
 	
 func get_legal_moves(piece):
@@ -84,15 +86,42 @@ func get_legal_moves(piece):
 
 func is_within_the_grid(pos):
 	return pos.x >= 0 and pos.x < model.grid_size.x and pos.y >= 0 and pos.y < model.grid_size.y
+
+func select_piece(piece):
+	var moves_in_the_grid = []
+	for movement in get_legal_moves(piece):
+		moves_in_the_grid.append(map.world_to_map(piece.position) + movement)
+	print(moves_in_the_grid)
+	possible_moves = moves_in_the_grid
 	
+
 func _input(event):
-	
+	# this is case of moving
 	if event is InputEventMouseButton:
-		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
-		if pos != last_cursor_pos:	
-			cursor_map.set_cellv(pos, 11)
-			last_cursor_pos = pos
+		pass
 		
+	if event.is_action_pressed("select_piece"):
+		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
+		var selected_cell = model.grid[pos.x][pos.y]
+		if selected_cell and not selected_piece:
+			selected_piece = selected_cell
+			select_piece(selected_piece)
+			print("there is something here: " + selected_piece.piece_name)
+			print(possible_moves)
+		elif selected_piece and pos in possible_moves:
+			model.move(selected_piece, pos)
+			selected_piece.is_moving = true
+			selected_piece.position = map.map_to_world(pos) + half_tile_size
+			update_child_pos(selected_piece)
+			possible_moves = []
+			selected_piece = null
+			reset_cells()
+
+
+		else: 
+			selected_piece = null
+			possible_moves = []
+			reset_cells(true)
 	if event.is_action_pressed("pause"):
 		if get_tree().is_paused():
 			get_tree().set_pause(false)
