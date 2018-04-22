@@ -15,7 +15,7 @@ const DOWN = Vector2(0, -1)
 const LEFT = Vector2(-1, 0)
 
 
-const MAX_SPEED = 1
+const MAX_SPEED = 0.5
 
 var speed = 0
 var velocity = Vector2()
@@ -44,9 +44,8 @@ func _ready():
 	representation.play("summon")
 	moves = model.get_legal_moves(self.piece_name)
 
-func animate(keyword, repeat=false):
-	if representation.has_animation(keyword) and not representation.is_playing():
-		representation.play(keyword)
+func animate(keyword):
+	representation.play(keyword)
 
 func face_left():
 	pivot.scale = Vector2(-baseScale, baseScale)
