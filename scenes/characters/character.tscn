@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/characters/character.gd" type="Script" id=1]
 [ext_resource path="res://assets/chess/chess_piece_2_black_queen.png" type="Texture" id=2]
@@ -6,28 +6,18 @@
 [ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=4]
 [ext_resource path="res://addons/net.kivano.fsm/assets/ico2d.png" type="Texture" id=5]
 [ext_resource path="res://scenes/characters/FSM/states/Idle/Idle.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/characters/FSM/states/Idle/Idle.gd" type="Script" id=7]
-[ext_resource path="res://scenes/characters/FSM/states/Summoned/Summoned.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/characters/FSM/states/Summoned/Summoned.gd" type="Script" id=9]
-[ext_resource path="res://scenes/characters/FSM/states/Walking/Walking.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/characters/FSM/states/Walking/Walking.gd" type="Script" id=11]
-[ext_resource path="res://scenes/characters/FSM/states/Attack/Attack.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/characters/FSM/states/Attack/Attack.gd" type="Script" id=13]
-[ext_resource path="res://scenes/characters/FSM/states/Dead/Dead.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/characters/FSM/states/Dead/Dead.gd" type="Script" id=15]
-[ext_resource path="res://scenes/characters/FSM/transitions/onMovement/onMovement.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/characters/FSM/transitions/onMovement/onMovement.gd" type="Script" id=17]
-[ext_resource path="res://scenes/characters/FSM/transitions/onMovementEnd/onMovementEnd.tscn" type="PackedScene" id=18]
-[ext_resource path="res://scenes/characters/FSM/transitions/onMovementEnd/onMovementEnd.gd" type="Script" id=19]
-[ext_resource path="res://scenes/characters/FSM/transitions/onAttack/onAttack.tscn" type="PackedScene" id=20]
-[ext_resource path="res://scenes/characters/FSM/transitions/onAttack/onAttack.gd" type="Script" id=21]
-[ext_resource path="res://scenes/characters/FSM/transitions/onEnemyExist/onEnemyExist.tscn" type="PackedScene" id=22]
-[ext_resource path="res://scenes/characters/FSM/transitions/onEnemyExist/onEnemyExist.gd" type="Script" id=23]
-[ext_resource path="res://scenes/characters/FSM/transitions/onAttackEnd/onAttackEnd.tscn" type="PackedScene" id=24]
-[ext_resource path="res://scenes/characters/FSM/transitions/onDeadHit/onDeadHit.tscn" type="PackedScene" id=25]
-[ext_resource path="res://scenes/characters/FSM/transitions/onDeadHit/onDeadHit.gd" type="Script" id=26]
+[ext_resource path="res://scenes/characters/FSM/states/Summoned/Summoned.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/characters/FSM/states/Walking/Walking.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/characters/FSM/states/Attack/Attack.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/characters/FSM/states/Dead/Dead.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/characters/FSM/transitions/onMovement/onMovement.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/characters/FSM/transitions/onMovementEnd/onMovementEnd.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/characters/FSM/transitions/onAttack/onAttack.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/characters/FSM/transitions/onEnemyExist/onEnemyExist.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/characters/FSM/transitions/onAttackEnd/onAttackEnd.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/characters/FSM/transitions/onDeadHit/onDeadHit.tscn" type="PackedScene" id=16]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 
 resource_name = "die"
 length = 1.0
@@ -46,7 +36,7 @@ tracks/0/keys = {
 "values": [ Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ), Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ), Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ), Color( 0.925781, 0.0614777, 0.203277, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 
 resource_name = "idle"
 length = 2.0
@@ -65,9 +55,8 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 43 ), Vector2( 0, 34 ), Vector2( 0, 43 ) ]
 }
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=3]
 
-resource_name = "setup"
 length = 1.0
 loop = false
 step = 0.1
@@ -103,7 +92,7 @@ tracks/0/keys = {
 "values": [ Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ), Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ), Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 
 resource_name = "summon"
 length = 4.0
@@ -122,9 +111,8 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 
-resource_name = "walk"
 length = 0.3
 loop = true
 step = 0.05
@@ -141,7 +129,7 @@ tracks/0/keys = {
 "values": [ Vector2( -0.526489, 41.1203 ), Vector2( 0.52652, 35.5554 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 
 custom_solver_bias = 0.0
 extents = Vector2( 7.15493, 34.6039 )
@@ -165,12 +153,12 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/die = SubResource( 2 )
-anims/idle = SubResource( 3 )
-anims/setup = SubResource( 1 )
+anims/die = SubResource( 1 )
+anims/idle = SubResource( 2 )
+anims/setup = SubResource( 3 )
 anims/stagger = SubResource( 4 )
-anims/summon = SubResource( 7 )
-anims/walk = SubResource( 5 )
+anims/summon = SubResource( 5 )
+anims/walk = SubResource( 6 )
 blend_times = [  ]
 
 [node name="Tween" type="Tween" parent="." index="1"]
@@ -205,7 +193,7 @@ texture = ExtResource( 3 )
 
 position = Vector2( -0.860466, -36.8646 )
 scale = Vector2( 4.22328, 1 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="FSM2D" type="Node2D" parent="." index="5"]
 
@@ -227,122 +215,162 @@ enableDebug = false
 "Create new:/Create state with name:" = null
 "Create new:/Create transition with name:" = null
 GraphData = {
-"Attack": Vector2( 363, 497 ),
-"Attack_": Vector2( 363, 497 ),
-"Attack__": Vector2( 363, 497 ),
-"Dead": Vector2( 70, 248 ),
-"Dead_": Vector2( 70, 248 ),
-"Dead__": Vector2( 70, 248 ),
-"Idle": Vector2( 354, 139 ),
+"Attack": Vector2( 665, 484 ),
+"Attack_": Vector2( 665, 484 ),
+"Attack__": Vector2( 665, 484 ),
+"Dead": Vector2( 125, 597 ),
+"Dead_": Vector2( 125, 597 ),
+"Dead__": Vector2( 125, 597 ),
+"Idle": Vector2( 370, 101 ),
 "Idle2": Vector2( -9, 27 ),
 "Idle2_": Vector2( -9, 27 ),
 "Idle2__": Vector2( -9, 27 ),
-"Idle_": Vector2( 354, 139 ),
-"Idle__": Vector2( 390, 237 ),
+"Idle_": Vector2( 370, 101 ),
+"Idle__": Vector2( 370, 101 ),
 "Null": Vector2( 602, 249 ),
 "Null2": Vector2( -9, 27 ),
 "Null2_": Vector2( -9, 27 ),
 "Null2__": Vector2( -9, 27 ),
 "Null_": Vector2( 602, 249 ),
 "Null__": Vector2( 602, 249 ),
-"Summoned": Vector2( 627, 15 ),
+"Summoned": Vector2( 358, 485 ),
 "Summoned2": Vector2( 32, -6 ),
 "Summoned2_": Vector2( 32, -6 ),
 "Summoned2__": Vector2( 32, -6 ),
-"Summoned_": Vector2( 627, 15 ),
-"Summoned__": Vector2( 362, 19 ),
-"Walking": Vector2( 822, 259 ),
-"Walking_": Vector2( 822, 259 ),
-"Walking__": Vector2( 760, 188 ),
-"onAnimationEnd": Vector2( 598, 242 ),
-"onAnimationEnd_": Vector2( 598, 242 ),
-"onAttack": Vector2( 365, 372 ),
-"onAttackEnd": Vector2( 52, 127 ),
-"onAttackEnd_": Vector2( 52, 127 ),
-"onAttackEnd__": Vector2( 169, 439 ),
-"onAttack_": Vector2( 365, 372 ),
-"onAttack__": Vector2( 364, 375 ),
+"Summoned_": Vector2( 358, 485 ),
+"Summoned__": Vector2( 358, 485 ),
+"Walking": Vector2( 965, 198 ),
+"Walking_": Vector2( 965, 198 ),
+"Walking__": Vector2( 965, 198 ),
+"onAnimationEnd": Vector2( 366, 305 ),
+"onAnimationEnd_": Vector2( 366, 305 ),
+"onAnimationEnd__": Vector2( 366, 305 ),
+"onAttack": Vector2( 757, 323 ),
+"onAttackEnd": Vector2( 95, 55 ),
+"onAttackEnd_": Vector2( 95, 55 ),
+"onAttackEnd__": Vector2( 95, 55 ),
+"onAttack_": Vector2( 757, 323 ),
+"onAttack__": Vector2( 757, 323 ),
 "onDeadHit": Vector2( 130, 383 ),
 "onDeadHit_": Vector2( 130, 383 ),
-"onDeadHit__": Vector2( 215, 146 ),
-"onEnemyExist": Vector2( 779, 481 ),
-"onEnemyExist_": Vector2( 779, 481 ),
-"onEnemyExist__": Vector2( 638, 417 ),
-"onMovement": Vector2( 827, 96 ),
-"onMovementEnd": Vector2( 567, 292 ),
-"onMovementEnd_": Vector2( 567, 292 ),
-"onMovementEnd__": Vector2( 567, 292 ),
-"onMovement_": Vector2( 827, 96 ),
-"onMovement__": Vector2( 551, 86 )
+"onDeadHit__": Vector2( 130, 383 ),
+"onEnemyExist": Vector2( 938, 481 ),
+"onEnemyExist_": Vector2( 938, 481 ),
+"onEnemyExist__": Vector2( 938, 481 ),
+"onMovement": Vector2( 925, 66 ),
+"onMovementEnd": Vector2( 672, 177 ),
+"onMovementEnd_": Vector2( 672, 177 ),
+"onMovementEnd__": Vector2( 672, 177 ),
+"onMovement_": Vector2( 925, 66 ),
+"onMovement__": Vector2( 925, 66 )
 }
 
 [node name="States" type="Node2D" parent="FSM2D" index="0"]
 
-[node name="Idle" type="Node" parent="FSM2D/States" index="0" instance=ExtResource( 6 )]
+[node name="Idle" parent="FSM2D/States" index="0" instance=ExtResource( 6 )]
 
-script = ExtResource( 7 )
+[node name="Summoned" parent="FSM2D/States" index="1" instance=ExtResource( 7 )]
 
-[node name="Summoned" type="Node" parent="FSM2D/States" index="1" instance=ExtResource( 8 )]
+[node name="Walking" parent="FSM2D/States" index="2" instance=ExtResource( 8 )]
 
-script = ExtResource( 9 )
+[node name="Attack" parent="FSM2D/States" index="3" instance=ExtResource( 9 )]
 
-[node name="Walking" type="Node" parent="FSM2D/States" index="2" instance=ExtResource( 10 )]
-
-script = ExtResource( 11 )
-
-[node name="Attack" type="Node" parent="FSM2D/States" index="3" instance=ExtResource( 12 )]
-
-script = ExtResource( 13 )
-
-[node name="Dead" type="Node" parent="FSM2D/States" index="4" instance=ExtResource( 14 )]
-
-script = ExtResource( 15 )
+[node name="Dead" parent="FSM2D/States" index="4" instance=ExtResource( 10 )]
 
 [node name="Transitions" type="Node2D" parent="FSM2D" index="1"]
 
 position = Vector2( -0.69458, -11.8076 )
 
-[node name="onMovement" type="Node" parent="FSM2D/Transitions" index="0" instance=ExtResource( 16 )]
+[node name="onMovement" parent="FSM2D/Transitions" index="0" instance=ExtResource( 11 )]
 
-script = ExtResource( 17 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Walking")
-intervalBetweenChecks = -1.0
 
-[node name="onAnimationEnd" type="Node" parent="FSM2D/Transitions" index="1" instance=ExtResource( 18 )]
+[node name="onAnimationEnd" parent="FSM2D/Transitions" index="1" instance=ExtResource( 12 )]
 
-script = ExtResource( 19 )
-path2SourceStates = [ NodePath(""), NodePath("../../States/Walking"), NodePath("../../States/Summoned"), NodePath("../../States/Attack") ]
+path2SourceStates = [ NodePath(""), NodePath("../../States/Summoned"), NodePath("../../States/Attack") ]
 path2TargetState = NodePath("../../States/Idle")
-intervalBetweenChecks = -1.0
 
-[node name="onAttack" type="Node" parent="FSM2D/Transitions" index="2" instance=ExtResource( 20 )]
+[node name="onAttack" parent="FSM2D/Transitions" index="2" instance=ExtResource( 13 )]
 
-script = ExtResource( 21 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Attack")
-intervalBetweenChecks = -1.0
 
-[node name="onEnemyExist" type="Node" parent="FSM2D/Transitions" index="3" instance=ExtResource( 22 )]
+[node name="onEnemyExist" parent="FSM2D/Transitions" index="3" instance=ExtResource( 14 )]
 
-script = ExtResource( 23 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/Walking") ]
 path2TargetState = NodePath("../../States/Attack")
-intervalBetweenChecks = -1.0
 
-[node name="onAttackEnd" type="Node" parent="FSM2D/Transitions" index="4" instance=ExtResource( 24 )]
+[node name="onAttackEnd" parent="FSM2D/Transitions" index="4" instance=ExtResource( 15 )]
 
-script = ExtResource( 19 )
-path2SourceStates = [ NodePath("") ]
-path2TargetState = null
-intervalBetweenChecks = -1.0
+[node name="onDeadHit" parent="FSM2D/Transitions" index="5" instance=ExtResource( 16 )]
 
-[node name="onDeadHit" type="Node" parent="FSM2D/Transitions" index="5" instance=ExtResource( 25 )]
-
-script = ExtResource( 26 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Dead")
-intervalBetweenChecks = -1.0
+
+[node name="onMovementEnd" parent="FSM2D/Transitions" index="6" instance=ExtResource( 12 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/Walking") ]
+path2TargetState = NodePath("../../States/Idle")
+
+[node name="StateInfo" type="Container" parent="." index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -25.0
+margin_top = -13.0
+margin_right = 33.0
+margin_bottom = 6.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="StateInfo" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 3.0
+margin_right = 58.0
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+
+[node name="Label" type="Label" parent="StateInfo" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_right = 48.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "state"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors" ]
 
 [connection signal="mouse_entered" from="." to="." method="_on_Character_mouse_entered"]
 

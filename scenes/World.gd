@@ -109,7 +109,10 @@ func _input(event):
 			print("there is something here: " + selected_piece.piece_name)
 			print(possible_moves)
 		elif selected_piece and pos in possible_moves:
+			# this piece is going to move
 			model.move(selected_piece, pos)
+			selected_piece.is_moving = true
+			selected_piece.target_pos = pos
 			selected_piece.is_moving = true
 			selected_piece.position = map.map_to_world(pos) + half_tile_size
 			update_child_pos(selected_piece)

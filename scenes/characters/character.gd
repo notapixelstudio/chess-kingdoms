@@ -85,6 +85,7 @@ func _physics_process(delta):
 		if abs(velocity.y) > distance_to_target.y: 
 			velocity.y = distance_to_target.y * target_direction.y
 			is_moving = false
+			target_pos = Vector2()
 		move_and_collide(velocity)
 
 func move():
