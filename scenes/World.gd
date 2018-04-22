@@ -26,11 +26,11 @@ func _ready():
 	
 	# in order to put the object at the center
 	half_tile_size = tile_size / 2
-	model.king.position = map.map_to_world(Vector2(4,7))
-	model.grid[4][7] = model.king
-	var start_pos = update_child_pos(model.king)
-	model.king.position = start_pos
-	add_child(model.king)
+	model.player1.position = map.map_to_world(Vector2(4,7))
+	model.grid[4][7] = model.player1
+	var start_pos = update_child_pos(model.player1)
+	model.player1.position = start_pos
+	add_child(model.player1)
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -82,12 +82,15 @@ func get_legal_moves(piece):
 	for pos in piece.moves:
 		var step = Vector2(pos["step"].front(), pos["step"].back())
 		if pos.has("repeat"):
-			print("give me repeat")
+			var repeated_step = Vector2()
 			for x in range(model.grid_size.x):
+				repeated_step.x = step.x * x + step.x
 				for y in range(model.grid_size.y):
-					var repeated_step = Vector2(step.x * (step.x + x), step.y * (step.y + y))
+					repeated_step.y = step.y * y + step.y
+					print(repeated_step)
 					if is_cell_vacant(piece.position, repeated_step):
 						legal_moves.append(repeated_step)
+	print("legals:")
 	print(legal_moves)
 	show_legal_moves(piece, legal_moves)
 	cursor_shape = legal_moves

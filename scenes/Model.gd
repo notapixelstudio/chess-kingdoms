@@ -11,7 +11,7 @@ const MOVES = "moves"
 const PIECE_DEF_JSON = "res://assets/logic/piece_def.json"
 
 onready var Piece = preload("res://scenes/characters/character.tscn")
-var king 
+var player1 
 func _ready():
 	# Create the grid Array with null in it.
 	for x in range(grid_size.x):
@@ -21,10 +21,10 @@ func _ready():
 	# load the piece definition
 	piece_defs = load_JSON(PIECE_DEF_JSON)
 	
-	king = Piece.instance()
-	king.piece_name = "rook"
-	# grid[king.position.x][king.position.y] = king.piece_name
-	print(piece_defs[king.piece_name])
+	player1 = Piece.instance()
+	player1.piece_name = "rook"
+	# grid[player1.position.x][player1.position.y] = player1.piece_name
+	print(piece_defs[player1.piece_name])
 	# REMEMBER to add_child to the root
             
 func get_legal_moves(piece_name):
