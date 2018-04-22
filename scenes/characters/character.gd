@@ -72,12 +72,10 @@ func _physics_process(delta):
 		# target_pos = battlefield.update_child_pos(self)
 		is_moving = true
 	elif is_moving:
-		print(velocity)
 		speed = MAX_SPEED
 		velocity = speed * direction
 		var pos = position
 		var distance_to_target = Vector2(abs(target_pos.x - position.x), abs(target_pos.y - pos.y))
-		print(distance_to_target)
 		if distance_to_target == Vector2():
 			is_moving = false
 		if abs(velocity.x) > distance_to_target.x: 

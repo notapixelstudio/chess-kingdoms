@@ -64,8 +64,10 @@ func update_child_pos(child_node):
 
 func show_legal_moves(piece, legal_moves):
 	var grid_pos = map.world_to_map(piece.position)
+	print(legal_moves)
 	for cell in legal_moves:
-		cursor_map.set_cellv(cell + grid_pos, 11)
+		print(cell+grid_pos)
+		cursor_map.set_cellv(cell + grid_pos, 4)
 	
 func reset_cells(force = false):
 	if not selected_piece or force:
@@ -108,7 +110,6 @@ func _input(event):
 			selected_piece = selected_cell
 			select_piece(selected_piece)
 			print("there is something here: " + selected_piece.piece_name)
-			print(possible_moves)
 		elif selected_piece and pos in possible_moves:
 			# this piece is going to move
 			selected_piece.target_pos_in_the_grid = pos

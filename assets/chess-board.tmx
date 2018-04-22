@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="8" height="8" tilewidth="64" tileheight="64" infinite="0" nextobjectid="1">
- <tileset firstgid="1" source="chess-board.tsx"/>
- <layer name="board" width="8" height="8">
-  <data encoding="csv">
-1,5,1,5,1,5,1,5,
-5,1,5,1,5,1,5,1,
-1,5,1,5,1,5,1,5,
-5,1,5,1,5,1,5,1,
-1,5,1,5,1,5,1,5,
-5,1,5,1,5,1,5,1,
-1,5,1,5,1,5,1,5,
-5,1,5,1,5,1,5,1
-</data>
- </layer>
+ <tileset firstgid="1" source="chess_tileset.tsx"/>
  <layer name="cursor" width="8" height="8">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,
@@ -23,6 +11,18 @@
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="board" width="8" height="8">
+  <data encoding="csv">
+5,13,5,13,5,13,5,13,
+13,5,13,5,13,5,13,5,
+5,13,5,13,5,13,5,13,
+13,5,13,5,13,5,13,5,
+5,13,5,13,5,13,5,13,
+13,5,13,5,13,5,13,5,
+5,13,5,13,5,13,5,13,
+13,5,13,5,13,5,13,5
 </data>
  </layer>
 </map>
