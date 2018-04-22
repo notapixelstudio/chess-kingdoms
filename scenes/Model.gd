@@ -22,7 +22,7 @@ func _ready():
 	piece_defs = load_JSON(PIECE_DEF_JSON)
 	
 	king = Piece.instance()
-	king.piece_name = "knight"
+	king.piece_name = "rook"
 	# grid[king.position.x][king.position.y] = king.piece_name
 	print(piece_defs[king.piece_name])
 	# REMEMBER to add_child to the root

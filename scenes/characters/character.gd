@@ -43,6 +43,8 @@ func _ready():
 	battlefield = get_parent()
 	representation.play("summon")
 	moves = model.get_legal_moves(self.piece_name)
+	side = "white"
+	$Pivot/Body.texture = load("res://assets/chess/chess_piece_2_"+side+"_"+piece_name+".png")
 
 func animate(keyword):
 	representation.play(keyword)
@@ -89,6 +91,7 @@ func _physics_process(delta):
 		move_and_collide(velocity)
 
 func _on_Character_mouse_entered():
+	print("area entered")
 	legal_moves = get_node("/root/World").get_legal_moves(self)
 	
 	

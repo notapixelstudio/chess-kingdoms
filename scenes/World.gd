@@ -81,8 +81,14 @@ func get_legal_moves(piece):
 	var legal_moves = []
 	for pos in piece.moves:
 		var step = Vector2(pos["step"].front(), pos["step"].back())
-		if is_cell_vacant(piece.position, step):
-			legal_moves.append(step)
+		if pos.has("repeat"):
+			print("give me repeat")
+			for x in range(model.grid_size.x):
+				for y in range(model.grid_size.y):
+					var repeated_step = Vector2(step.x * (step.x + x), step.y * (step.y + y))
+					if is_cell_vacant(piece.position, repeated_step):
+						legal_moves.append(repeated_step)
+	print(legal_moves)
 	show_legal_moves(piece, legal_moves)
 	cursor_shape = legal_moves
 	return legal_moves

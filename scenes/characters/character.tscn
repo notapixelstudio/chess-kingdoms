@@ -135,7 +135,7 @@ tracks/0/keys = {
 custom_solver_bias = 0.0
 extents = Vector2( 7.15493, 34.6039 )
 
-[node name="Piece" type="KinematicBody2D" groups=[
+[node name="Piece" type="KinematicBody2D" index="0" groups=[
 "character",
 ]]
 
@@ -186,21 +186,21 @@ _sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
 
 [node name="StateInfo" type="Container" parent="Pivot/Body" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -17.1086
-margin_top = -36.898
-margin_right = 40.8914
-margin_bottom = -17.898
+margin_left = -31.0
+margin_top = -35.0
+margin_right = 27.0
+margin_bottom = -17.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
+mouse_filter = 2
+mouse_default_cursor_shape = 16
 size_flags_horizontal = 1
 size_flags_vertical = 1
+_sections_unfolded = [ "Focus", "Mouse" ]
 __meta__ = {
 "_edit_group_": true
 }
@@ -216,11 +216,12 @@ margin_right = 58.0
 margin_bottom = 12.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "Mouse" ]
 
 [node name="Label" type="Label" parent="Pivot/Body/StateInfo" index="1"]
 
@@ -242,7 +243,7 @@ text = "state"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors" ]
+_sections_unfolded = [ "Focus", "Mouse", "custom_colors" ]
 
 [node name="Shadow" type="Sprite" parent="." index="3"]
 
@@ -253,13 +254,14 @@ texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
 
-position = Vector2( -0.860466, -36.8646 )
-scale = Vector2( 4.22328, 1 )
+position = Vector2( -0.410531, -0.940865 )
+scale = Vector2( 4.43212, 1 )
 shape = SubResource( 7 )
 
 [node name="FSM2D" type="Node2D" parent="." index="5"]
 
-position = Vector2( 0, -15.975 )
+visible = false
+position = Vector2( 1.67087, 1.56916 )
 script = ExtResource( 4 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
