@@ -15,13 +15,12 @@ const DOWN = Vector2(0, -1)
 const LEFT = Vector2(-1, 0)
 
 
-const MAX_SPEED = 4
+const MAX_SPEED = 1
 
 var speed = 0
 var velocity = Vector2()
 
 var target_pos = Vector2()
-var target_direction = Vector2()
 var is_moving = false
 
 var type
@@ -33,6 +32,7 @@ var piece_name
 var moves
 var legal_moves
 var pos_in_the_grid
+var target_pos_in_the_grid
 
 export var baseScale = 1
 onready var representation = get_node("AnimationPlayer")
@@ -55,7 +55,6 @@ func face_right():
 	pivot.scale = Vector2(baseScale, baseScale)
 	
 func _physics_process(delta):
-	direction = Vector2()
 	speed = 0
 	
 	if Input.is_action_just_pressed("ui_up"):
@@ -68,28 +67,29 @@ func _physics_process(delta):
 	elif Input.is_action_just_pressed("ui_right"):
 		direction.x = 1
 
-	if not is_moving and direction != Vector2():
-		target_direction = direction
-		if battlefield.is_cell_vacant(position, target_direction):
-			target_pos = battlefield.update_child_pos(self)
-			is_moving = true
+	if not is_moving and target_pos != Vector2():
+		# Actually I think target_pos cannot be NON vacant
+		# if battlefield.is_cell_vacant(position, target_pos):
+		# target_pos = battlefield.update_child_pos(self)
+		is_moving = true
 	elif is_moving:
+		print(velocity)
 		speed = MAX_SPEED
-		velocity = speed * target_direction
+		velocity = speed * direction
 		var pos = position
 		var distance_to_target = Vector2(abs(target_pos.x - position.x), abs(target_pos.y - pos.y))
-		if abs(velocity.x) > distance_to_target.x: 
-			velocity.x = distance_to_target.x * target_direction.x
+		print(distance_to_target)
+		if distance_to_target == Vector2():
 			is_moving = false
-
+		if abs(velocity.x) > distance_to_target.x: 
+			velocity.x = distance_to_target.x * target_pos.x
+			is_moving = false
+			target_pos = Vector2()
 		if abs(velocity.y) > distance_to_target.y: 
-			velocity.y = distance_to_target.y * target_direction.y
+			velocity.y = distance_to_target.y * target_pos.y
 			is_moving = false
 			target_pos = Vector2()
 		move_and_collide(velocity)
-
-func move():
-	pass
 
 func _on_Character_mouse_entered():
 	legal_moves = get_node("/root/World").get_legal_moves(self)

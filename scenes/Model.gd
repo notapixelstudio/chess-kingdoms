@@ -22,7 +22,7 @@ func _ready():
 	piece_defs = load_JSON(PIECE_DEF_JSON)
 	
 	king = Piece.instance()
-	king.piece_name = "king"
+	king.piece_name = "knight"
 	# grid[king.position.x][king.position.y] = king.piece_name
 	print(piece_defs[king.piece_name])
 	# REMEMBER to add_child to the root
@@ -37,12 +37,9 @@ func move(piece, new_pos):
 	# this function needs to exist . but I need the grid! and the map! 
 	# maybe we need the grid position for the piece?
 	print(piece.piece_name + " is going to move")
-	print(piece.pos_in_the_grid)
-	print(new_pos)
 	grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = null
 	grid[new_pos.x][new_pos.y] = piece
 	piece.pos_in_the_grid = new_pos
-	print(grid)
 	
 
 func summon():

@@ -53,7 +53,8 @@ func update_child_pos(child_node):
 	# Returns the new target world position of the child
 	var grid_pos = map.world_to_map(child_node.position)
 	model.grid[grid_pos.x][grid_pos.y] = null
-	
+	print("position on the grid")
+	print(grid_pos)	
 	var new_grid_pos = grid_pos + child_node.direction
 	model.grid[new_grid_pos.x][new_grid_pos.y] = child_node
 	
@@ -110,16 +111,18 @@ func _input(event):
 			print(possible_moves)
 		elif selected_piece and pos in possible_moves:
 			# this piece is going to move
+			selected_piece.target_pos_in_the_grid = pos
+			print(selected_piece.pos_in_the_grid)
+			selected_piece.direction = pos - selected_piece.pos_in_the_grid 
+			print("direction before movement")
+			print(selected_piece.direction)
+			
 			model.move(selected_piece, pos)
-			selected_piece.is_moving = true
-			selected_piece.target_pos = pos
-			selected_piece.is_moving = true
-			selected_piece.position = map.map_to_world(pos) + half_tile_size
-			update_child_pos(selected_piece)
-			possible_moves = []
-			selected_piece = null
-			reset_cells()
-
+			# this will be made by character.gd
+			# the position of the piece will be updated by the view.
+			selected_piece.target_pos = update_child_pos(selected_piece)
+			
+			reset()
 
 		else: 
 			selected_piece = null
@@ -130,3 +133,8 @@ func _input(event):
 			get_tree().set_pause(false)
 		else:
 			get_tree().set_pause(true)
+
+func reset():
+	possible_moves = []
+	selected_piece = null
+	reset_cells()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/characters/character.gd" type="Script" id=1]
 [ext_resource path="res://assets/chess/chess_piece_2_black_queen.png" type="Texture" id=2]
@@ -11,11 +11,12 @@
 [ext_resource path="res://scenes/characters/FSM/states/Attack/Attack.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/characters/FSM/states/Dead/Dead.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/characters/FSM/transitions/onMovement/onMovement.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/characters/FSM/transitions/onMovementEnd/onMovementEnd.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/characters/FSM/transitions/onAnimationEnd/onAnimationEnd.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/characters/FSM/transitions/onAttack/onAttack.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/characters/FSM/transitions/onEnemyExist/onEnemyExist.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/characters/FSM/transitions/onAttackEnd/onAttackEnd.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/characters/FSM/transitions/onDeadHit/onDeadHit.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/characters/FSM/transitions/onMovementEnd/onMovementEnd.tscn" type="PackedScene" id=17]
 
 [sub_resource type="Animation" id=1]
 
@@ -95,7 +96,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=5]
 
 resource_name = "summon"
-length = 4.0
+length = 1.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -105,7 +106,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 4 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
@@ -176,11 +177,72 @@ _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
 [node name="Body" type="Sprite" parent="Pivot" index="0"]
 
-position = Vector2( -0.106779, 38.9022 )
+modulate = Color( 1, 1, 1, 0.25 )
+position = Vector2( -0.165044, 39.2102 )
 scale = Vector2( 1.45501, 1.40664 )
 texture = ExtResource( 2 )
 offset = Vector2( -0.544521, -55.6007 )
 _sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
+
+[node name="StateInfo" type="Container" parent="Pivot/Body" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -17.1086
+margin_top = -36.898
+margin_right = 40.8914
+margin_bottom = -17.898
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Pivot/Body/StateInfo" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 3.0
+margin_right = 58.0
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+
+[node name="Label" type="Label" parent="Pivot/Body/StateInfo" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_right = 48.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "state"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors" ]
 
 [node name="Shadow" type="Sprite" parent="." index="3"]
 
@@ -258,8 +320,8 @@ GraphData = {
 "onEnemyExist_": Vector2( 938, 481 ),
 "onEnemyExist__": Vector2( 938, 481 ),
 "onMovement": Vector2( 925, 66 ),
-"onMovementEnd": Vector2( 672, 177 ),
-"onMovementEnd_": Vector2( 672, 177 ),
+"onMovementEnd": Vector2( 655, 170 ),
+"onMovementEnd_": Vector2( 655, 170 ),
 "onMovementEnd__": Vector2( 672, 177 ),
 "onMovement_": Vector2( 925, 66 ),
 "onMovement__": Vector2( 925, 66 )
@@ -308,69 +370,10 @@ path2TargetState = NodePath("../../States/Attack")
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Dead")
 
-[node name="onMovementEnd" parent="FSM2D/Transitions" index="6" instance=ExtResource( 12 )]
+[node name="onMovementEnd" parent="FSM2D/Transitions" index="6" instance=ExtResource( 17 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Walking") ]
 path2TargetState = NodePath("../../States/Idle")
-
-[node name="StateInfo" type="Container" parent="." index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -25.0
-margin_top = -13.0
-margin_right = 33.0
-margin_bottom = 6.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="StateInfo" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 3.0
-margin_right = 58.0
-margin_bottom = 12.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 1, 1, 1, 1 )
-
-[node name="Label" type="Label" parent="StateInfo" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 8.0
-margin_right = 48.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "state"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors" ]
 
 [connection signal="mouse_entered" from="." to="." method="_on_Character_mouse_entered"]
 

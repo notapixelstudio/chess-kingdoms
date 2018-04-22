@@ -4,7 +4,7 @@
 
 
 
-[node name="onAttackEnd" type="Node"]
+[node name="onMovementEnd" type="Node"]
 
 script = ExtResource( 1 )
 path2SourceStates = [ NodePath("") ]
