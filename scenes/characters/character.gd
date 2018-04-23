@@ -25,6 +25,7 @@ var is_moving = false
 
 var type
 var side
+var state
 var battlefield
 
 # Structure of the piece

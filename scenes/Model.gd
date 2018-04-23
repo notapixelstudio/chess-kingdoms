@@ -35,6 +35,9 @@ func _ready():
 	player2.piece_name = "king"
 	player2.side = "black"
 	player2.pos_in_the_grid = Vector2(4,0)
+
+	# add players to the grid
+	grid[player1.pos_in_the_grid.x][player1.pos_in_the_grid.y] = player1
             
 func get_legal_moves(piece_name):
 	# function that get the json for the legal moves. 
@@ -51,7 +54,7 @@ func move(piece, new_pos):
 	piece.pos_in_the_grid = new_pos
 	
 
-func summon():
+func summon(piece_name):
 	pass
 
 func update_board():

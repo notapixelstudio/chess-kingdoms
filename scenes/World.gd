@@ -42,7 +42,6 @@ func _ready():
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
 	# Return true if the cell is vacant, else false
-
 	var grid_pos = map.world_to_map(pos) + direction
 	
 	var tile_id = map.get_cellv(grid_pos)
