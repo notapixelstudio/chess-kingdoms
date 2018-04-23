@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/GridVisualizer.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Camera2D.gd" type="Script" id=4]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -26,6 +26,8 @@ size_flags_vertical = 1
 color = Color( 0, 0, 0, 1 )
 
 [node name="ChessBoard" parent="." index="1" instance=ExtResource( 2 )]
+
+_sections_unfolded = [ "Transform" ]
 
 [node name="Node2D" type="Node2D" parent="ChessBoard" index="1"]
 

@@ -22,15 +22,22 @@ func _ready():
 	map = get_node("ChessBoard/board")
 	tiledict = map.get_tileset().get_meta('tile_meta')
 	tile_size = map.get_cell_size()
+	half_tile_size = tile_size / 2
+
 	cursor_map = get_node("ChessBoard/cursor")
 	
 	# in order to put the object at the center
-	half_tile_size = tile_size / 2
-	model.player1.position = map.map_to_world(Vector2(4,7))
-	model.grid[4][7] = model.player1
-	var start_pos = update_child_pos(model.player1)
-	model.player1.position = start_pos
+	#Player1
+	model.player1.position = map.map_to_world(model.player1.pos_in_the_grid)
+	model.grid[model.player1.pos_in_the_grid.x][model.player1.pos_in_the_grid.y] = model.player1
+	model.player1.position =  update_child_pos(model.player1)
 	add_child(model.player1)
+
+	#Player2
+	model.player2.position = map.map_to_world(model.player2.pos_in_the_grid)
+	model.grid[model.player2.pos_in_the_grid.x][model.player2.pos_in_the_grid.y] = model.player2
+	model.player2.position = update_child_pos(model.player2)
+	add_child(model.player2)
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -78,20 +85,21 @@ func reset_cells(force = false):
 	cursor_shape= []
 	
 func get_legal_moves(piece):
+	# TODO: we don't like repetition of code
 	var legal_moves = []
 	for pos in piece.moves:
 		var step = Vector2(pos["step"].front(), pos["step"].back())
 		if pos.has("repeat"):
 			var repeated_step = Vector2()
-			for x in range(model.grid_size.x):
-				repeated_step.x = step.x * x + step.x
-				for y in range(model.grid_size.y):
-					repeated_step.y = step.y * y + step.y
-					print(repeated_step)
-					if is_cell_vacant(piece.position, repeated_step):
-						legal_moves.append(repeated_step)
-	print("legals:")
-	print(legal_moves)
+			# we just need one multiplier
+			for i in range(model.grid_size.x):
+				repeated_step.x = step.x * i
+				repeated_step.y = step.y * i
+				if is_cell_vacant(piece.position, repeated_step):
+					legal_moves.append(repeated_step)
+		else: 
+			if is_cell_vacant(piece.position, step):
+				legal_moves.append(step)
 	show_legal_moves(piece, legal_moves)
 	cursor_shape = legal_moves
 	return legal_moves

@@ -178,14 +178,15 @@ _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 [node name="Body" type="Sprite" parent="Pivot" index="0"]
 
 modulate = Color( 1, 1, 1, 0.25 )
-position = Vector2( -0.165044, 39.2102 )
-scale = Vector2( 1.45501, 1.40664 )
+position = Vector2( 0, 30.9456 )
+scale = Vector2( 1.09865, 1.13581 )
 texture = ExtResource( 2 )
 offset = Vector2( -0.544521, -55.6007 )
 _sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
 
 [node name="StateInfo" type="Container" parent="Pivot/Body" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -249,13 +250,15 @@ _sections_unfolded = [ "Focus", "Mouse", "custom_colors" ]
 
 self_modulate = Color( 1, 1, 1, 0.313726 )
 show_behind_parent = true
-position = Vector2( -0.997643, 0.363886 )
+position = Vector2( 0, 24.4121 )
+scale = Vector2( 1, 0.323517 )
 texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
 
-position = Vector2( -0.410531, -0.940865 )
-scale = Vector2( 4.43212, 1 )
+position = Vector2( 0.424805, -33.6671 )
+scale = Vector2( 3.1158, 0.596264 )
 shape = SubResource( 7 )
 
 [node name="FSM2D" type="Node2D" parent="." index="5"]
