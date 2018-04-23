@@ -59,8 +59,7 @@ func update_child_pos(child_node):
 	# Returns the new target world position of the child
 	var grid_pos = map.world_to_map(child_node.position)
 	model.grid[grid_pos.x][grid_pos.y] = null
-	print("position on the grid")
-	print(grid_pos)	
+	
 	var new_grid_pos = grid_pos + child_node.direction
 	model.grid[new_grid_pos.x][new_grid_pos.y] = child_node
 	
@@ -70,9 +69,8 @@ func update_child_pos(child_node):
 
 func show_legal_moves(piece, legal_moves):
 	var grid_pos = map.world_to_map(piece.position)
-	print(legal_moves)
+	
 	for cell in legal_moves:
-		print(cell+grid_pos)
 		cursor_map.set_cellv(cell + grid_pos, 4)
 	
 func reset_cells(force = false):
@@ -110,7 +108,6 @@ func select_piece(piece):
 	var moves_in_the_grid = []
 	for movement in get_legal_moves(piece):
 		moves_in_the_grid.append(map.world_to_map(piece.position) + movement)
-	print(moves_in_the_grid)
 	possible_moves = moves_in_the_grid
 	
 
@@ -121,30 +118,30 @@ func _input(event):
 		
 	if event.is_action_pressed("select_piece"):
 		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
-		var selected_cell = model.grid[pos.x][pos.y]
-		if selected_cell and not selected_piece:
-			selected_piece = selected_cell
-			select_piece(selected_piece)
-			print("there is something here: " + selected_piece.piece_name)
-		elif selected_piece and pos in possible_moves:
-			# this piece is going to move
-			selected_piece.target_pos_in_the_grid = pos
-			print(selected_piece.pos_in_the_grid)
-			selected_piece.direction = pos - selected_piece.pos_in_the_grid 
-			print("direction before movement")
-			print(selected_piece.direction)
-			
-			model.move(selected_piece, pos)
-			# this will be made by character.gd
-			# the position of the piece will be updated by the view.
-			selected_piece.target_pos = update_child_pos(selected_piece)
-			
-			reset()
+		if is_within_the_grid(pos):
+			var selected_cell = model.grid[pos.x][pos.y]
+			if selected_cell and not selected_piece:
+				selected_piece = selected_cell
+				print("there is something here: " + selected_piece.side +" "+ selected_piece.piece_name)
+				if selected_piece.state == selected_piece.IDLE:
+					select_piece(selected_piece)
+				else:
+					print("but we cannot move it")
+				
+			elif selected_piece and pos in possible_moves and selected_piece.state == selected_piece.IDLE:
+				# this piece is going to move
+				selected_piece.target_pos_in_the_grid = pos
+				selected_piece.direction = pos - selected_piece.pos_in_the_grid 
+				
+				model.move(selected_piece, pos)
+				# this will be made by character.gd
+				# the position of the piece will be updated by the view.
+				selected_piece.target_pos = update_child_pos(selected_piece)
+				reset()
 
-		else: 
-			selected_piece = null
-			possible_moves = []
-			reset_cells(true)
+			else: 
+				reset() 
+				
 	if event.is_action_pressed("pause"):
 		if get_tree().is_paused():
 			get_tree().set_pause(false)

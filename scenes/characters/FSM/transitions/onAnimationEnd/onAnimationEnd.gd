@@ -34,5 +34,5 @@ func transitionCondition(inDeltaTime, inParam0=null, inParam1=null, inParam2=nul
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	print(anim_name + " has ended")
+	print(logicRoot.side +" "+logicRoot.piece_name +" "+ anim_name + " animation has ended")
 	anim_ended = true

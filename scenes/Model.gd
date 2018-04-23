@@ -28,7 +28,6 @@ func _ready():
 	player1.side = "white"
 	player1.pos_in_the_grid = Vector2(4,7)
 	# grid[player1.position.x][player1.position.y] = player1.piece_name
-	print(piece_defs[player1.piece_name])
 	# REMEMBER to add_child to the root
 	
 	player2 = Piece.instance()
@@ -48,7 +47,7 @@ func get_legal_moves(piece_name):
 func move(piece, new_pos):
 	# this function needs to exist . but I need the grid! and the map! 
 	# maybe we need the grid position for the piece?
-	print(piece.piece_name + " is going to move")
+	print(piece.side +" "+ piece.piece_name + " is going to move")
 	grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = null
 	grid[new_pos.x][new_pos.y] = piece
 	piece.pos_in_the_grid = new_pos
