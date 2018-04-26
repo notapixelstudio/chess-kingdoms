@@ -134,6 +134,10 @@ func _input(event):
 				selected_piece.direction = pos - selected_piece.pos_in_the_grid 
 				
 				model.move(selected_piece, pos)
+				if model.turn == 0:
+					$Label.text = "White moves"
+				else:
+					$Label.text = "Black moves"
 				# this will be made by character.gd
 				# the position of the piece will be updated by the view.
 				selected_piece.target_pos = update_child_pos(selected_piece)

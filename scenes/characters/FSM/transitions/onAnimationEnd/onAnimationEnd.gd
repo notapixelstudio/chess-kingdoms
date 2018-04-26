@@ -1,5 +1,5 @@
 tool
-extends "res://addons/net.kivano.fsm/content/FSMTransition.gd";
+extends "res://addons/net.kivano.fsm/content/FSMTransition.gd"
 ################################### R E A D M E ##################################
 # For more informations check script attached to FSM node
 # All params are optional and will be used only if you decide to manually initialize FSM (fsm.init())
@@ -15,8 +15,8 @@ extends "res://addons/net.kivano.fsm/content/FSMTransition.gd";
 var anim_ended=false
 ######################################
 ####### Getters
-func getFSM(): return fsm; #access to owner FSM, defined in parent class
-func getLogicRoot(): return logicRoot; #access to logic root of FSM (usually fsm.get_parent())
+func getFSM(): return fsm #access to owner FSM, defined in parent class
+func getLogicRoot(): return logicRoot #access to logic root of FSM (usually fsm.get_parent())
 
 ######################################
 ####### Implement those below ########

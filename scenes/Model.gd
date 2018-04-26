@@ -6,13 +6,14 @@ var grid_size = Vector2(8, 8)
 var grid = []
 var piece_defs = {}
 
-var battlefield
 const MOVES = "moves"
 const PIECE_DEF_JSON = "res://assets/logic/piece_def.json"
 
 onready var Piece = preload("res://scenes/characters/character.tscn")
 var player1 
 var player2
+
+var turn = 0
 
 func _ready():
 	# Create the grid Array with null in it.
@@ -37,7 +38,12 @@ func _ready():
 
 	# add players to the grid
 	grid[player1.pos_in_the_grid.x][player1.pos_in_the_grid.y] = player1
-            
+
+func change_turn():
+	turn = (turn + 1) % 2
+	print(turn)
+
+
 func get_legal_moves(piece_name):
 	# function that get the json for the legal moves. 
 	# return array of cells where the piece can move.
@@ -51,6 +57,7 @@ func move(piece, new_pos):
 	grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = null
 	grid[new_pos.x][new_pos.y] = piece
 	piece.pos_in_the_grid = new_pos
+	change_turn()
 	
 
 func summon(piece_name):
