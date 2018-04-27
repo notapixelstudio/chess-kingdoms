@@ -45,12 +45,41 @@ func change_turn():
 	turn = (turn + 1) % 2
 
 
-func get_legal_moves(piece_name):
+func get_moves(piece_name):
 	# function that get the json for the legal moves. 
 	# return array of cells where the piece can move.
 	return piece_defs[piece_name][MOVES]
 
 
+func get_legal_moves(piece):
+	# TODO: we don't like repetition of code
+	var legal_moves = []
+	for pos in piece.moves:
+		var step = Vector2(pos["step"].front(), pos["step"].back())
+		if pos.has("repeat"):
+			var repeated_step = Vector2()
+			# we just need one multiplier
+			for i in range(1,model.grid_size.x):
+				repeated_step.x = step.x * i
+				repeated_step.y = step.y * i
+				# TODO: check if leaps or not
+				if is_cell_vacant(piece.pos_in_the_grid, repeated_step):
+					legal_moves.append(repeated_step)
+				else:
+					#print("someone is on the way")
+					break
+		else: 
+			if is_cell_vacant(piece.pos_in_the_grid, step):
+				legal_moves.append(step)
+	return legal_moves
+
+func is_cell_vacant(pos_in_the_grid, direction):
+	var grid_pos = pos_in_the_grid + direction
+	# world boundaries
+	if grid_pos.x < grid_size.x and grid_pos.x >=0:
+		if grid_pos.y < grid_size.y and grid_pos.y >=0:
+			return model.grid[grid_pos.x][grid_pos.y] == null
+	
 func move(piece, new_pos):
 	# this function needs to exist . but I need the grid! and the map! 
 	# maybe we need the grid position for the piece?

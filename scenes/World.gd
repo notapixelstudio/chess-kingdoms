@@ -60,10 +60,7 @@ func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
 	# Returns the new target world position of the child
 	var grid_pos = map.world_to_map(child_node.position)
-	model.grid[grid_pos.x][grid_pos.y] = null
-	
 	var new_grid_pos = grid_pos + child_node.direction
-	model.grid[new_grid_pos.x][new_grid_pos.y] = child_node
 	
 	child_node.pos_in_the_grid = new_grid_pos
 	var target_pos = map.map_to_world(new_grid_pos) + half_tile_size
@@ -74,6 +71,7 @@ func show_legal_moves(piece, legal_moves):
 	
 	for cell in legal_moves:
 		cursor_map.set_cellv(cell + grid_pos, 4)
+	cursor_shape = legal_moves
 	
 func reset_cells(force = false):
 	if not selected_piece or force:
@@ -83,32 +81,15 @@ func reset_cells(force = false):
 				cursor_map.set_cellv(Vector2(x,y), -1)
 	cursor_shape= []
 	
-func get_legal_moves(piece):
-	# TODO: we don't like repetition of code
-	var legal_moves = []
-	for pos in piece.moves:
-		var step = Vector2(pos["step"].front(), pos["step"].back())
-		if pos.has("repeat"):
-			var repeated_step = Vector2()
-			# we just need one multiplier
-			for i in range(model.grid_size.x):
-				repeated_step.x = step.x * i
-				repeated_step.y = step.y * i
-				if is_cell_vacant(piece.position, repeated_step):
-					legal_moves.append(repeated_step)
-		else: 
-			if is_cell_vacant(piece.position, step):
-				legal_moves.append(step)
-	show_legal_moves(piece, legal_moves)
-	cursor_shape = legal_moves
-	return legal_moves
 
 func is_within_the_grid(pos):
 	return pos.x >= 0 and pos.x < model.grid_size.x and pos.y >= 0 and pos.y < model.grid_size.y
 
 func select_piece(piece):
 	var moves_in_the_grid = []
-	for movement in get_legal_moves(piece):
+	var moves = model.get_legal_moves(piece)
+	show_legal_moves(piece, moves)
+	for movement in moves:
 		moves_in_the_grid.append(map.world_to_map(piece.position) + movement)
 	possible_moves = moves_in_the_grid
 	
