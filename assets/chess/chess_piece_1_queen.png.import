@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chess_piece_2_white_queen.png-a1298a815218eeabdb1ef44dcc7ad117.stex"
+path="res://.import/chess_piece_1_queen.png-271d5a367a1e81f15c5d0a002044ea32.stex"
 
 [deps]
 
-source_file="res://assets/chess/chess_piece_2_white_queen.png"
-source_md5="096a111ccc1b4110c7cdfd074af0d9fd"
+source_file="res://assets/chess/chess_piece_1_queen.png"
+source_md5="9b061180e06bbe34e1f05848b1cadbfc"
 
-dest_files=[ "res://.import/chess_piece_2_white_queen.png-a1298a815218eeabdb1ef44dcc7ad117.stex" ]
-dest_md5="9d0a893985bd3c91b730d285f0fdad7f"
+dest_files=[ "res://.import/chess_piece_1_queen.png-271d5a367a1e81f15c5d0a002044ea32.stex" ]
+dest_md5="d63bcf7429466d2f3ebca949317b953d"
 
 [params]
 

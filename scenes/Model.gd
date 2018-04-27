@@ -13,6 +13,8 @@ onready var Piece = preload("res://scenes/characters/character.tscn")
 var player1 
 var player2
 
+enum players {PLAYER1,PLAYER2}
+var dic_players = {PLAYER1:"player1", PLAYER2:"player2"}
 var turn = 0
 
 func _ready():
@@ -26,14 +28,14 @@ func _ready():
 	
 	player1 = Piece.instance()
 	player1.piece_name = "rook"
-	player1.side = "white"
+	player1.side = PLAYER1
 	player1.pos_in_the_grid = Vector2(4,7)
 	# grid[player1.position.x][player1.position.y] = player1.piece_name
 	# REMEMBER to add_child to the root
 	
 	player2 = Piece.instance()
 	player2.piece_name = "king"
-	player2.side = "black"
+	player2.side = PLAYER2
 	player2.pos_in_the_grid = Vector2(4,0)
 
 	# add players to the grid
@@ -41,7 +43,6 @@ func _ready():
 
 func change_turn():
 	turn = (turn + 1) % 2
-	print(turn)
 
 
 func get_legal_moves(piece_name):
@@ -53,14 +54,14 @@ func get_legal_moves(piece_name):
 func move(piece, new_pos):
 	# this function needs to exist . but I need the grid! and the map! 
 	# maybe we need the grid position for the piece?
-	print(piece.side +" "+ piece.piece_name + " is going to move")
+	print(dic_players[piece.side] +" "+ piece.piece_name + " is going to move")
 	grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = null
 	grid[new_pos.x][new_pos.y] = piece
 	piece.pos_in_the_grid = new_pos
 	change_turn()
 	
 
-func summon(piece_name):
+func summon(piece):
 	pass
 
 func update_board():

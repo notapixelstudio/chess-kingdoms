@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/characters/character.gd" type="Script" id=1]
-[ext_resource path="res://assets/chess/chess_piece_2_black_queen.png" type="Texture" id=2]
+[ext_resource path="res://assets/chess/chess_piece_1_queen.png" type="Texture" id=2]
 [ext_resource path="res://scenes/characters/shadow.png" type="Texture" id=3]
 [ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=4]
 [ext_resource path="res://addons/net.kivano.fsm/assets/ico2d.png" type="Texture" id=5]
@@ -176,7 +176,6 @@ _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
 [node name="Body" type="Sprite" parent="Pivot" index="0"]
 
-modulate = Color( 1, 1, 1, 0.25 )
 position = Vector2( 0, 30.9456 )
 scale = Vector2( 1.09865, 1.13581 )
 texture = ExtResource( 2 )
@@ -253,14 +252,28 @@ scale = Vector2( 1, 0.323517 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+[node name="Area2D" type="Area2D" parent="." index="4"]
 
-position = Vector2( 0.424805, -33.6671 )
-scale = Vector2( 3.1158, 0.596264 )
+position = Vector2( 0.135925, -26.2557 )
+scale = Vector2( 0.880436, 0.991844 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Pickable", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+position = Vector2( -1.51318, -7.47237 )
+scale = Vector2( 3.72025, 0.601167 )
 shape = SubResource( 7 )
 
 [node name="FSM2D" type="Node2D" parent="." index="5"]
 
+editor/display_folded = true
 visible = false
 position = Vector2( 1.67087, 1.56916 )
 script = ExtResource( 4 )
@@ -347,6 +360,7 @@ GraphData = {
 
 [node name="Transitions" type="Node2D" parent="FSM2D" index="1"]
 
+editor/display_folded = true
 position = Vector2( -0.69458, -11.8076 )
 
 [node name="onMovement" parent="FSM2D/Transitions" index="0" instance=ExtResource( 11 )]

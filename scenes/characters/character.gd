@@ -44,7 +44,7 @@ func _ready():
 	battlefield = get_parent()
 	representation.play("summon")
 	moves = model.get_legal_moves(self.piece_name)
-	$Pivot/Body.texture = load("res://assets/chess/chess_piece_2_"+side+"_"+piece_name+".png")
+	$Pivot/Body.texture = load("res://assets/chess/chess_piece_"+str(side)+"_"+piece_name+".png")
 
 func animate(keyword):
 	representation.play(keyword)

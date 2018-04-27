@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chess_piece_2_black_rook.png-388b8abe8c8e6a9f09f2361708604a75.stex"
+path="res://.import/chess_piece_1_pawn.png-67a9709e4f1e43049f6fa061ca46173b.stex"
 
 [deps]
 
-source_file="res://assets/chess/chess_piece_2_black_rook.png"
-source_md5="c47cbafc38e844f343e4728518ba87d0"
+source_file="res://assets/chess/chess_piece_1_pawn.png"
+source_md5="082e0eaeaad90fcd3b5f7aa24d7a876b"
 
-dest_files=[ "res://.import/chess_piece_2_black_rook.png-388b8abe8c8e6a9f09f2361708604a75.stex" ]
-dest_md5="1c30bd59224411ce8f4383fdde2dce5f"
+dest_files=[ "res://.import/chess_piece_1_pawn.png-67a9709e4f1e43049f6fa061ca46173b.stex" ]
+dest_md5="d1ef3e3eac91022008746ce0865b1206"
 
 [params]
 

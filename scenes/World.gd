@@ -15,8 +15,8 @@ var half_tile_size
 
 var map
 var tiledict
+var dic_side = {model.PLAYER1:"player1", model.PLAYER2:"player2"}
 
-enum ENTITY_TYPES {PLAYER}
 
 func _ready():
 	map = get_node("ChessBoard/board")
@@ -25,6 +25,8 @@ func _ready():
 	half_tile_size = tile_size / 2
 
 	cursor_map = get_node("ChessBoard/cursor")
+	
+	possible_moves = []
 	
 	# in order to put the object at the center
 	#Player1
@@ -122,8 +124,8 @@ func _input(event):
 			var selected_cell = model.grid[pos.x][pos.y]
 			if selected_cell and not selected_piece:
 				selected_piece = selected_cell
-				print("there is something here: " + selected_piece.side +" "+ selected_piece.piece_name)
-				if selected_piece.state == selected_piece.IDLE:
+				print("there is something here: " + dic_side[selected_piece.side] +" "+ selected_piece.piece_name)
+				if selected_piece.state == selected_piece.IDLE and selected_piece.side == model.turn:
 					select_piece(selected_piece)
 				else:
 					print("but we cannot move it")

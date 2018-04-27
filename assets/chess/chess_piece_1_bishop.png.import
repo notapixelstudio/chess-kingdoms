@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chess_piece_2_white_knight.png-7345fc57f167f096f19e9ee880ef64dc.stex"
+path="res://.import/chess_piece_1_bishop.png-997ec33bb1706e0e47fe7ca5acdd80d9.stex"
 
 [deps]
 
-source_file="res://assets/chess/chess_piece_2_white_knight.png"
-source_md5="428fab0ea8a68d7129fbf6c1f447a76d"
+source_file="res://assets/chess/chess_piece_1_bishop.png"
+source_md5="ad9109b6b8d96f70967c7d5b64efe08d"
 
-dest_files=[ "res://.import/chess_piece_2_white_knight.png-7345fc57f167f096f19e9ee880ef64dc.stex" ]
-dest_md5="831ff47685cd464f30596926b6fa2fd7"
+dest_files=[ "res://.import/chess_piece_1_bishop.png-997ec33bb1706e0e47fe7ca5acdd80d9.stex" ]
+dest_md5="74b5b65b50ee509d8565f04402c7ed49"
 
 [params]
 
