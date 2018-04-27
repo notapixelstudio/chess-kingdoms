@@ -7,10 +7,10 @@ path="res://.import/chess_piece_2_black_rook.png-388b8abe8c8e6a9f09f2361708604a7
 [deps]
 
 source_file="res://assets/chess/chess_piece_2_black_rook.png"
-source_md5="5f4239f95f1d7f40b8e5d3111a499273"
+source_md5="c47cbafc38e844f343e4728518ba87d0"
 
 dest_files=[ "res://.import/chess_piece_2_black_rook.png-388b8abe8c8e6a9f09f2361708604a75.stex" ]
-dest_md5="cb178bbe9bbe3df11d5100f636a89573"
+dest_md5="1c30bd59224411ce8f4383fdde2dce5f"
 
 [params]
 

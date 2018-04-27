@@ -7,10 +7,10 @@ path="res://.import/chess_piece_2_white_king.png-073f7efe786d18f0dcbae61224d5c5b
 [deps]
 
 source_file="res://assets/chess/chess_piece_2_white_king.png"
-source_md5="e5280dffdb0ec2b4af0485f556fbaf64"
+source_md5="ef95cbb7649814ecf6eca5494a67e942"
 
 dest_files=[ "res://.import/chess_piece_2_white_king.png-073f7efe786d18f0dcbae61224d5c5b7.stex" ]
-dest_md5="6a8e5abe1be0cf89439238315dae40eb"
+dest_md5="821a4625f9a7dbfee9d5597c57dfa497"
 
 [params]
 

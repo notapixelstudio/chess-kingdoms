@@ -25,7 +25,7 @@ func _ready():
 	piece_defs = load_JSON(PIECE_DEF_JSON)
 	
 	player1 = Piece.instance()
-	player1.piece_name = "king"
+	player1.piece_name = "rook"
 	player1.side = "white"
 	player1.pos_in_the_grid = Vector2(4,7)
 	# grid[player1.position.x][player1.position.y] = player1.piece_name

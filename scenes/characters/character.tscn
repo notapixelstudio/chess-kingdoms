@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/characters/character.gd" type="Script" id=1]
 [ext_resource path="res://assets/chess/chess_piece_2_black_queen.png" type="Texture" id=2]
@@ -12,11 +12,10 @@
 [ext_resource path="res://scenes/characters/FSM/states/Dead/Dead.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/characters/FSM/transitions/onMovement/onMovement.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/characters/FSM/transitions/onAnimationEnd/onAnimationEnd.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/characters/FSM/transitions/onAttack/onAttack.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/characters/FSM/transitions/onEnemyExist/onEnemyExist.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/characters/FSM/transitions/onAttackEnd/onAttackEnd.tscn" type="PackedScene" id=15]
-[ext_resource path="res://scenes/characters/FSM/transitions/onDeadHit/onDeadHit.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/characters/FSM/transitions/onMovementEnd/onMovementEnd.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/characters/FSM/transitions/onEnemyExist/onEnemyExist.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/characters/FSM/transitions/onAttackEnd/onAttackEnd.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/characters/FSM/transitions/onDeadHit/onDeadHit.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/characters/FSM/transitions/onMovementEnd/onMovementEnd.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Animation" id=1]
 
@@ -186,7 +185,6 @@ _sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
 
 [node name="StateInfo" type="Container" parent="Pivot/Body" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -194,7 +192,7 @@ anchor_bottom = 0.0
 margin_left = -31.0
 margin_top = -35.0
 margin_right = 27.0
-margin_bottom = -17.0
+margin_bottom = -21.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -222,7 +220,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 1, 1, 1, 1 )
-_sections_unfolded = [ "Mouse" ]
+_sections_unfolded = [ "Focus", "Mouse" ]
 
 [node name="Label" type="Label" parent="Pivot/Body/StateInfo" index="1"]
 
@@ -282,54 +280,57 @@ enableDebug = false
 "Create new:/Create state with name:" = null
 "Create new:/Create transition with name:" = null
 GraphData = {
-"Attack": Vector2( 665, 484 ),
-"Attack_": Vector2( 665, 484 ),
-"Attack__": Vector2( 665, 484 ),
-"Dead": Vector2( 125, 597 ),
-"Dead_": Vector2( 125, 597 ),
-"Dead__": Vector2( 125, 597 ),
-"Idle": Vector2( 370, 101 ),
+"Attack": Vector2( 943, 535 ),
+"Attack_": Vector2( 943, 535 ),
+"Attack__": Vector2( 943, 535 ),
+"Dead": Vector2( 390, 552 ),
+"Dead_": Vector2( 390, 552 ),
+"Dead__": Vector2( 390, 552 ),
+"Idle": Vector2( 404, 260 ),
 "Idle2": Vector2( -9, 27 ),
 "Idle2_": Vector2( -9, 27 ),
 "Idle2__": Vector2( -9, 27 ),
-"Idle_": Vector2( 370, 101 ),
-"Idle__": Vector2( 370, 101 ),
+"Idle_": Vector2( 404, 260 ),
+"Idle__": Vector2( 404, 260 ),
 "Null": Vector2( 602, 249 ),
 "Null2": Vector2( -9, 27 ),
 "Null2_": Vector2( -9, 27 ),
 "Null2__": Vector2( -9, 27 ),
 "Null_": Vector2( 602, 249 ),
 "Null__": Vector2( 602, 249 ),
-"Summoned": Vector2( 358, 485 ),
+"Summoned": Vector2( 403, 12 ),
 "Summoned2": Vector2( 32, -6 ),
 "Summoned2_": Vector2( 32, -6 ),
 "Summoned2__": Vector2( 32, -6 ),
-"Summoned_": Vector2( 358, 485 ),
-"Summoned__": Vector2( 358, 485 ),
-"Walking": Vector2( 965, 198 ),
-"Walking_": Vector2( 965, 198 ),
-"Walking__": Vector2( 965, 198 ),
-"onAnimationEnd": Vector2( 366, 305 ),
-"onAnimationEnd_": Vector2( 366, 305 ),
-"onAnimationEnd__": Vector2( 366, 305 ),
-"onAttack": Vector2( 757, 323 ),
-"onAttackEnd": Vector2( 95, 55 ),
-"onAttackEnd_": Vector2( 95, 55 ),
-"onAttackEnd__": Vector2( 95, 55 ),
-"onAttack_": Vector2( 757, 323 ),
-"onAttack__": Vector2( 757, 323 ),
-"onDeadHit": Vector2( 130, 383 ),
-"onDeadHit_": Vector2( 130, 383 ),
-"onDeadHit__": Vector2( 130, 383 ),
-"onEnemyExist": Vector2( 938, 481 ),
-"onEnemyExist_": Vector2( 938, 481 ),
-"onEnemyExist__": Vector2( 938, 481 ),
-"onMovement": Vector2( 925, 66 ),
-"onMovementEnd": Vector2( 655, 170 ),
-"onMovementEnd_": Vector2( 655, 170 ),
-"onMovementEnd__": Vector2( 672, 177 ),
-"onMovement_": Vector2( 925, 66 ),
-"onMovement__": Vector2( 925, 66 )
+"Summoned_": Vector2( 403, 12 ),
+"Summoned__": Vector2( 403, 12 ),
+"Walking": Vector2( 910, 196 ),
+"Walking_": Vector2( 910, 196 ),
+"Walking__": Vector2( 910, 196 ),
+"onAnimationEnd": Vector2( 399, 118 ),
+"onAnimationEnd_": Vector2( 399, 118 ),
+"onAnimationEnd__": Vector2( 399, 118 ),
+"onAttack": Vector2( 721, 300 ),
+"onAttackEnd": Vector2( 790, 404 ),
+"onAttackEnd2": Vector2( 879, 338 ),
+"onAttackEnd2_": Vector2( 879, 338 ),
+"onAttackEnd2__": Vector2( 879, 338 ),
+"onAttackEnd_": Vector2( 790, 404 ),
+"onAttackEnd__": Vector2( 790, 404 ),
+"onAttack_": Vector2( 721, 300 ),
+"onAttack__": Vector2( 721, 300 ),
+"onDeadHit": Vector2( 392, 370 ),
+"onDeadHit_": Vector2( 392, 370 ),
+"onDeadHit__": Vector2( 392, 370 ),
+"onEnemyExist": Vector2( 1108, 338 ),
+"onEnemyExist_": Vector2( 1108, 338 ),
+"onEnemyExist__": Vector2( 1108, 338 ),
+"onMovement": Vector2( 667, 48 ),
+"onMovementEnd": Vector2( 653, 324 ),
+"onMovementEnd_": Vector2( 653, 324 ),
+"onMovementEnd__": Vector2( 653, 324 ),
+"onMovement_": Vector2( 667, 48 ),
+"onMovement__": Vector2( 667, 48 )
 }
 
 [node name="States" type="Node2D" parent="FSM2D" index="0"]
@@ -355,27 +356,24 @@ path2TargetState = NodePath("../../States/Walking")
 
 [node name="onAnimationEnd" parent="FSM2D/Transitions" index="1" instance=ExtResource( 12 )]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/Summoned"), NodePath("../../States/Attack") ]
+path2SourceStates = [ NodePath(""), NodePath("../../States/Summoned") ]
 path2TargetState = NodePath("../../States/Idle")
 
-[node name="onAttack" parent="FSM2D/Transitions" index="2" instance=ExtResource( 13 )]
-
-path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
-path2TargetState = NodePath("../../States/Attack")
-
-[node name="onEnemyExist" parent="FSM2D/Transitions" index="3" instance=ExtResource( 14 )]
+[node name="onEnemyExist" parent="FSM2D/Transitions" index="2" instance=ExtResource( 13 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Walking") ]
 path2TargetState = NodePath("../../States/Attack")
 
-[node name="onAttackEnd" parent="FSM2D/Transitions" index="4" instance=ExtResource( 15 )]
+[node name="onAttackEnd" parent="FSM2D/Transitions" index="3" instance=ExtResource( 14 )]
 
-[node name="onDeadHit" parent="FSM2D/Transitions" index="5" instance=ExtResource( 16 )]
+path2TargetState = NodePath("../../States/Walking")
+
+[node name="onDeadHit" parent="FSM2D/Transitions" index="4" instance=ExtResource( 15 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Dead")
 
-[node name="onMovementEnd" parent="FSM2D/Transitions" index="6" instance=ExtResource( 17 )]
+[node name="onMovementEnd" parent="FSM2D/Transitions" index="5" instance=ExtResource( 16 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Walking") ]
 path2TargetState = NodePath("../../States/Idle")

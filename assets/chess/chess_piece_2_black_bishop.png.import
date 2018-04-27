@@ -7,10 +7,10 @@ path="res://.import/chess_piece_2_black_bishop.png-3f4d33f225da4256b898a6f053c63
 [deps]
 
 source_file="res://assets/chess/chess_piece_2_black_bishop.png"
-source_md5="febe3f27b146289640b684383c302062"
+source_md5="ad9109b6b8d96f70967c7d5b64efe08d"
 
 dest_files=[ "res://.import/chess_piece_2_black_bishop.png-3f4d33f225da4256b898a6f053c63112.stex" ]
-dest_md5="d41337bbe0ef7e9516391df57e988e13"
+dest_md5="74b5b65b50ee509d8565f04402c7ed49"
 
 [params]
 

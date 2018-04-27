@@ -7,10 +7,10 @@ path="res://.import/chess_piece_2_white_pawn.png-9c7f9650c446501b3b8e0be2d90b951
 [deps]
 
 source_file="res://assets/chess/chess_piece_2_white_pawn.png"
-source_md5="c2cf67c2a10b6290f3c0747bde9845d1"
+source_md5="df75c8888212f2f215d70940d88a2526"
 
 dest_files=[ "res://.import/chess_piece_2_white_pawn.png-9c7f9650c446501b3b8e0be2d90b951d.stex" ]
-dest_md5="9609ba5f84d0d85fd6365c59ea9b36a0"
+dest_md5="aee5fb62f8531886ebd56005f861fa01"
 
 [params]
 
