@@ -31,13 +31,13 @@ func _ready():
 	# in order to put the object at the center
 	#Player1
 	model.player1.position = map.map_to_world(model.player1.pos_in_the_grid)
-	model.grid[model.player1.pos_in_the_grid.x][model.player1.pos_in_the_grid.y] = model.player1
+	# model.grid[model.player1.pos_in_the_grid.x][model.player1.pos_in_the_grid.y] = model.player1
 	model.player1.position =  update_child_pos(model.player1)
 	add_child(model.player1)
 
 	#Player2
 	model.player2.position = map.map_to_world(model.player2.pos_in_the_grid)
-	model.grid[model.player2.pos_in_the_grid.x][model.player2.pos_in_the_grid.y] = model.player2
+	# model.grid[model.player2.pos_in_the_grid.x][model.player2.pos_in_the_grid.y] = model.player2
 	model.player2.position = update_child_pos(model.player2)
 	add_child(model.player2)
 	

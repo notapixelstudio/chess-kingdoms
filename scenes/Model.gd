@@ -5,6 +5,7 @@ extends Node
 var grid_size = Vector2(8, 8)
 var grid = []
 var piece_defs = {}
+var list_piece_name = []
 
 const MOVES = "moves"
 const PIECE_DEF_JSON = "res://assets/logic/piece_def.json"
@@ -18,6 +19,7 @@ var dic_players = {PLAYER1:"player1", PLAYER2:"player2"}
 var turn = 0
 
 func _ready():
+	# list characters
 	# Create the grid Array with null in it.
 	for x in range(grid_size.x):
 		grid.append([])
@@ -25,21 +27,24 @@ func _ready():
 			grid[x].append(null)
 	# load the piece definition
 	piece_defs = load_JSON(PIECE_DEF_JSON)
+	for k in piece_defs.keys():
+		list_piece_name.append(k)
 	
 	player1 = Piece.instance()
-	player1.piece_name = "rook"
+	player1.piece_name = list_piece_name[randi() % len(list_piece_name)]
 	player1.side = PLAYER1
 	player1.pos_in_the_grid = Vector2(4,7)
-	# grid[player1.position.x][player1.position.y] = player1.piece_name
+	
 	# REMEMBER to add_child to the root
 	
 	player2 = Piece.instance()
-	player2.piece_name = "king"
+	player2.piece_name = list_piece_name[randi() % len(list_piece_name)]
 	player2.side = PLAYER2
 	player2.pos_in_the_grid = Vector2(4,0)
 
 	# add players to the grid
 	grid[player1.pos_in_the_grid.x][player1.pos_in_the_grid.y] = player1
+	grid[player2.pos_in_the_grid.x][player2.pos_in_the_grid.y] = player2
 
 func change_turn():
 	turn = (turn + 1) % 2
