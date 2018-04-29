@@ -40,6 +40,15 @@ func _ready():
 	# model.grid[model.player2.pos_in_the_grid.x][model.player2.pos_in_the_grid.y] = model.player2
 	model.player2.position = update_child_pos(model.player2)
 	add_child(model.player2)
+
+	var squire = null
+	squire = model.summon(model.player1, model.list_piece_name[randi()%len(model.list_piece_name)])
+	squire.position = map.map_to_world(squire.pos_in_the_grid)+ half_tile_size
+	add_child(squire)
+
+	squire = model.summon(model.player2, model.list_piece_name[randi()% len(model.list_piece_name)])
+	squire.position = map.map_to_world(squire.pos_in_the_grid)+ half_tile_size
+	add_child(squire)
 	
 # the object will ask if the cell is vacant
 func is_cell_vacant(pos, direction):
@@ -98,7 +107,7 @@ func _input(event):
 	# this is case of moving
 	if event is InputEventMouseButton:
 		pass
-		
+	
 	if event.is_action_pressed("select_piece"):
 		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
 		if is_within_the_grid(pos):

@@ -19,32 +19,35 @@ var dic_players = {PLAYER1:"player1", PLAYER2:"player2"}
 var turn = 0
 
 func _ready():
+	randomize()
 	# list characters
 	# Create the grid Array with null in it.
 	for x in range(grid_size.x):
 		grid.append([])
 		for y in range(grid_size.y):
 			grid[x].append(null)
+
 	# load the piece definition
 	piece_defs = load_JSON(PIECE_DEF_JSON)
 	for k in piece_defs.keys():
 		list_piece_name.append(k)
 	
 	player1 = Piece.instance()
-	player1.piece_name = list_piece_name[randi() % len(list_piece_name)]
+	player1.piece_name = "king"
 	player1.side = PLAYER1
 	player1.pos_in_the_grid = Vector2(4,7)
 	
 	# REMEMBER to add_child to the root
 	
 	player2 = Piece.instance()
-	player2.piece_name = list_piece_name[randi() % len(list_piece_name)]
+	player2.piece_name = "king"
 	player2.side = PLAYER2
 	player2.pos_in_the_grid = Vector2(4,0)
 
 	# add players to the grid
 	grid[player1.pos_in_the_grid.x][player1.pos_in_the_grid.y] = player1
 	grid[player2.pos_in_the_grid.x][player2.pos_in_the_grid.y] = player2
+
 
 func change_turn():
 	turn = (turn + 1) % 2
@@ -95,8 +98,21 @@ func move(piece, new_pos):
 	change_turn()
 	
 
-func summon(piece):
-	pass
+func summon(king, piece_name):
+	var piece = Piece.instance()
+	piece.piece_name = piece_name
+	piece.side = king.side 
+	var possible_direction = Vector2(int(rand_range(-1,0)) % 2, int(rand_range(-1,1)) % 2)
+	var sign_of_pos = 1
+	while not is_cell_vacant(king.pos_in_the_grid, possible_direction):
+		
+		possible_direction.x = (int(possible_direction.x) + 1) % 2 *sign_of_pos
+		possible_direction.x = (int(possible_direction.y) + 1) % 2 *sign_of_pos
+		print(possible_direction)
+	
+	piece.pos_in_the_grid = king.pos_in_the_grid + possible_direction
+	grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = piece
+	return piece
 
 func update_board():
 	pass
