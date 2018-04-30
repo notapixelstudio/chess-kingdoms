@@ -7,10 +7,10 @@ path="res://.import/shogi.png-29bf9dc5467f97a3d118d59944e4373d.stex"
 [deps]
 
 source_file="res://assets/shogi.png"
-source_md5="552688da238db7cd6f03e328e3385f61"
+source_md5="44bbd4d2270e1caaa1fa727e52e8610c"
 
 dest_files=[ "res://.import/shogi.png-29bf9dc5467f97a3d118d59944e4373d.stex" ]
-dest_md5="3b189616dce04a5fdba586478aa263b6"
+dest_md5="5e0a323605a2e95354f52532e8b534cf"
 
 [params]
 
