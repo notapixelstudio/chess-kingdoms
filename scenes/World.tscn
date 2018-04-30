@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/World.gd" type="Script" id=1]
 [ext_resource path="res://assets/chess-board.tmx" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://scenes/FSM/states/GameOver/GameOver.gd" type="Script" id=10]
 [ext_resource path="res://scenes/FSM/transitions/onGameOver/onGameOver.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/FSM/transitions/onGameOver/onGameOver.gd" type="Script" id=12]
+[ext_resource path="res://scenes/FSM/transitions/onRestart/onRestart.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/FSM/transitions/onRestart/onRestart.gd" type="Script" id=14]
 
 [node name="World" type="Node2D" index="0"]
 
@@ -129,7 +131,8 @@ GraphData = {
 "Playing_": Vector2( 249, 33 ),
 "Playing__": Vector2( -9, 27 ),
 "onGameOver": Vector2( 250, 181 ),
-"onGameOver_": Vector2( 250, 181 )
+"onGameOver_": Vector2( 250, 181 ),
+"onRestart": Vector2( 647, 62 )
 }
 
 [node name="States" type="Control" parent="FSMControl" index="0"]
@@ -156,9 +159,9 @@ script = ExtResource( 10 )
 [node name="Timer" type="Timer" parent="FSMControl/States/GameOver" index="0"]
 
 process_mode = 1
-wait_time = 2.0
-one_shot = true
-autostart = true
+wait_time = 5.0
+one_shot = false
+autostart = false
 
 [node name="Transitions" type="Control" parent="FSMControl" index="1"]
 
@@ -178,6 +181,13 @@ size_flags_vertical = 1
 script = ExtResource( 12 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/Playing") ]
 path2TargetState = NodePath("../../States/GameOver")
+intervalBetweenChecks = -1.0
+
+[node name="onRestart" type="Node" parent="FSMControl/Transitions" index="1" instance=ExtResource( 13 )]
+
+script = ExtResource( 14 )
+path2SourceStates = [ NodePath(""), NodePath("../../States/GameOver") ]
+path2TargetState = NodePath("../../States/Playing")
 intervalBetweenChecks = -1.0
 
 [connection signal="timeout" from="FSMControl/States/GameOver/Timer" to="." method="_on_Timer_timeout"]
