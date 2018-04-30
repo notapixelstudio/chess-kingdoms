@@ -10,8 +10,26 @@ config_version=3
 
 [application]
 
-config/name="Chess Kingdoms"
-config/icon="res://icon.png"
+config/name="Kingdoms of Shadoran"
+run/main_scene="res://scenes/World.tscn"
+config/icon="res://assets/chess/chess_piece_1_queen.png"
+
+[autoload]
+
+model="*res://scenes/Model.gd"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "godot-git-control.funabab", "net.kivano.fsm", "vnen.tiled_importer" )
+
+[input]
+
+pause=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"unicode":0,"echo":false,"script":null)
+ ]
+select_piece=[ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+summon=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
+ ]
 
 [rendering]
 
