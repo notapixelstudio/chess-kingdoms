@@ -9,7 +9,8 @@ var last_cursor_pos
 var possible_moves
 
 var selected_piece
-
+var list_summonable_pieces = [
+	"knight", "rook", "bishop", "queen", "ferz", "alfil", "dabbaba", "centurion", "gold_general", "lance", "shogi_pawn", "wall"]
 var tile_size
 var half_tile_size
 var taken_grid = Vector2(10,0)
@@ -18,7 +19,7 @@ var cont_taken = {model.PLAYER1:0, model.PLAYER2:0}
 var map
 var tiledict
 var dic_side = {model.PLAYER1:"player1", model.PLAYER2:"player2"}
-
+var players
 var dic_tiles = {
 	"move": 12,
 	"take": 4,
@@ -26,6 +27,8 @@ var dic_tiles = {
 	}
 
 func _ready():
+
+	players = {model.PLAYER1 : model.player1, model.PLAYER2: model.player2}
 	map = get_node("ChessBoard/board")
 	tiledict = map.get_tileset().get_meta('tile_meta')
 	tile_size = map.get_cell_size()
@@ -103,6 +106,20 @@ func _input(event):
 	if event is InputEventMouseButton:
 		pass
 	
+	if Input.is_action_just_pressed("summon"):
+		print("invochiamo")
+		print(players[model.turn])
+		var summoned = model.summon(players[model.turn], list_summonable_pieces[randi() % len(list_summonable_pieces)])
+		if summoned:
+			summoned.position = map.map_to_world(summoned.pos_in_the_grid)+ half_tile_size
+			add_child(summoned)
+			if model.turn == 0:
+				$Label.text = "White moves or summon"
+			else:
+				$Label.text = "Black moves or summon"
+		else:
+			print("we cannot summon any other piece")
+
 	if event.is_action_pressed("select_piece"):
 		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
 		if is_within_the_grid(pos):
@@ -130,9 +147,9 @@ func _input(event):
 				# the position of the piece will be updated by the view.
 				selected_piece.target_pos = update_child_pos(selected_piece)
 				if model.turn == 0:
-					$Label.text = "White moves"
+					$Label.text = "White moves or summon"
 				else:
-					$Label.text = "Black moves"
+					$Label.text = "Black moves or summon"
 				reset()
 
 			else: 

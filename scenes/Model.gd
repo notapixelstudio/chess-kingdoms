@@ -22,6 +22,7 @@ var turn = 0
 
 const MOVE = "move"
 const ATTACK = "take"
+const MAX_COUNT = 20
 
 func _ready():
 	randomize()
@@ -36,7 +37,6 @@ func _ready():
 	piece_defs = load_JSON(PIECE_DEF_JSON)
 	for k in piece_defs.keys():
 		list_piece_name.append(k)
-	
 	player1 = Piece.instance()
 	player1.piece_name = "king"
 	player1.side = PLAYER1
@@ -135,19 +135,45 @@ func move(piece, new_pos):
 	change_turn()
 	return taken_piece
 	
+# from https://godotengine.org/qa/2547/how-to-randomize-a-list-array
+func shuffleList(list):
+	var tmp_list = list
+	var shuffledList = []
+	var indexList = range(list.size())
+	for i in range(list.size()):
+		randomize()
+		var x = randi()%indexList.size()
+		shuffledList.append(list[x])
+		indexList.remove(x)
+		list.remove(x)
+	list = tmp_list
+	print(tmp_list)
+	return shuffledList
 
 func summon(king, piece_name):
 	var piece = Piece.instance()
 	piece.piece_name = piece_name
 	piece.side = king.side 
 	var possible_direction = Vector2()
-	while not is_cell_vacant(king.pos_in_the_grid, possible_direction):
-		possible_direction = Vector2(rand_dir[randi()%len(rand_dir)],rand_dir[randi()%len(rand_dir)])
+	var all = []
+	rand_dir = shuffleList(rand_dir)
+	for x in rand_dir:
+		for y in rand_dir:
+			all.append(Vector2(x,y))
+	for pos in all:
+		
+		if is_cell_vacant(king.pos_in_the_grid, pos):
+			possible_direction = pos
+			break
+		
 		print(possible_direction)
-	
-	piece.pos_in_the_grid = king.pos_in_the_grid + possible_direction
-	grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = piece
-	return piece
+	if possible_direction:
+		piece.pos_in_the_grid = king.pos_in_the_grid + possible_direction
+		grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = piece
+		change_turn()
+		return piece
+	else:
+		return null
 
 func update_board():
 	pass

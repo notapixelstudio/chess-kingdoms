@@ -138,7 +138,7 @@ tracks/0/keys = {
 custom_solver_bias = 0.0
 extents = Vector2( 7.15493, 34.6039 )
 
-[node name="Piece" type="KinematicBody2D" index="0" groups=[
+[node name="Piece" type="KinematicBody2D" groups=[
 "character",
 ]]
 
@@ -186,7 +186,7 @@ texture = ExtResource( 2 )
 offset = Vector2( -0.544521, -55.6007 )
 _sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
 
-[node name="StateInfo" type="Container" parent="Pivot/Body" index="0"]
+[node name="StateInfo" type="Panel" parent="Pivot/Body" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -202,50 +202,32 @@ mouse_filter = 2
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 1
 size_flags_vertical = 1
-_sections_unfolded = [ "Focus", "Mouse" ]
-__meta__ = {
-"_edit_group_": true
-}
+_sections_unfolded = [ "Focus", "Mouse", "Rect", "Visibility" ]
 
-[node name="ColorRect" type="ColorRect" parent="Pivot/Body/StateInfo" index="0"]
+[node name="Label" type="Label" parent="Pivot/Body/StateInfo" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 3.0
-margin_right = 58.0
-margin_bottom = 12.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 1, 1, 1, 1 )
-_sections_unfolded = [ "Focus", "Mouse" ]
-
-[node name="Label" type="Label" parent="Pivot/Body/StateInfo" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 8.0
-margin_right = 48.0
-margin_bottom = 14.0
+margin_left = 22.0
+margin_top = 2.0
+margin_right = 76.0
+margin_bottom = 19.0
+rect_scale = Vector2( 0.8, 0.8 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "state"
+size_flags_stretch_ratio = 0.96
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "piece name"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Focus", "Mouse", "custom_colors" ]
+_sections_unfolded = [ "Focus", "Mouse", "Rect", "Size Flags", "custom_colors", "custom_fonts", "custom_styles" ]
 
 [node name="Shadow" type="Sprite" parent="." index="3"]
 
@@ -259,8 +241,8 @@ _sections_unfolded = [ "Transform" ]
 [node name="Area2D" type="Area2D" parent="." index="4"]
 
 editor/display_folded = true
-position = Vector2( -0.606201, -26.2557 )
-scale = Vector2( 0.880436, 0.991844 )
+position = Vector2( -0.848083, -27.3905 )
+scale = Vector2( 0.880436, 0.956381 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chess_tileset.png-ce39a62688f8f19230d7b227bc8a0b44.stex"
+path="res://.import/chess_piece_1_ferz.png-64819dfe64f9cb3e61d55643febba2be.stex"
 
 [deps]
 
-source_file="res://assets/chess_tileset.png"
-source_md5="65ef028e3590de9838d3a41ce43ac6fb"
+source_file="res://assets/chess/chess_piece_1_ferz.png"
+source_md5="e8dad95f8bb47ee995e0816cc38f531e"
 
-dest_files=[ "res://.import/chess_tileset.png-ce39a62688f8f19230d7b227bc8a0b44.stex" ]
-dest_md5="40000cc196d2bc5219953432598865f7"
+dest_files=[ "res://.import/chess_piece_1_ferz.png-64819dfe64f9cb3e61d55643febba2be.stex" ]
+dest_md5="7b851a95cb19b01e49fbc5a1855b222d"
 
 [params]
 
