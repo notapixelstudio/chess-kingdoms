@@ -14,9 +14,14 @@ onready var Piece = preload("res://scenes/characters/character.tscn")
 var player1 
 var player2
 
+var rand_dir = [-1, 0, 1]
 enum players {PLAYER1,PLAYER2}
+var sign_of_moves = {PLAYER1:-1, PLAYER2:1}
 var dic_players = {PLAYER1:"player1", PLAYER2:"player2"}
 var turn = 0
+
+const MOVE = "move"
+const ATTACK = "take"
 
 func _ready():
 	randomize()
@@ -62,52 +67,82 @@ func get_moves(piece_name):
 func get_legal_moves(piece):
 	# TODO: we don't like repetition of code
 	var legal_moves = []
+	var pos_to_check = Vector2()
+
 	for pos in piece.moves:
-		var step = Vector2(pos["step"].front(), pos["step"].back())
+		var step = Vector2(pos["step"].front()*sign_of_moves[piece.side], pos["step"].back()*sign_of_moves[piece.side])
 		if pos.has("repeat"):
 			var repeated_step = Vector2()
 			# we just need one multiplier
 			for i in range(1,model.grid_size.x):
 				repeated_step.x = step.x * i
 				repeated_step.y = step.y * i
+
 				# TODO: check if leaps or not
 				if is_cell_vacant(piece.pos_in_the_grid, repeated_step):
-					legal_moves.append(repeated_step)
+					legal_moves.append({"step":repeated_step, "action":MOVE})
 				else:
-					#print("someone is on the way")
+					print("someone is on the way")
+					pos_to_check = piece.pos_in_the_grid + repeated_step
+					if is_within_the_grid(pos_to_check):
+						if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
+							legal_moves.append({"step":repeated_step, "action":ATTACK})
+						else: 
+							print("it is our friend")
 					break
 		else: 
 			if is_cell_vacant(piece.pos_in_the_grid, step):
-				legal_moves.append(step)
+				
+				legal_moves.append({"step":step, "action":MOVE})
+			else:
+				print("someone is on the way")
+				pos_to_check = piece.pos_in_the_grid + step
+				if is_within_the_grid(pos_to_check):
+					if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
+						legal_moves.append({"step":step, "action":ATTACK})
+					else: 
+						print("it is our friend")
+	print(legal_moves)
 	return legal_moves
 
+# return the piece that occupies the cell, if hit the boundaries, return null
 func is_cell_vacant(pos_in_the_grid, direction):
 	var grid_pos = pos_in_the_grid + direction
 	# world boundaries
-	if grid_pos.x < grid_size.x and grid_pos.x >=0:
-		if grid_pos.y < grid_size.y and grid_pos.y >=0:
-			return model.grid[grid_pos.x][grid_pos.y] == null
-	
+	if is_within_the_grid(grid_pos):
+		return model.grid[grid_pos.x][grid_pos.y] == null
+			
+func is_within_the_grid(pos):
+	return pos.x >= 0 and pos.x < grid_size.x and pos.y >= 0 and pos.y < grid_size.y
+				
+func take_piece(attacker, defender):
+	grid[defender.pos_in_the_grid.x][defender.pos_in_the_grid.y] = null
+	defender.taken = true
+	print(defender.piece_name + " has been taken")
+	return defender
+
 func move(piece, new_pos):
 	# this function needs to exist . but I need the grid! and the map! 
 	# maybe we need the grid position for the piece?
 	print(dic_players[piece.side] +" "+ piece.piece_name + " is going to move")
+	
 	grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = null
+	var taken_piece = null
+	if grid[new_pos.x][new_pos.y]:
+		taken_piece = take_piece(piece, grid[new_pos.x][new_pos.y])
 	grid[new_pos.x][new_pos.y] = piece
 	piece.pos_in_the_grid = new_pos
 	change_turn()
+	return taken_piece
 	
 
 func summon(king, piece_name):
 	var piece = Piece.instance()
 	piece.piece_name = piece_name
 	piece.side = king.side 
-	var possible_direction = Vector2(int(rand_range(-1,0)) % 2, int(rand_range(-1,1)) % 2)
-	var sign_of_pos = 1
+	var possible_direction = Vector2()
 	while not is_cell_vacant(king.pos_in_the_grid, possible_direction):
-		
-		possible_direction.x = (int(possible_direction.x) + 1) % 2 *sign_of_pos
-		possible_direction.x = (int(possible_direction.y) + 1) % 2 *sign_of_pos
+		possible_direction = Vector2(rand_dir[randi()%len(rand_dir)],rand_dir[randi()%len(rand_dir)])
 		print(possible_direction)
 	
 	piece.pos_in_the_grid = king.pos_in_the_grid + possible_direction

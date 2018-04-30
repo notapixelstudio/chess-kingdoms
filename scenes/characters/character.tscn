@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/characters/character.gd" type="Script" id=1]
 [ext_resource path="res://assets/chess/chess_piece_1_queen.png" type="Texture" id=2]
@@ -10,12 +10,16 @@
 [ext_resource path="res://scenes/characters/FSM/states/Walking/Walking.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/characters/FSM/states/Attack/Attack.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/characters/FSM/states/Dead/Dead.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/characters/FSM/transitions/onMovement/onMovement.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/characters/FSM/transitions/onAnimationEnd/onAnimationEnd.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/characters/FSM/transitions/onEnemyExist/onEnemyExist.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/characters/FSM/transitions/onAttackEnd/onAttackEnd.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/characters/FSM/transitions/onDeadHit/onDeadHit.tscn" type="PackedScene" id=15]
-[ext_resource path="res://scenes/characters/FSM/transitions/onMovementEnd/onMovementEnd.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/characters/FSM/states/Taken/Taken.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/characters/FSM/states/Taken/Taken.gd" type="Script" id=12]
+[ext_resource path="res://scenes/characters/FSM/transitions/onMovement/onMovement.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/characters/FSM/transitions/onAnimationEnd/onAnimationEnd.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/characters/FSM/transitions/onEnemyExist/onEnemyExist.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/characters/FSM/transitions/onAttackEnd/onAttackEnd.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/characters/FSM/transitions/onDeadHit/onDeadHit.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/characters/FSM/transitions/onMovementEnd/onMovementEnd.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/characters/FSM/transitions/onPieceTaken/onPieceTaken.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/characters/FSM/transitions/onAnimationEnd/onAnimationEnd.gd" type="Script" id=20]
 
 [sub_resource type="Animation" id=1]
 
@@ -188,10 +192,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -31.0
-margin_top = -35.0
-margin_right = 27.0
-margin_bottom = -21.0
+margin_left = -35.0
+margin_top = -28.0
+margin_right = 36.0
+margin_bottom = -14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -254,7 +258,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Area2D" type="Area2D" parent="." index="4"]
 
-position = Vector2( 0.135925, -26.2557 )
+editor/display_folded = true
+position = Vector2( -0.606201, -26.2557 )
 scale = Vector2( 0.880436, 0.991844 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -273,7 +278,6 @@ shape = SubResource( 7 )
 
 [node name="FSM2D" type="Node2D" parent="." index="5"]
 
-editor/display_folded = true
 visible = false
 position = Vector2( 1.67087, 1.56916 )
 script = ExtResource( 4 )
@@ -311,17 +315,19 @@ GraphData = {
 "Null2__": Vector2( -9, 27 ),
 "Null_": Vector2( 602, 249 ),
 "Null__": Vector2( 602, 249 ),
-"Summoned": Vector2( 403, 12 ),
+"Summoned": Vector2( 400, 10 ),
 "Summoned2": Vector2( 32, -6 ),
 "Summoned2_": Vector2( 32, -6 ),
 "Summoned2__": Vector2( 32, -6 ),
-"Summoned_": Vector2( 403, 12 ),
+"Summoned_": Vector2( 400, 10 ),
 "Summoned__": Vector2( 403, 12 ),
+"Taken": Vector2( 160, 382 ),
+"Taken_": Vector2( 164, 392 ),
 "Walking": Vector2( 910, 196 ),
 "Walking_": Vector2( 910, 196 ),
 "Walking__": Vector2( 910, 196 ),
-"onAnimationEnd": Vector2( 399, 118 ),
-"onAnimationEnd_": Vector2( 399, 118 ),
+"onAnimationEnd": Vector2( 145, 242 ),
+"onAnimationEnd_": Vector2( 145, 242 ),
 "onAnimationEnd__": Vector2( 399, 118 ),
 "onAttack": Vector2( 721, 300 ),
 "onAttackEnd": Vector2( 790, 404 ),
@@ -343,7 +349,9 @@ GraphData = {
 "onMovementEnd_": Vector2( 653, 324 ),
 "onMovementEnd__": Vector2( 653, 324 ),
 "onMovement_": Vector2( 667, 48 ),
-"onMovement__": Vector2( 667, 48 )
+"onMovement__": Vector2( 667, 48 ),
+"onPieceTaken": Vector2( 155, 550 ),
+"onPieceTaken_": Vector2( 155, 550 )
 }
 
 [node name="States" type="Node2D" parent="FSM2D" index="0"]
@@ -358,44 +366,57 @@ GraphData = {
 
 [node name="Dead" parent="FSM2D/States" index="4" instance=ExtResource( 10 )]
 
+[node name="Taken" type="Node" parent="FSM2D/States" index="5" instance=ExtResource( 11 )]
+
+script = ExtResource( 12 )
+_sections_unfolded = [ "Pause" ]
+
 [node name="Transitions" type="Node2D" parent="FSM2D" index="1"]
 
-editor/display_folded = true
 position = Vector2( -0.69458, -11.8076 )
 
-[node name="onMovement" parent="FSM2D/Transitions" index="0" instance=ExtResource( 11 )]
+[node name="onMovement" parent="FSM2D/Transitions" index="0" instance=ExtResource( 13 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Walking")
 
-[node name="onAnimationEnd" parent="FSM2D/Transitions" index="1" instance=ExtResource( 12 )]
+[node name="onAnimationEnd" parent="FSM2D/Transitions" index="1" instance=ExtResource( 14 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Summoned") ]
 path2TargetState = NodePath("../../States/Idle")
 
-[node name="onEnemyExist" parent="FSM2D/Transitions" index="2" instance=ExtResource( 13 )]
+[node name="onEnemyExist" parent="FSM2D/Transitions" index="2" instance=ExtResource( 15 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Walking") ]
 path2TargetState = NodePath("../../States/Attack")
 
-[node name="onAttackEnd" parent="FSM2D/Transitions" index="3" instance=ExtResource( 14 )]
+[node name="onAttackEnd" parent="FSM2D/Transitions" index="3" instance=ExtResource( 16 )]
 
 path2TargetState = NodePath("../../States/Walking")
 
-[node name="onDeadHit" parent="FSM2D/Transitions" index="4" instance=ExtResource( 15 )]
+[node name="onDeadHit" parent="FSM2D/Transitions" index="4" instance=ExtResource( 17 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
 path2TargetState = NodePath("../../States/Dead")
 
-[node name="onMovementEnd" parent="FSM2D/Transitions" index="5" instance=ExtResource( 16 )]
+[node name="onMovementEnd" parent="FSM2D/Transitions" index="5" instance=ExtResource( 18 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Walking") ]
 path2TargetState = NodePath("../../States/Idle")
+
+[node name="onPieceTaken" type="Node" parent="FSM2D/Transitions" index="6" instance=ExtResource( 19 )]
+
+script = ExtResource( 20 )
+path2SourceStates = [ NodePath(""), NodePath("../../States/Dead") ]
+path2TargetState = NodePath("../../States/Taken")
+intervalBetweenChecks = -1.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_Character_mouse_entered"]
 
 [connection signal="mouse_exited" from="." to="." method="_on_Piece_mouse_exited"]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="FSM2D/Transitions/onAnimationEnd" method="_on_AnimationPlayer_animation_finished"]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="FSM2D/Transitions/onPieceTaken" method="_on_AnimationPlayer_animation_finished"]
 
 

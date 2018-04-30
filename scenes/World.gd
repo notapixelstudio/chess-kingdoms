@@ -12,11 +12,18 @@ var selected_piece
 
 var tile_size
 var half_tile_size
+var taken_grid = Vector2(10,0)
+var cont_taken = {model.PLAYER1:0, model.PLAYER2:0}
 
 var map
 var tiledict
 var dic_side = {model.PLAYER1:"player1", model.PLAYER2:"player2"}
 
+var dic_tiles = {
+	"move": 12,
+	"take": 4,
+	"preview":0
+	}
 
 func _ready():
 	map = get_node("ChessBoard/board")
@@ -49,22 +56,7 @@ func _ready():
 	squire = model.summon(model.player2, model.list_piece_name[randi()% len(model.list_piece_name)])
 	squire.position = map.map_to_world(squire.pos_in_the_grid)+ half_tile_size
 	add_child(squire)
-	
-# the object will ask if the cell is vacant
-func is_cell_vacant(pos, direction):
-	# Return true if the cell is vacant, else false
-	var grid_pos = map.world_to_map(pos) + direction
-	
-	var tile_id = map.get_cellv(grid_pos)
-	var solid = tile_id in tiledict and tiledict[tile_id]["solid"]
-	
-	# world boundaries
-	if grid_pos.x < model.grid_size.x and grid_pos.x >=0:
-		if grid_pos.y < model.grid_size.y and grid_pos.y >=0:
-			return model.grid[grid_pos.x][grid_pos.y] == null and not solid
-			
-	return false
-	
+
 func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
 	# Returns the new target world position of the child
@@ -77,9 +69,12 @@ func update_child_pos(child_node):
 
 func show_legal_moves(piece, legal_moves):
 	var grid_pos = map.world_to_map(piece.position)
+	print(legal_moves)
 	
 	for cell in legal_moves:
-		cursor_map.set_cellv(cell + grid_pos, 4)
+		# cell[action] could be move, attack
+		cursor_map.set_cellv(cell["step"] + grid_pos, dic_tiles[cell["action"]])
+		
 	cursor_shape = legal_moves
 	
 func reset_cells(force = false):
@@ -99,7 +94,7 @@ func select_piece(piece):
 	var moves = model.get_legal_moves(piece)
 	show_legal_moves(piece, moves)
 	for movement in moves:
-		moves_in_the_grid.append(map.world_to_map(piece.position) + movement)
+		moves_in_the_grid.append(map.world_to_map(piece.position) + movement["step"])
 	possible_moves = moves_in_the_grid
 	
 
@@ -125,14 +120,19 @@ func _input(event):
 				selected_piece.target_pos_in_the_grid = pos
 				selected_piece.direction = pos - selected_piece.pos_in_the_grid 
 				
-				model.move(selected_piece, pos)
+				var taken_piece = model.move(selected_piece, pos)
+				if taken_piece:
+					taken_piece.pos_in_the_grid = Vector2(taken_grid.x+taken_piece.side, cont_taken[taken_piece.side])
+					cont_taken[taken_piece.side] += 1
+					taken_piece.taken_pos = map.map_to_world(taken_piece.pos_in_the_grid) + half_tile_size
+					
+				# this will be made by character.gd
+				# the position of the piece will be updated by the view.
+				selected_piece.target_pos = update_child_pos(selected_piece)
 				if model.turn == 0:
 					$Label.text = "White moves"
 				else:
 					$Label.text = "Black moves"
-				# this will be made by character.gd
-				# the position of the piece will be updated by the view.
-				selected_piece.target_pos = update_child_pos(selected_piece)
 				reset()
 
 			else: 

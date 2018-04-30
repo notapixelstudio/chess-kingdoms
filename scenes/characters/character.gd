@@ -14,7 +14,8 @@ const RIGHT = Vector2(1, 0)
 const DOWN = Vector2(0, -1)
 const LEFT = Vector2(-1, 0)
 
-
+#condition of being alive
+var taken = false
 const MAX_SPEED = 0.5
 
 var speed = 0
@@ -34,6 +35,7 @@ var moves
 var legal_moves
 var pos_in_the_grid
 var target_pos_in_the_grid
+var taken_pos
 
 export var baseScale = 1
 onready var representation = get_node("AnimationPlayer")
@@ -45,6 +47,7 @@ func _ready():
 	representation.play("summon")
 	moves = model.get_moves(self.piece_name)
 	$Pivot/Body.texture = load("res://assets/chess/chess_piece_"+str(side)+"_"+piece_name+".png")
+	$Pivot/Body/StateInfo/Label.set_text(self.piece_name)
 
 func animate(keyword):
 	representation.play(keyword)
