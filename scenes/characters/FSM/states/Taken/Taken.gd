@@ -1,4 +1,4 @@
-extends "res://addons/net.kivano.fsm/content/FSMState.gd"
+extends "res://addons/net.kivano.fsm/content/FSMState.gd";
 ################################### R E A D M E ##################################
 # For more informations check script attached to FSM node
 #
@@ -7,7 +7,6 @@ extends "res://addons/net.kivano.fsm/content/FSMState.gd"
 ##################################################################################
 #####  Variables (Constants, Export Variables, Node Vars, Normal variables)  #####
 ######################### var myvar setget myvar_set,myvar_get ###################
-
 
 ##################################################################################
 #########                       Getters and Setters                      #########
@@ -25,20 +24,21 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 
 #when entering state, usually you will want to reset internal state here somehow
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
-	logicRoot.state=name.to_lower()
-	logicRoot.animate("idle")
-	#logicRoot.get_node("Pivot/Body/StateInfo/Label").set_text("idle")
+	logicRoot.representation.stop()
+	logicRoot.animate("setup")
+	#logicRoot.get_node("Pivot/Body/StateInfo/Label").set_text("taken")
+	print("setup??")
+	logicRoot.position = logicRoot.taken_pos
+	print(logicRoot.position)
+	
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
-	# idle has to reiterate its animation
-	if not logicRoot.representation.is_playing():
-		logicRoot.animate("idle")
-	
+	pass
 
 #when exiting state
 func exit(toState=null):
-	logicRoot.representation.stop()
+	pass
 
 ##################################################################################
 #########                       Connected Signals                        #########

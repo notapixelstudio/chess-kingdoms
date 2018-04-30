@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chess_piece_0_king.png-b8a2aa6ff9f804c674e01867e88d4331.stex"
+path="res://.import/chess_piece_1_shogi_pawn.png-ec9746db436adf8948c3c8bdef8595d0.stex"
 
 [deps]
 
-source_file="res://assets/chess/chess_piece_0_king.png"
-source_md5="ea83fef55d8400b8c4aad261faa80ba2"
+source_file="res://assets/chess/chess_piece_1_shogi_pawn.png"
+source_md5="af06b6a95cb3dc4d2cca104619270144"
 
-dest_files=[ "res://.import/chess_piece_0_king.png-b8a2aa6ff9f804c674e01867e88d4331.stex" ]
-dest_md5="17e7f9f71f48a48731e8c8fc48a461b1"
+dest_files=[ "res://.import/chess_piece_1_shogi_pawn.png-ec9746db436adf8948c3c8bdef8595d0.stex" ]
+dest_md5="51a5e41ad4b89c25d11fef94e5606caa"
 
 [params]
 

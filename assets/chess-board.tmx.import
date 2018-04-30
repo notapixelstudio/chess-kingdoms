@@ -7,10 +7,10 @@ path="res://.import/chess-board.tmx-05211934eba010a518ecf9ab90759a45.scn"
 [deps]
 
 source_file="res://assets/chess-board.tmx"
-source_md5="45374001bd9b08908539dcb3a65e671a"
+source_md5="fd8c41683ac378a00c623c65896a052a"
 
 dest_files=[ "res://.import/chess-board.tmx-05211934eba010a518ecf9ab90759a45.scn" ]
-dest_md5="500b8e8580d9f137417d21ab09dfdb09"
+dest_md5="f01a7bea599cd3185ac7a500d34e5c3c"
 
 [params]
 

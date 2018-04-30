@@ -7,10 +7,10 @@ path="res://.import/chess_tileset.png-ce39a62688f8f19230d7b227bc8a0b44.stex"
 [deps]
 
 source_file="res://assets/chess_tileset.png"
-source_md5="642ee5a3a8acf40081afb44feae8af8f"
+source_md5="65ef028e3590de9838d3a41ce43ac6fb"
 
 dest_files=[ "res://.import/chess_tileset.png-ce39a62688f8f19230d7b227bc8a0b44.stex" ]
-dest_md5="61792e20a50b47107a3b956597f28001"
+dest_md5="40000cc196d2bc5219953432598865f7"
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chess_piece_0_king.png-b8a2aa6ff9f804c674e01867e88d4331.stex"
+path="res://.import/chess_piece_1_lance.png-cc733f70bcb106390b541fd13b37f5bc.stex"
 
 [deps]
 
-source_file="res://assets/chess/chess_piece_0_king.png"
-source_md5="ea83fef55d8400b8c4aad261faa80ba2"
+source_file="res://assets/chess/chess_piece_1_lance.png"
+source_md5="0948aac94ae74408f5c4aa95bbdc9a38"
 
-dest_files=[ "res://.import/chess_piece_0_king.png-b8a2aa6ff9f804c674e01867e88d4331.stex" ]
-dest_md5="17e7f9f71f48a48731e8c8fc48a461b1"
+dest_files=[ "res://.import/chess_piece_1_lance.png-cc733f70bcb106390b541fd13b37f5bc.stex" ]
+dest_md5="4f4d04f83bfb88c3fa66d4f8ed83245c"
 
 [params]
 
