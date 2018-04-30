@@ -119,6 +119,8 @@ func take_piece(attacker, defender):
 	grid[defender.pos_in_the_grid.x][defender.pos_in_the_grid.y] = null
 	defender.taken = true
 	print(defender.piece_name + " has been taken")
+	if defender.piece_name == "king":
+		game_over(defender)
 	return defender
 
 func move(piece, new_pos):
@@ -190,5 +192,10 @@ func load_JSON(file_path):
 	file.close()
 	return dict
 
-func save():
-	pass
+
+func game_over(king_defeated):
+	print("game_over")
+	print(str((king_defeated.side + 1)%2) + " won")
+
+func reset():
+	_ready()

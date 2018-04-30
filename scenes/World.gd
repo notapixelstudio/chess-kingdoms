@@ -165,3 +165,8 @@ func reset():
 	possible_moves = []
 	selected_piece = null
 	reset_cells()
+
+func _on_Timer_timeout():
+	print("timeout")
+	model.reset()
+	get_tree().reload_current_scene()
