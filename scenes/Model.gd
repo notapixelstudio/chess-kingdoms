@@ -8,7 +8,7 @@ var piece_defs = {}
 var list_piece_name = []
 
 const MOVES = "moves"
-const PIECE_DEF_JSON = "res://assets/logic/piece_def.json"
+const PIECE_DEF_JSON = "res://assets/logic/piece_def.json_data"
 
 onready var Piece = preload("res://scenes/characters/character.tscn")
 var player1 
