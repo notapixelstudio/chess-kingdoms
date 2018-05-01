@@ -103,8 +103,8 @@ func select_piece(piece):
 
 func _input(event):
 	# this is case of moving
-	if event is InputEventMouseButton:
-		pass
+	if not model.playing:
+		return
 	
 	if Input.is_action_just_pressed("summon"):
 		print("invochiamo")
@@ -120,7 +120,7 @@ func _input(event):
 		else:
 			print("we cannot summon any other piece")
 
-	if event.is_action_pressed("select_piece"):
+	if Input.is_action_pressed("select_piece"):
 		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
 		if is_within_the_grid(pos):
 			var selected_cell = model.grid[pos.x][pos.y]
@@ -155,7 +155,7 @@ func _input(event):
 			else: 
 				reset() 
 				
-	if event.is_action_pressed("pause"):
+	if Input.is_action_pressed("pause"):
 		if get_tree().is_paused():
 			get_tree().set_pause(false)
 		else:

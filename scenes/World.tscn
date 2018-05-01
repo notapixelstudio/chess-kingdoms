@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/World.gd" type="Script" id=1]
 [ext_resource path="res://assets/chess-board.tmx" type="PackedScene" id=2]
@@ -7,11 +7,9 @@
 [ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=5]
 [ext_resource path="res://addons/net.kivano.fsm/assets/icoControl.png" type="Texture" id=6]
 [ext_resource path="res://scenes/FSM/states/Playing/Playing.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/FSM/states/Playing/Playing.gd" type="Script" id=8]
-[ext_resource path="res://scenes/FSM/states/GameOver/GameOver.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/FSM/states/GameOver/GameOver.gd" type="Script" id=10]
-[ext_resource path="res://scenes/FSM/transitions/onGameOver/onGameOver.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/FSM/transitions/onGameOver/onGameOver.gd" type="Script" id=12]
+[ext_resource path="res://scenes/FSM/states/GameOver/GameOver.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/FSM/transitions/onGameOver/onGameOver.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/FSM/transitions/onRestart/onRestart.tscn" type="PackedScene" id=10]
 
 [node name="World" type="Node2D" index="0"]
 
@@ -95,6 +93,7 @@ _sections_unfolded = [ "Rect" ]
 
 [node name="FSMControl" type="Control" parent="." index="4"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -129,7 +128,9 @@ GraphData = {
 "Playing_": Vector2( 249, 33 ),
 "Playing__": Vector2( -9, 27 ),
 "onGameOver": Vector2( 250, 181 ),
-"onGameOver_": Vector2( 250, 181 )
+"onGameOver_": Vector2( 250, 181 ),
+"onRestart": Vector2( 597, 26 ),
+"onRestart_": Vector2( 597, 26 )
 }
 
 [node name="States" type="Control" parent="FSMControl" index="0"]
@@ -145,20 +146,18 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="Playing" type="Node" parent="FSMControl/States" index="0" instance=ExtResource( 7 )]
+[node name="Playing" parent="FSMControl/States" index="0" instance=ExtResource( 7 )]
 
-script = ExtResource( 8 )
+[node name="GameOver" parent="FSMControl/States" index="1" instance=ExtResource( 8 )]
 
-[node name="GameOver" type="Node" parent="FSMControl/States" index="1" instance=ExtResource( 9 )]
-
-script = ExtResource( 10 )
+editor/display_folded = true
 
 [node name="Timer" type="Timer" parent="FSMControl/States/GameOver" index="0"]
 
 process_mode = 1
-wait_time = 2.0
-one_shot = true
-autostart = true
+wait_time = 5.0
+one_shot = false
+autostart = false
 
 [node name="Transitions" type="Control" parent="FSMControl" index="1"]
 
@@ -173,12 +172,15 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="onGameOver" type="Node" parent="FSMControl/Transitions" index="0" instance=ExtResource( 11 )]
+[node name="onGameOver" parent="FSMControl/Transitions" index="0" instance=ExtResource( 9 )]
 
-script = ExtResource( 12 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/Playing") ]
 path2TargetState = NodePath("../../States/GameOver")
-intervalBetweenChecks = -1.0
+
+[node name="onRestart" parent="FSMControl/Transitions" index="1" instance=ExtResource( 10 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/GameOver") ]
+path2TargetState = NodePath("../../States/Playing")
 
 [connection signal="timeout" from="FSMControl/States/GameOver/Timer" to="." method="_on_Timer_timeout"]
 

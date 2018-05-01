@@ -23,6 +23,7 @@ var turn = 0
 const MOVE = "move"
 const ATTACK = "take"
 const MAX_COUNT = 20
+var playing
 
 func _ready():
 	randomize()
@@ -52,7 +53,7 @@ func _ready():
 	# add players to the grid
 	grid[player1.pos_in_the_grid.x][player1.pos_in_the_grid.y] = player1
 	grid[player2.pos_in_the_grid.x][player2.pos_in_the_grid.y] = player2
-
+	playing = true
 
 func change_turn():
 	turn = (turn + 1) % 2
@@ -196,6 +197,7 @@ func load_JSON(file_path):
 func game_over(king_defeated):
 	print("game_over")
 	print(str((king_defeated.side + 1)%2) + " won")
+	playing = false
 
 func reset():
 	_ready()
