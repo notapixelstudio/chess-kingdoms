@@ -2,6 +2,8 @@
 # This is the model. It will handle the state, getting data and modifying the model
 extends Node2D
 
+const BOARD_OFFSET = Vector2(4,1)
+
 # cursor
 var cursor_shape
 var cursor_map
@@ -40,24 +42,22 @@ func _ready():
 	
 	# in order to put the object at the center
 	#Player1
-	model.player1.position = map.map_to_world(model.player1.pos_in_the_grid)
+	model.player1.position = assign_position(model.player1.pos_in_the_grid)
 	# model.grid[model.player1.pos_in_the_grid.x][model.player1.pos_in_the_grid.y] = model.player1
-	model.player1.position =  update_child_pos(model.player1)
 	add_child(model.player1)
 
 	#Player2
-	model.player2.position = map.map_to_world(model.player2.pos_in_the_grid)
+	model.player2.position = assign_position(model.player2.pos_in_the_grid)
 	# model.grid[model.player2.pos_in_the_grid.x][model.player2.pos_in_the_grid.y] = model.player2
-	model.player2.position = update_child_pos(model.player2)
 	add_child(model.player2)
 
 	var squire = null
 	squire = model.summon(model.player1, model.list_piece_name[randi()%len(model.list_piece_name)])
-	squire.position = map.map_to_world(squire.pos_in_the_grid)+ half_tile_size
+	squire.position = assign_position(squire.pos_in_the_grid)
 	add_child(squire)
 
 	squire = model.summon(model.player2, model.list_piece_name[randi()% len(model.list_piece_name)])
-	squire.position = map.map_to_world(squire.pos_in_the_grid)+ half_tile_size
+	squire.position = assign_position(squire.pos_in_the_grid)
 	add_child(squire)
 
 func update_child_pos(child_node):
@@ -66,13 +66,12 @@ func update_child_pos(child_node):
 	var grid_pos = map.world_to_map(child_node.position)
 	var new_grid_pos = grid_pos + child_node.direction
 	
-	child_node.pos_in_the_grid = new_grid_pos
+	child_node.pos_in_the_grid = new_grid_pos - BOARD_OFFSET
 	var target_pos = map.map_to_world(new_grid_pos) + half_tile_size
 	return target_pos
 
 func show_legal_moves(piece, legal_moves):
-	var grid_pos = map.world_to_map(piece.position)
-	print(legal_moves)
+	var grid_pos = piece.pos_in_the_grid
 	
 	for cell in legal_moves:
 		# cell[action] could be move, attack
@@ -97,9 +96,11 @@ func select_piece(piece):
 	var moves = model.get_legal_moves(piece)
 	show_legal_moves(piece, moves)
 	for movement in moves:
-		moves_in_the_grid.append(map.world_to_map(piece.position) + movement["step"])
+		moves_in_the_grid.append(piece.pos_in_the_grid + movement["step"])
 	possible_moves = moves_in_the_grid
-	
+
+func assign_position(pos_in_the_grid):
+	return map.map_to_world(pos_in_the_grid+ BOARD_OFFSET) + half_tile_size
 
 func _input(event):
 	# this is case of moving
@@ -107,11 +108,9 @@ func _input(event):
 		return
 	
 	if Input.is_action_just_pressed("summon"):
-		print("invochiamo")
-		print(players[model.turn])
 		var summoned = model.summon(players[model.turn], list_summonable_pieces[randi() % len(list_summonable_pieces)])
 		if summoned:
-			summoned.position = map.map_to_world(summoned.pos_in_the_grid)+ half_tile_size
+			summoned.position = assign_position(summoned.pos_in_the_grid)
 			add_child(summoned)
 			if model.turn == 0:
 				$Label.text = "White moves or summon"
@@ -122,8 +121,14 @@ func _input(event):
 
 	if Input.is_action_pressed("select_piece"):
 		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
+		print(pos)
+		pos -= BOARD_OFFSET
 		if is_within_the_grid(pos):
+			# update with the offset
+			print("dentro")
+			print(pos)
 			var selected_cell = model.grid[pos.x][pos.y]
+			print(selected_cell)
 			if selected_cell and not selected_piece:
 				selected_piece = selected_cell
 				print("there is something here: " + dic_side[selected_piece.side] +" "+ selected_piece.piece_name)

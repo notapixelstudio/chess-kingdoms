@@ -42,6 +42,7 @@ onready var representation = get_node("AnimationPlayer")
 onready var pivot = get_node("Pivot")
 
 func _ready():
+	direction = Vector2()
 	representation.play(SETUP)
 	battlefield = get_parent()
 	representation.play("summon")
