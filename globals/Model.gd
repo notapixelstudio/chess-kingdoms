@@ -37,7 +37,8 @@ func _ready():
 	# load the piece definition
 	piece_defs = load_JSON(PIECE_DEF_JSON)
 	for k in piece_defs.keys():
-		list_piece_name.append(k)
+		if k != "king":
+			list_piece_name.append(k)
 	player1 = Piece.instance()
 	player1.piece_name = "king"
 	player1.side = PLAYER1
