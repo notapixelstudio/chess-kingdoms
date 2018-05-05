@@ -1,0 +1,23 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/chess_tileset.tsx-e1dfaac24972575e032cb05b75ed3e9f.res"
+
+[deps]
+
+source_file="res://assets/chess/board/chess_tileset.tsx"
+source_md5="70fd0ba5c3d675b84d21fbfb0d3d2701"
+
+dest_files=[ "res://.import/chess_tileset.tsx-e1dfaac24972575e032cb05b75ed3e9f.res" ]
+dest_md5="4c8962a4532e83d91dcc76c7b5063557"
+
+[params]
+
+custom_properties=true
+tile_metadata=true
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=true
+apply_offset=false
+post_import_script=""

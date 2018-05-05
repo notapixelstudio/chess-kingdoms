@@ -42,6 +42,7 @@ const error_prefix = "Tiled Importer: "
 const whitelist_properties = [
 	"compression",
 	"draworder",
+	"gid",
 	"height",
 	"imageheight",
 	"imagewidth",
@@ -74,7 +75,6 @@ func build(source_path, options):
 	if err != OK:
 		return err
 
-	var map_size = Vector2(int(map.width), int(map.height))
 	var cell_size = Vector2(int(map.tilewidth), int(map.tileheight))
 	var map_mode = TileMap.MODE_SQUARE
 	var map_offset = TileMap.HALF_OFFSET_DISABLED
@@ -109,13 +109,13 @@ func build(source_path, options):
 
 	var map_data = {
 		"options": options,
-		"map_size": map_size,
 		"map_mode": map_mode,
 		"map_offset": map_offset,
 		"map_pos_offset": map_pos_offset,
 		"cell_size": cell_size,
 		"tileset": tileset,
-		"source_path": source_path
+		"source_path": source_path,
+		"infinite": bool(map.infinite) if "infinite" in map else false
 	}
 
 	for layer in map.layers:
@@ -131,7 +131,6 @@ func make_layer(layer, parent, root, data):
 		return err
 
 	# Main map data
-	var map_size = data.map_size
 	var map_mode = data.map_mode
 	var map_offset = data.map_offset
 	var map_pos_offset = data.map_pos_offset
@@ -139,22 +138,13 @@ func make_layer(layer, parent, root, data):
 	var options = data.options
 	var tileset = data.tileset
 	var source_path = data.source_path
+	var infinite = data.infinite
 
 	var opacity = float(layer.opacity) if "opacity" in layer else 1.0
 	var visible = bool(layer.visible) if "visible" in layer else true
 
 	if layer.type == "tilelayer":
-		var layer_data = layer.data
-
-		if "encoding" in layer and layer.encoding == "base64":
-			if "compression" in layer:
-				layer_data = decompress_layer(layer_data, layer.compression, map_size)
-				if typeof(layer_data) == TYPE_INT:
-					# Error happened
-					return layer_data
-			else:
-				layer_data = read_base64_layer(layer_data)
-
+		var layer_size = Vector2(int(layer.width), int(layer.height))
 		var tilemap = TileMap.new()
 		tilemap.set_name(layer.name)
 		tilemap.cell_size = cell_size
@@ -175,24 +165,48 @@ func make_layer(layer, parent, root, data):
 		tilemap.position = offset + map_pos_offset
 		tilemap.tile_set = tileset
 
-		var count = 0
-		for tile_id in layer_data:
-			var int_id = int(str(tile_id)) & 0xFFFFFFFF
+		var chunks = []
 
-			if int_id == 0:
+		if infinite:
+			chunks = layer.chunks
+		else:
+			chunks = [layer]
+
+		for chunk in chunks:
+			err = validate_chunk(chunk)
+			if err != OK:
+				return err
+
+			var chunk_data = chunk.data
+
+			if "encoding" in layer and layer.encoding == "base64":
+				if "compression" in layer:
+					chunk_data = decompress_layer_data(chunk.data, layer.compression, layer_size)
+					if typeof(chunk_data) == TYPE_INT:
+						# Error happened
+						return chunk_data
+				else:
+					chunk_data = read_base64_layer_data(chunk.data)
+
+			var count = 0
+			for tile_id in chunk_data:
+				var int_id = int(str(tile_id)) & 0xFFFFFFFF
+
+				if int_id == 0:
+					count += 1
+					continue
+
+				var flipped_h = bool(int_id & FLIPPED_HORIZONTALLY_FLAG)
+				var flipped_v = bool(int_id & FLIPPED_VERTICALLY_FLAG)
+				var flipped_d = bool(int_id & FLIPPED_DIAGONALLY_FLAG)
+
+				var gid = int_id & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG)
+
+				var cell_x = chunk.x + (count % int(chunk.width))
+				var cell_y = chunk.y + int(count / chunk.width)
+				tilemap.set_cell(cell_x, cell_y, gid, flipped_h, flipped_v, flipped_d)
+
 				count += 1
-				continue
-
-			var flipped_h = bool(int_id & FLIPPED_HORIZONTALLY_FLAG)
-			var flipped_v = bool(int_id & FLIPPED_VERTICALLY_FLAG)
-			var flipped_d = bool(int_id & FLIPPED_DIAGONALLY_FLAG)
-
-			var gid = int_id & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG)
-
-			var cell_pos = Vector2(count % int(map_size.x), int(count / map_size.x))
-			tilemap.set_cellv(cell_pos, gid, flipped_h, flipped_v, flipped_d)
-
-			count += 1
 
 		if options.save_tiled_properties:
 			set_tiled_properties_as_meta(tilemap, layer)
@@ -355,6 +369,8 @@ func make_layer(layer, parent, root, data):
 							collision.build_mode = CollisionPolygon2D.BUILD_SOLIDS
 						collision.polygon = points
 
+					collision.one_way_collision = object.type == "one-way"
+
 					if "x" in object:
 						pos.x = float(object.x)
 					if "y" in object:
@@ -386,6 +402,8 @@ func make_layer(layer, parent, root, data):
 				var tile_id = tile_raw_id & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG)
 
 				var is_tile_object = tileset.tile_get_region(tile_id).get_area() == 0
+				var collisions = tileset.tile_get_shape_count(tile_id)
+				var has_collisions = collisions > 0 && object.type != "sprite"
 				var sprite = Sprite.new()
 				var pos = Vector2()
 				var rot = 0
@@ -418,17 +436,41 @@ func make_layer(layer, parent, root, data):
 					if "height" in object and float(object.height) != texture_size.y:
 						scale.y = float(object.height) / texture_size.y
 
-				sprite.position = pos
-				sprite.rotation_degrees = rot
-				sprite.visible = bool(object.visible) if "visible" in object else true
-				sprite.region_filter_clip = options.uv_clip
-				sprite.scale = scale
+				var obj_root = sprite
+				if has_collisions:
+					match object.type:
+						"area": obj_root = Area2D.new()
+						"kinematic": obj_root = KinematicBody2D.new()
+						"rigid": obj_root = RigidBody2D.new()
+						_: obj_root = StaticBody2D.new()
+
+					object_layer.add_child(obj_root)
+					obj_root.owner = root
+
+					obj_root.add_child(sprite)
+					sprite.owner = root
+
+					var shapes = tileset.tile_get_shapes(tile_id)
+					for s in shapes:
+						var collision_node = CollisionShape2D.new()
+						collision_node.shape = s.shape
+
+						collision_node.transform = s.shape_transform
+						obj_root.add_child(collision_node)
+						collision_node.owner = root
+
+				obj_root.position = pos
+				obj_root.rotation_degrees = rot
+				obj_root.visible = bool(object.visible) if "visible" in object else true
+				obj_root.scale = scale
 				# Translate from Tiled bottom-left position to Godot top-left
 				sprite.centered = false
+				sprite.region_filter_clip = options.uv_clip
 				sprite.offset = Vector2(0, -texture_size.y)
 
-				object_layer.add_child(sprite)
-				sprite.set_owner(root)
+				if not has_collisions:
+					object_layer.add_child(sprite)
+					sprite.set_owner(root)
 
 				if options.save_tiled_properties:
 					set_tiled_properties_as_meta(sprite, object)
@@ -437,8 +479,8 @@ func make_layer(layer, parent, root, data):
 						var tile_meta = tileset.get_meta("tile_meta")
 						if typeof(tile_meta) == TYPE_DICTIONARY and tile_id in tile_meta:
 							for prop in tile_meta[tile_id]:
-								sprite.set_meta(prop, tile_meta[tile_id][prop])
-					set_custom_properties(sprite, object)
+								obj_root.set_meta(prop, tile_meta[tile_id][prop])
+					set_custom_properties(obj_root, object)
 
 	elif layer.type == "group":
 		var group = Node2D.new()
@@ -523,6 +565,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 		var spacing = int(ts.spacing) if "spacing" in ts and str(ts.spacing).is_valid_integer() else 0
 		var margin = int(ts.margin) if "margin" in ts and str(ts.margin).is_valid_integer() else 0
 		var firstgid = int(ts.firstgid)
+		var columns = int(ts.columns) if "columns" in ts and str(ts.columns).is_valid_integer() else -1
 
 		var image = null
 		var imagesize = Vector2()
@@ -543,6 +586,7 @@ func build_tileset_for_scene(tilesets, source_path, options):
 		var y = margin
 
 		var i = 0
+		var column = 0
 		while i < tilecount:
 			var tilepos = Vector2(x, y)
 			var region = Rect2(tilepos, tilesize)
@@ -554,7 +598,8 @@ func build_tileset_for_scene(tilesets, source_path, options):
 			if has_global_image:
 				result.tile_set_texture(gid, image)
 				result.tile_set_region(gid, region)
-				result.tile_set_texture_offset(gid, Vector2(0, -tilesize.y))
+				if options.apply_offset:
+					result.tile_set_texture_offset(gid, Vector2(0, -tilesize.y))
 			elif not rel_id in ts.tiles:
 				gid += 1
 				continue
@@ -565,7 +610,8 @@ func build_tileset_for_scene(tilesets, source_path, options):
 					# Error happened
 					return image
 				result.tile_set_texture(gid, image)
-				result.tile_set_texture_offset(gid, Vector2(0, -image.get_height()))
+				if options.apply_offset:
+					result.tile_set_texture_offset(gid, Vector2(0, -image.get_height()))
 
 			if "tiles" in ts and rel_id in ts.tiles and "objectgroup" in ts.tiles[rel_id] \
 					and "objects" in ts.tiles[rel_id].objectgroup:
@@ -578,7 +624,8 @@ func build_tileset_for_scene(tilesets, source_path, options):
 						return shape
 
 					var offset = Vector2(float(object.x), float(object.y))
-					offset += result.tile_get_texture_offset(gid)
+					if options.apply_offset:
+						offset += result.tile_get_texture_offset(gid)
 					if "width" in object and "height" in object:
 						offset += Vector2(float(object.width) / 2, float(object.height) / 2)
 
@@ -589,23 +636,25 @@ func build_tileset_for_scene(tilesets, source_path, options):
 						result.tile_set_light_occluder(gid, shape)
 						result.tile_set_occluder_offset(gid, offset)
 					else:
-						result.tile_add_shape(gid, shape, Transform2D(0, offset))
+						result.tile_add_shape(gid, shape, Transform2D(0, offset), object.type == "one-way")
 
 			if options.custom_properties and options.tile_metadata and "tileproperties" in ts \
 					and "tilepropertytypes" in ts and rel_id in ts.tileproperties and rel_id in ts.tilepropertytypes:
-				tile_meta[rel_id] = get_custom_properties(ts.tileproperties[rel_id], ts.tilepropertytypes[rel_id])
+				tile_meta[gid] = get_custom_properties(ts.tileproperties[rel_id], ts.tilepropertytypes[rel_id])
 			if options.save_tiled_properties and rel_id in ts.tiles:
 				for property in whitelist_properties:
 					if property in ts.tiles[rel_id]:
-						if not rel_id in tile_meta: tile_meta[rel_id] = {}
-						tile_meta[rel_id][property] = ts.tiles[rel_id][property]
+						if not gid in tile_meta: tile_meta[gid] = {}
+						tile_meta[gid][property] = ts.tiles[rel_id][property]
 
 			gid += 1
+			column += 1
 			i += 1
 			x += int(tilesize.x) + spacing
-			if x >= int(imagesize.x) - margin:
+			if (columns > 0 and column >= columns) or x >= int(imagesize.x) - margin or (x + int(tilesize.x)) > int(imagesize.x):
 				x = margin
 				y += int(tilesize.y) + spacing
+				column = 0
 
 		if str(ts.name) != "":
 			result.resource_name = ts.name
@@ -631,7 +680,7 @@ func build_tileset(source_path, options):
 		return ERR_INVALID_DATA
 
 	# Just to validate and build correctly using the existing builder
-	set["firstgid"] = 1
+	set["firstgid"] = 0
 
 	return build_tileset_for_scene([set], source_path, options)
 
@@ -747,11 +796,20 @@ func shape_from_object(object):
 			shape.polygon = vertices
 			shape.closed = "polygon" in object
 		else:
-			shape = ConvexPolygonShape2D.new()
 			if is_convex(vertices):
 				var sorter = PolygonSorter.new()
 				vertices = sorter.sort_polygon(vertices)
-			shape.points = vertices
+				shape = ConvexPolygonShape2D.new()
+				shape.points = vertices
+			else:
+				shape = ConcavePolygonShape2D.new()
+				var segments = [vertices[0]]
+				for x in range(1, vertices.size()):
+					segments.push_back(vertices[x])
+					segments.push_back(vertices[x])
+				segments.push_back(vertices[0])
+				shape.segments = PoolVector2Array(segments)
+
 	elif "ellipse" in object:
 		if object.type == "navigation" or object.type == "occluder":
 			print_error("Ellipse shapes are not supported as navigation or occluder. Use polygon/polyline instead.")
@@ -826,7 +884,7 @@ func is_convex(vertices):
 
 # Decompress the data of the layer
 # Compression argument is a string, either "gzip" or "zlib"
-func decompress_layer(layer_data, compression, map_size):
+func decompress_layer_data(layer_data, compression, map_size):
 	if compression != "gzip" and compression != "zlib":
 		print_error("Unrecognized compression format: %s" % [compression])
 		return ERR_INVALID_DATA
@@ -839,7 +897,7 @@ func decompress_layer(layer_data, compression, map_size):
 
 # Reads the layer as a base64 data
 # Returns an array of ints as the decoded layer would be
-func read_base64_layer(layer_data):
+func read_base64_layer_data(layer_data):
 	var decoded = Marshalls.base64_to_raw(layer_data)
 	return decode_layer(decoded)
 
@@ -907,12 +965,6 @@ func validate_map(map):
 	elif not "version" in map or int(map.version) != 1:
 		print_error("Missing or invalid map version.")
 		return ERR_INVALID_DATA
-	elif not "height" in map or not str(map.height).is_valid_integer():
-		print_error("Missing or invalid height property.")
-		return ERR_INVALID_DATA
-	elif not "width" in map or not str(map.width).is_valid_integer():
-		print_error("Missing or invalid width property.")
-		return ERR_INVALID_DATA
 	elif not "tileheight" in map or not str(map.tileheight).is_valid_integer():
 		print_error("Missing or invalid tileheight property.")
 		return ERR_INVALID_DATA
@@ -925,7 +977,7 @@ func validate_map(map):
 	elif not "tilesets" in map or typeof(map.tilesets) != TYPE_ARRAY:
 		print_error("Missing or invalid tilesets property.")
 		return ERR_INVALID_DATA
-	elif "orientation" in map and (map.orientation == "staggered" or map.orientation == "hexagonal"):
+	if "orientation" in map and (map.orientation == "staggered" or map.orientation == "hexagonal"):
 		if not "staggeraxis" in map:
 			print_error("Missing stagger axis property.")
 			return ERR_INVALID_DATA
@@ -949,17 +1001,24 @@ func validate_tileset(tileset):
 	elif not "tilecount" in tileset or not str(tileset.tilecount).is_valid_integer():
 		print_error("Missing or invalid tilecount tileset property.")
 		return ERR_INVALID_DATA
-	elif not "image" in tileset:
+	if not "image" in tileset:
 		for tile in tileset.tiles:
 			if not "image" in tileset.tiles[tile]:
 				print_error("Missing or invalid image in tileset property.")
 				return ERR_INVALID_DATA
-	elif not "imagewidth" in tileset or not str(tileset.imagewidth).is_valid_integer():
-		print_error("Missing or invalid imagewidth tileset property.")
-		return ERR_INVALID_DATA
-	elif not "imageheight" in tileset or not str(tileset.imageheight).is_valid_integer():
-		print_error("Missing or invalid imageheight tileset property.")
-		return ERR_INVALID_DATA
+			elif not "imagewidth" in tileset.tiles[tile] or not str(tileset.tiles[tile].imagewidth).is_valid_integer():
+				print_error("Missing or invalid imagewidth tileset property 1.")
+				return ERR_INVALID_DATA
+			elif not "imageheight" in tileset.tiles[tile] or not str(tileset.tiles[tile].imageheight).is_valid_integer():
+				print_error("Missing or invalid imageheight tileset property.")
+				return ERR_INVALID_DATA
+	else:
+		if not "imagewidth" in tileset or not str(tileset.imagewidth).is_valid_integer():
+			print_error("Missing or invalid imagewidth tileset property 2.")
+			return ERR_INVALID_DATA
+		elif not "imageheight" in tileset or not str(tileset.imageheight).is_valid_integer():
+			print_error("Missing or invalid imageheight tileset property.")
+			return ERR_INVALID_DATA
 	return OK
 
 # Validates the layer dictionary content for missing or invalid keys
@@ -971,33 +1030,65 @@ func validate_layer(layer):
 	elif not "name" in layer:
 		print_error("Missing or invalid name layer property.")
 		return ERR_INVALID_DATA
-	elif layer.type == "tilelayer":
-		if not "data" in layer:
-			print_error("Missing data layer property.")
-			return ERR_INVALID_DATA
-		elif "encoding" in layer:
-			if layer.encoding == "base64" and typeof(layer.data) != TYPE_STRING:
+	match layer.type:
+		"tilelayer":
+			if not "height" in layer or not str(layer.height).is_valid_integer():
+				print_error("Missing or invalid layer height property.")
+				return ERR_INVALID_DATA
+			elif not "width" in layer or not str(layer.width).is_valid_integer():
+				print_error("Missing or invalid layer width property.")
+				return ERR_INVALID_DATA
+			elif not "data" in layer:
+				if not "chunks" in layer:
+					print_error("Missing data or chunks layer properties.")
+					return ERR_INVALID_DATA
+				elif typeof(layer.chunks) != TYPE_ARRAY:
+					print_error("Invalid chunks layer property.")
+					return ERR_INVALID_DATA
+			elif "encoding" in layer:
+				if layer.encoding == "base64" and typeof(layer.data) != TYPE_STRING:
+					print_error("Invalid data layer property.")
+					return ERR_INVALID_DATA
+				if layer.encoding != "base64" and typeof(layer.data) != TYPE_ARRAY:
+					print_error("Invalid data layer property.")
+					return ERR_INVALID_DATA
+			elif typeof(layer.data) != TYPE_ARRAY:
 				print_error("Invalid data layer property.")
 				return ERR_INVALID_DATA
-		elif typeof(layer.data) != TYPE_ARRAY:
-			print_error("Invalid data layer property.")
-			return ERR_INVALID_DATA
-		elif "compression" in layer:
-			if layer.compression != "gzip" and layer.compression != "zlib":
-				print_error("Invalid compression type.")
+			if "compression" in layer:
+				if layer.compression != "gzip" and layer.compression != "zlib":
+					print_error("Invalid compression type.")
+					return ERR_INVALID_DATA
+		"imagelayer":
+			if not "image" in layer or typeof(layer.image) != TYPE_STRING:
+				print_error("Missing or invalid image path for layer.")
 				return ERR_INVALID_DATA
-	elif layer.type == "imagelayer":
-		if not "image" in layer or typeof(layer.image) != TYPE_STRING:
-			print_error("Missing or invalid image path for layer.")
-			return ERR_INVALID_DATA
-	elif layer.type == "objectgroup":
-		if not "objects" in layer or typeof(layer.objects) != TYPE_ARRAY:
-			print_error("Missing or invalid objects array for layer.")
-			return ERR_INVALID_DATA
-	elif layer.type == "group":
-		if not "layers" in layer or typeof(layer.layers) != TYPE_ARRAY:
-			print_error("Missing or invalid layer array for group layer.")
-			return ERR_INVALID_DATA
+		"objectgroup":
+			if not "objects" in layer or typeof(layer.objects) != TYPE_ARRAY:
+				print_error("Missing or invalid objects array for layer.")
+				return ERR_INVALID_DATA
+		"group":
+			if not "layers" in layer or typeof(layer.layers) != TYPE_ARRAY:
+				print_error("Missing or invalid layer array for group layer.")
+				return ERR_INVALID_DATA
+	return OK
+
+func validate_chunk(chunk):
+	if not "data" in chunk:
+		print_error("Missing data chunk property.")
+		return ERR_INVALID_DATA
+	elif not "height" in chunk or not str(chunk.height).is_valid_integer():
+		print_error("Missing or invalid height chunk property.")
+		return ERR_INVALID_DATA
+	elif not "width" in chunk or not str(chunk.width).is_valid_integer():
+		print_error("Missing or invalid width chunk property.")
+		return ERR_INVALID_DATA
+	elif not "x" in chunk or not str(chunk.x).is_valid_integer():
+		print_error("Missing or invalid x chunk property.")
+		return ERR_INVALID_DATA
+	elif not "y" in chunk or not str(chunk.y).is_valid_integer():
+		print_error("Missing or invalid y chunk property.")
+		return ERR_INVALID_DATA
 	return OK
 
 # Custom function to print error, to centralize the prefix addition

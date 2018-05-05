@@ -39,6 +39,12 @@ func get_recognized_extensions():
 func get_save_extension():
 	return "scn"
 
+func get_priority():
+	return 1
+
+func get_import_order():
+	return 100
+
 func get_resource_type():
 	return "PackedScene"
 
@@ -92,6 +98,8 @@ func get_option_visibility(option, options):
 func import(source_file, save_path, options, r_platform_variants, r_gen_files):
 	var map_reader = TiledMapReader.new()
 
+	# Offset is only optional for importing TileSets
+	options.apply_offset = true
 	var scene = map_reader.build(source_file, options)
 
 	if typeof(scene) != TYPE_OBJECT:
