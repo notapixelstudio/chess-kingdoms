@@ -42,14 +42,14 @@ func _ready():
 	player1 = Piece.instance()
 	player1.piece_name = "king"
 	player1.side = PLAYER1
-	player1.pos_in_the_grid = Vector2(4,7)
+	player1.pos_in_the_grid = Vector2(7,4)
 	
 	# REMEMBER to add_child to the root
 	
 	player2 = Piece.instance()
 	player2.piece_name = "king"
 	player2.side = PLAYER2
-	player2.pos_in_the_grid = Vector2(4,0)
+	player2.pos_in_the_grid = Vector2(0,4)
 
 	# add players to the grid
 	grid[player1.pos_in_the_grid.x][player1.pos_in_the_grid.y] = player1
@@ -72,7 +72,7 @@ func get_legal_moves(piece):
 	var pos_to_check = Vector2()
 
 	for pos in piece.moves:
-		var step = Vector2(pos["step"].front()*sign_of_moves[piece.side], pos["step"].back()*sign_of_moves[piece.side])
+		var step = Vector2(pos["step"].back()*sign_of_moves[piece.side], pos["step"].front()*sign_of_moves[piece.side])
 		if pos.has("repeat"):
 			var repeated_step = Vector2()
 			# we just need one multiplier
