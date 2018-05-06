@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://actors/characters/character.gd" type="Script" id=1]
-[ext_resource path="res://assets/chess/pieces/chess_piece_1_queen.png" type="Texture" id=2]
+[ext_resource path="res://assets/chess/pixel_pieces/ruby_king.png" type="Texture" id=2]
 [ext_resource path="res://actors/characters/shadow.png" type="Texture" id=3]
 [ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=4]
 [ext_resource path="res://addons/net.kivano.fsm/assets/ico2d.png" type="Texture" id=5]
@@ -18,8 +18,6 @@
 [ext_resource path="res://actors/characters/FSM/transitions/onDeadHit/onDeadHit.tscn" type="PackedScene" id=16]
 [ext_resource path="res://actors/characters/FSM/transitions/onMovementEnd/onMovementEnd.tscn" type="PackedScene" id=17]
 [ext_resource path="res://actors/characters/FSM/transitions/onPieceTaken/onPieceTaken.tscn" type="PackedScene" id=18]
-
-
 
 [sub_resource type="Animation" id=1]
 
@@ -150,52 +148,16 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "collision" ]
 baseScale = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
-anims/die = SubResource( 1 )
-anims/idle = SubResource( 2 )
-anims/setup = SubResource( 3 )
-anims/stagger = SubResource( 4 )
-anims/summon = SubResource( 5 )
-anims/walk = SubResource( 6 )
-blend_times = [  ]
-
-[node name="Tween" type="Tween" parent="." index="1"]
-
-repeat = false
-playback_process_mode = 1
-playback_speed = 1.0
-playback/active = false
-playback/repeat = false
-playback/speed = 1.0
-
-[node name="Pivot" type="Position2D" parent="." index="2"]
-
-_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
-
-[node name="Body" type="Sprite" parent="Pivot" index="0"]
-
-position = Vector2( 0, 30.9456 )
-scale = Vector2( 1.09865, 1.13581 )
-texture = ExtResource( 2 )
-offset = Vector2( -0.544521, -55.6007 )
-_sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
-
-[node name="StateInfo" type="Panel" parent="Pivot/Body" index="0"]
+[node name="StateInfo" type="Panel" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -35.0
-margin_top = -28.0
-margin_right = 36.0
-margin_bottom = -14.0
+margin_left = -45.0
+margin_top = 30.0
+margin_right = 28.0
+margin_bottom = 52.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -204,7 +166,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Theme" ]
 
-[node name="Label" type="Label" parent="Pivot/Body/StateInfo" index="0"]
+[node name="Label" type="Label" parent="StateInfo" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -212,8 +174,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 3.0
 margin_top = 1.0
-margin_right = 84.0
-margin_bottom = 18.0
+margin_right = 90.0
+margin_bottom = 30.0
 rect_scale = Vector2( 0.8, 0.8 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -229,16 +191,52 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Focus", "Mouse", "Rect", "Size Flags", "Theme", "custom_colors", "custom_fonts", "custom_styles" ]
 
-[node name="Shadow" type="Sprite" parent="." index="3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 
-self_modulate = Color( 1, 1, 1, 0.313726 )
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/die = SubResource( 1 )
+anims/idle = SubResource( 2 )
+anims/setup = SubResource( 3 )
+anims/stagger = SubResource( 4 )
+anims/summon = SubResource( 5 )
+anims/walk = SubResource( 6 )
+blend_times = [  ]
+
+[node name="Tween" type="Tween" parent="." index="2"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[node name="Pivot" type="Position2D" parent="." index="3"]
+
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="Body" type="Sprite" parent="Pivot" index="0"]
+
+position = Vector2( 0, 30.9456 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -25 )
+_sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
+
+[node name="Shadow" type="Sprite" parent="." index="4"]
+
+self_modulate = Color( 1, 1, 1, 0.32 )
 show_behind_parent = true
-position = Vector2( 0, 24.4121 )
-scale = Vector2( 1, 0.323517 )
+position = Vector2( 0, 22.9009 )
+scale = Vector2( 1, 0.263067 )
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="Area2D" type="Area2D" parent="." index="4"]
+[node name="Area2D" type="Area2D" parent="." index="5"]
 
 editor/display_folded = true
 position = Vector2( -0.848083, -27.3905 )
@@ -258,7 +256,7 @@ position = Vector2( -1.51318, -7.47237 )
 scale = Vector2( 3.72025, 0.601167 )
 shape = SubResource( 7 )
 
-[node name="FSM2D" type="Node2D" parent="." index="5"]
+[node name="FSM2D" type="Node2D" parent="." index="6"]
 
 editor/display_folded = true
 visible = false

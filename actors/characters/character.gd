@@ -25,10 +25,10 @@ var target_pos = Vector2()
 var is_moving = false
 
 var type
-var side
 var state
 var battlefield
 
+var side
 # Structure of the piece
 var piece_name
 var moves
@@ -37,28 +37,42 @@ var pos_in_the_grid
 var target_pos_in_the_grid
 var taken_pos
 
+# Shadoran-specific
+var kingdom
+
 export var baseScale = 1
 onready var representation = get_node("AnimationPlayer")
 onready var pivot = get_node("Pivot")
 
 func _ready():
-	direction = Vector2()
+	kingdom = "ruby"
 	representation.play(SETUP)
 	battlefield = get_parent()
 	representation.play("summon")
+	# set_piece_texture("res://assets/chess/pieces/chess_piece_"+str(side)+"_"+piece_name+".png")
+	face_with_side()
+	$StateInfo/Label.set_text(self.piece_name)
+	set_piece_texture("res://assets/chess/pixel_pieces/"+kingdom+"_"+piece_name+".png")
 	moves = model.get_moves(self.piece_name)
-	$Pivot/Body.texture = load("res://assets/chess/pieces/chess_piece_"+str(side)+"_"+piece_name+".png")
-	$Pivot/Body/StateInfo/Label.set_text(self.piece_name)
 
 func animate(keyword):
 	representation.play(keyword)
+
+func face_with_side():
+	if side:
+		face_right()
+	else:
+		face_left()
 
 func face_left():
 	pivot.scale = Vector2(-baseScale, baseScale)
 
 func face_right():
 	pivot.scale = Vector2(baseScale, baseScale)
-	
+
+func set_piece_texture(img_filename):
+	$Pivot/Body.texture = load(img_filename)
+
 func _physics_process(delta):
 	speed = 0
 	

@@ -43,12 +43,15 @@ func _ready():
 	player1.piece_name = "king"
 	player1.side = PLAYER1
 	player1.pos_in_the_grid = Vector2(7,4)
+	player1.kingdom = "amber"
+	player1.set_piece_texture("res://assets/chess/pixel_pieces/ruby_king.png")
 	
 	# REMEMBER to add_child to the root
 	
 	player2 = Piece.instance()
 	player2.piece_name = "king"
 	player2.side = PLAYER2
+	player1.kingdom = "emerald"
 	player2.pos_in_the_grid = Vector2(0,4)
 
 	# add players to the grid
