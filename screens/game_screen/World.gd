@@ -12,7 +12,8 @@ var possible_moves
 
 var selected_piece
 var list_summonable_pieces = [
-	"knight", "rook", "bishop", "queen", "ferz", "alfil", "dabbaba", "centurion", "gold_general", "lance", "shogi_pawn", "wall"]
+	"knight", "rook", "bishop", "queen", "ferz", "alfil", "dabbaba", "centurion", "gold_general", "lance", "shogi_pawn", "wall",
+	]
 var tile_size
 var half_tile_size
 var taken_grid = Vector2(10,0)
