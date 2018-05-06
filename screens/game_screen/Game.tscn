@@ -1,0 +1,209 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://screens/game_screen/World.gd" type="Script" id=1]
+[ext_resource path="res://assets/chess/board/chess-board.tmx" type="PackedScene" id=2]
+[ext_resource path="res://screens/game_screen/GridVisualizer.gd" type="Script" id=3]
+[ext_resource path="res://screens/game_screen/Camera2D.gd" type="Script" id=4]
+[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=5]
+[ext_resource path="res://addons/net.kivano.fsm/assets/icoControl.png" type="Texture" id=6]
+[ext_resource path="res://screens/game_screen/FSM/states/Playing/Playing.tscn" type="PackedScene" id=7]
+[ext_resource path="res://screens/game_screen/FSM/states/GameOver/GameOver.tscn" type="PackedScene" id=8]
+[ext_resource path="res://screens/game_screen/FSM/transitions/onGameOver/onGameOver.tscn" type="PackedScene" id=9]
+[ext_resource path="res://screens/game_screen/FSM/transitions/onRestart/onRestart.tscn" type="PackedScene" id=10]
+
+[node name="World" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="GridVisualizer" type="TileMap" parent="." index="0"]
+
+mode = 0
+tile_set = null
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+_sections_unfolded = [ "Cell", "Collision" ]
+
+[node name="ColorRect" type="ColorRect" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1020.0
+margin_bottom = 620.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 1 )
+
+[node name="ChessBoard" parent="." index="2" instance=ExtResource( 2 )]
+
+position = Vector2( 256, 64 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Node2D" type="Node2D" parent="ChessBoard" index="1"]
+
+script = ExtResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="." index="3"]
+
+position = Vector2( 0, 1.81888 )
+anchor_mode = 0
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+script = ExtResource( 4 )
+_sections_unfolded = [ "Limit", "Smoothing" ]
+
+[node name="Label" type="Label" parent="." index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 27.0
+margin_top = 528.0
+margin_right = 167.0
+margin_bottom = 561.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "White moves or summon"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_colors" ]
+
+[node name="FSMControl" type="Control" parent="." index="5"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 5 )
+_sections_unfolded = [ "Create new:" ]
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+path2LogicRoot = NodePath("..")
+onlyActiveStateOnTheScene = true
+initManually = false
+updateMode = 1
+receiceSignalsOnly4ActiveStatesAndTransitions = true
+enableDebug = false
+"Initial state:" = ""
+"Create new:/Subdirectory for FSM nodes:" = "FSM"
+"Create new:/Create state with name:" = null
+"Create new:/Create transition with name:" = null
+GraphData = {
+"GameOver": Vector2( 588, 188 ),
+"GameOver_": Vector2( 588, 188 ),
+"Playing": Vector2( 249, 33 ),
+"Playing_": Vector2( 249, 33 ),
+"Playing__": Vector2( -9, 27 ),
+"onGameOver": Vector2( 250, 181 ),
+"onGameOver_": Vector2( 250, 181 ),
+"onRestart": Vector2( 597, 26 ),
+"onRestart_": Vector2( 597, 26 )
+}
+
+[node name="States" type="Control" parent="FSMControl" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Playing" parent="FSMControl/States" index="0" instance=ExtResource( 7 )]
+
+[node name="GameOver" parent="FSMControl/States" index="1" instance=ExtResource( 8 )]
+
+editor/display_folded = true
+
+[node name="Timer" type="Timer" parent="FSMControl/States/GameOver" index="0"]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = false
+autostart = false
+
+[node name="Transitions" type="Control" parent="FSMControl" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="onGameOver" parent="FSMControl/Transitions" index="0" instance=ExtResource( 9 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/Playing") ]
+path2TargetState = NodePath("../../States/GameOver")
+
+[node name="onRestart" parent="FSMControl/Transitions" index="1" instance=ExtResource( 10 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/GameOver") ]
+path2TargetState = NodePath("../../States/Playing")
+
+[connection signal="timeout" from="FSMControl/States/GameOver/Timer" to="." method="_on_Timer_timeout"]
+
+

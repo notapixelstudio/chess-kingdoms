@@ -11,16 +11,20 @@ config_version=3
 [application]
 
 config/name="Kingdoms of Shadoran"
-run/main_scene="res://scenes/World.tscn"
-config/icon="res://assets/chess/chess_piece_1_queen.png"
+run/main_scene="res://screens/splash_screen/splash_screen.tscn"
+config/icon="res://assets/chess/pieces/chess_piece_0_centurion.png"
 
 [autoload]
 
-model="*res://scenes/Model.gd"
+model="*res://globals/Model.gd"
 
 [editor_plugins]
 
 enabled=PoolStringArray( "godot-git-control.funabab", "net.kivano.fsm", "vnen.tiled_importer" )
+
+[gui]
+
+theme/custom="res://assets/theme/theme.tres"
 
 [input]
 
