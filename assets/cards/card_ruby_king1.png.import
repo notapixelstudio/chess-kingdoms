@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/body.png-98fbfaa91549e30945c5f6c938a4af83.stex"
+path="res://.import/card_ruby_king1.png-c6f307c64d56345e7904726e1eb7222f.stex"
 
 [deps]
 
-source_file="res://actors/characters/player/body.png"
-source_md5="e76fc4b6b913ad7e09352eada55fc124"
+source_file="res://assets/cards/card_ruby_king1.png"
+source_md5="0dc6788bf261d9f74c3048b0459c95a7"
 
-dest_files=[ "res://.import/body.png-98fbfaa91549e30945c5f6c938a4af83.stex" ]
-dest_md5="b65921b7af7d7cea3cb9567625d04d34"
+dest_files=[ "res://.import/card_ruby_king1.png-c6f307c64d56345e7904726e1eb7222f.stex" ]
+dest_md5="3d33df5e5e55c60f7818ce6ae2e2db41"
 
 [params]
 

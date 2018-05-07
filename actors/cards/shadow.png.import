@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chess_tileset.png-f5bf9930ee992888a8abf96cebc8b236.stex"
+path="res://.import/shadow.png-cdea29fc79b9aa0c27b568049a836920.stex"
 
 [deps]
 
-source_file="res://assets/chess/board/chess_tileset.png"
-source_md5="7298cb1a86d53ebbfcbcef1cf02463ca"
+source_file="res://actors/cards/shadow.png"
+source_md5="ba1c3f4ef3a93dcd980bc4d020c4a22c"
 
-dest_files=[ "res://.import/chess_tileset.png-f5bf9930ee992888a8abf96cebc8b236.stex" ]
-dest_md5="b5934876a403eb61762a1a2892fb446e"
+dest_files=[ "res://.import/shadow.png-cdea29fc79b9aa0c27b568049a836920.stex" ]
+dest_md5="7dd3fb33b53c00ce76edd77833bce15d"
 
 [params]
 

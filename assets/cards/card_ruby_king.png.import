@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chess_tileset.png-f5bf9930ee992888a8abf96cebc8b236.stex"
+path="res://.import/card_ruby_king.png-47f05b394299b86d0ef1cb51e66cc5f7.stex"
 
 [deps]
 
-source_file="res://assets/chess/board/chess_tileset.png"
-source_md5="7298cb1a86d53ebbfcbcef1cf02463ca"
+source_file="res://assets/cards/card_ruby_king.png"
+source_md5="3d5f1f61d72f9d34988fdd2e5c83422a"
 
-dest_files=[ "res://.import/chess_tileset.png-f5bf9930ee992888a8abf96cebc8b236.stex" ]
-dest_md5="b5934876a403eb61762a1a2892fb446e"
+dest_files=[ "res://.import/card_ruby_king.png-47f05b394299b86d0ef1cb51e66cc5f7.stex" ]
+dest_md5="e35ee295d3478b20977d3abb37f18cc6"
 
 [params]
 

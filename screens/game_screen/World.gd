@@ -26,7 +26,8 @@ var players
 var dic_tiles = {
 	"move": 12,
 	"take": 4,
-	"preview":0
+	"summon":20,
+	"preview":21
 	}
 
 func _ready():
@@ -71,18 +72,21 @@ func update_child_pos(child_node):
 	var target_pos = map.map_to_world(new_grid_pos) + half_tile_size
 	return target_pos
 
-func show_legal_moves(piece, legal_moves):
+func show_legal_moves(piece, legal_moves, focused = false):
 	var grid_pos = piece.pos_in_the_grid
+	var action = "preview"
 	
 	for cell in legal_moves:
 		# cell[action] could be move, attack
-		cursor_map.set_cellv(cell["step"] + grid_pos, dic_tiles[cell["action"]])
+		if not focused:
+			action = cell["action"]
+			
+		cursor_map.set_cellv(cell["step"] + grid_pos, dic_tiles[action])
 		
 	cursor_shape = legal_moves
 	
 func reset_cells(force = false):
 	if not selected_piece or force:
-		possible_moves = []
 		for x in range(model.grid_size.x):
 			for y in range(model.grid_size.y):
 				cursor_map.set_cellv(Vector2(x,y), -1)
@@ -108,7 +112,19 @@ func _input(event):
 	if not model.playing:
 		return
 	
-	if Input.is_action_just_pressed("summon"):
+	var pos = 0
+	if event is InputEventMouse:
+		pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
+		print(pos)
+		pos -= BOARD_OFFSET
+		if is_within_the_grid(pos):
+			reset(true)
+			var selected_cell1 = model.grid[pos.x][pos.y]
+			if selected_cell1 != selected_piece and selected_cell1 and selected_cell1.state == selected_cell1.IDLE:
+				var moves = model.get_legal_moves(selected_cell1)
+				show_legal_moves(selected_cell1, moves, true)
+
+	if Input.is_action_just_pressed("summon") and not selected_piece:
 		var summoned = model.summon(players[model.turn], list_summonable_pieces[randi() % len(list_summonable_pieces)])
 		if summoned:
 			summoned.position = assign_position(summoned.pos_in_the_grid)
@@ -121,7 +137,7 @@ func _input(event):
 			print("we cannot summon any other piece")
 
 	if Input.is_action_pressed("select_piece"):
-		var pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
+		pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
 		print(pos)
 		pos -= BOARD_OFFSET
 		if is_within_the_grid(pos):
@@ -167,9 +183,10 @@ func _input(event):
 		else:
 			get_tree().set_pause(true)
 
-func reset():
-	possible_moves = []
-	selected_piece = null
+func reset(focused = false):
+	if not focused: 
+		possible_moves = []
+		selected_piece = null
 	reset_cells()
 
 func _on_Timer_timeout():

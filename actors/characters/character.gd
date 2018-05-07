@@ -51,7 +51,7 @@ func _ready():
 	representation.play("summon")
 	# set_piece_texture("res://assets/chess/pieces/chess_piece_"+str(side)+"_"+piece_name+".png")
 	face_with_side()
-	$StateInfo/Label.set_text(self.piece_name)
+	#$StateInfo/Label.set_text(self.piece_name)
 	set_piece_texture("res://assets/chess/pixel_pieces/"+kingdom+"_"+piece_name+".png")
 	moves = model.get_moves(self.piece_name)
 
@@ -108,10 +108,11 @@ func _physics_process(delta):
 			target_pos = Vector2()
 		move_and_collide(velocity)
 
-func _on_Character_mouse_entered():
-	print("area entered")
-	legal_moves = get_node("/root/World").get_legal_moves(self)
-	
 	
 func _on_Piece_mouse_exited():
 	legal_moves = get_node("/root/World").reset_cells()
+
+
+func _on_Piece_mouse_entered():
+	print("area entered")
+	legal_moves = get_node("/root/World").get_legal_moves(self)
