@@ -115,7 +115,6 @@ func _input(event):
 	var pos = 0
 	if event is InputEventMouse:
 		pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
-		print(pos)
 		pos -= BOARD_OFFSET
 		if is_within_the_grid(pos):
 			reset(true)
@@ -138,14 +137,11 @@ func _input(event):
 
 	if Input.is_action_pressed("select_piece"):
 		pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
-		print(pos)
+		
 		pos -= BOARD_OFFSET
 		if is_within_the_grid(pos):
 			# update with the offset
-			print("dentro")
-			print(pos)
 			var selected_cell = model.grid[pos.x][pos.y]
-			print(selected_cell)
 			if selected_cell and not selected_piece:
 				selected_piece = selected_cell
 				print("there is something here: " + dic_side[selected_piece.side] +" "+ selected_piece.piece_name)

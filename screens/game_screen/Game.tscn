@@ -1,24 +1,27 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://screens/game_screen/World.gd" type="Script" id=1]
-[ext_resource path="res://assets/chess/board/chess-board.tmx" type="PackedScene" id=2]
-[ext_resource path="res://screens/game_screen/GridVisualizer.gd" type="Script" id=3]
-[ext_resource path="res://screens/game_screen/Camera2D.gd" type="Script" id=4]
-[ext_resource path="res://actors/cards/Card.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/cards/card_ruby_king1.png" type="Texture" id=6]
-[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=7]
-[ext_resource path="res://addons/net.kivano.fsm/assets/icoControl.png" type="Texture" id=8]
-[ext_resource path="res://screens/game_screen/FSM/states/Playing/Playing.tscn" type="PackedScene" id=9]
-[ext_resource path="res://screens/game_screen/FSM/states/GameOver/GameOver.tscn" type="PackedScene" id=10]
-[ext_resource path="res://screens/game_screen/FSM/transitions/onGameOver/onGameOver.tscn" type="PackedScene" id=11]
-[ext_resource path="res://screens/game_screen/FSM/transitions/onRestart/onRestart.tscn" type="PackedScene" id=12]
+[ext_resource path="res://screens/basic_screen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/chess/board/chess-board.tmx" type="PackedScene" id=3]
+[ext_resource path="res://screens/game_screen/GridVisualizer.gd" type="Script" id=4]
+[ext_resource path="res://screens/game_screen/Camera2D.gd" type="Script" id=5]
+[ext_resource path="res://actors/cards/Card.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/cards/card_ruby_king1.png" type="Texture" id=7]
+[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=8]
+[ext_resource path="res://addons/net.kivano.fsm/assets/icoControl.png" type="Texture" id=9]
+[ext_resource path="res://screens/game_screen/FSM/states/Playing/Playing.tscn" type="PackedScene" id=10]
+[ext_resource path="res://screens/game_screen/FSM/states/GameOver/GameOver.tscn" type="PackedScene" id=11]
+[ext_resource path="res://screens/game_screen/FSM/transitions/onGameOver/onGameOver.tscn" type="PackedScene" id=12]
+[ext_resource path="res://screens/game_screen/FSM/transitions/onRestart/onRestart.tscn" type="PackedScene" id=13]
 
 [node name="World" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="ColorRect" type="ColorRect" parent="." index="0"]
+[node name="BasicScreen" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="ColorRect" type="ColorRect" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -35,16 +38,16 @@ size_flags_vertical = 1
 color = Color( 0, 0, 0, 1 )
 _sections_unfolded = [ "Mouse" ]
 
-[node name="ChessBoard" parent="." index="1" instance=ExtResource( 2 )]
+[node name="ChessBoard" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 256, 64 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Node2D" type="Node2D" parent="ChessBoard" index="1"]
 
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
+[node name="Camera2D" type="Camera2D" parent="." index="3"]
 
 position = Vector2( 0, 1.81888 )
 anchor_mode = 0
@@ -69,10 +72,10 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Limit", "Smoothing" ]
 
-[node name="Label" type="Label" parent="." index="3"]
+[node name="Label" type="Label" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -95,7 +98,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Mouse", "Rect", "custom_colors" ]
 
-[node name="VBoxContainer" type="HBoxContainer" parent="." index="4"]
+[node name="VBoxContainer" type="HBoxContainer" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -114,21 +117,22 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Mouse", "Rect" ]
 
-[node name="Card" parent="VBoxContainer" index="0" instance=ExtResource( 5 )]
+[node name="Card" parent="VBoxContainer" index="0" instance=ExtResource( 6 )]
 
 position = Vector2( 42.5288, 76.3172 )
 scale = Vector2( 0.3, 0.3 )
 
-[node name="Card2" parent="VBoxContainer" index="1" instance=ExtResource( 5 )]
+[node name="Card2" parent="VBoxContainer" index="1" instance=ExtResource( 6 )]
 
-position = Vector2( 150.78, 75.4838 )
+editor/display_folded = true
+position = Vector2( 143.78, 75.4838 )
 scale = Vector2( 0.3, 0.3 )
 
 [node name="Body" parent="VBoxContainer/Card2/Pivot" index="0"]
 
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
-[node name="FSMControl" type="Control" parent="." index="5"]
+[node name="FSMControl" type="Control" parent="." index="6"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -143,10 +147,10 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 _sections_unfolded = [ "Create new:", "Mouse" ]
 __meta__ = {
-"_editor_icon": ExtResource( 8 )
+"_editor_icon": ExtResource( 9 )
 }
 path2LogicRoot = NodePath("..")
 onlyActiveStateOnTheScene = true
@@ -161,11 +165,11 @@ enableDebug = false
 GraphData = {
 "GameOver": Vector2( 588, 188 ),
 "GameOver_": Vector2( 588, 188 ),
-"Playing": Vector2( 249, 33 ),
-"Playing_": Vector2( 249, 33 ),
+"Playing": Vector2( 250, 143 ),
+"Playing_": Vector2( 250, 143 ),
 "Playing__": Vector2( -9, 27 ),
-"onGameOver": Vector2( 250, 181 ),
-"onGameOver_": Vector2( 250, 181 ),
+"onGameOver": Vector2( 302, 301 ),
+"onGameOver_": Vector2( 302, 301 ),
 "onRestart": Vector2( 597, 26 ),
 "onRestart_": Vector2( 597, 26 )
 }
@@ -185,9 +189,9 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="Playing" parent="FSMControl/States" index="0" instance=ExtResource( 9 )]
+[node name="Playing" parent="FSMControl/States" index="0" instance=ExtResource( 10 )]
 
-[node name="GameOver" parent="FSMControl/States" index="1" instance=ExtResource( 10 )]
+[node name="GameOver" parent="FSMControl/States" index="1" instance=ExtResource( 11 )]
 
 [node name="Timer" type="Timer" parent="FSMControl/States/GameOver" index="0"]
 
@@ -210,12 +214,12 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="onGameOver" parent="FSMControl/Transitions" index="0" instance=ExtResource( 11 )]
+[node name="onGameOver" parent="FSMControl/Transitions" index="0" instance=ExtResource( 12 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/Playing") ]
 path2TargetState = NodePath("../../States/GameOver")
 
-[node name="onRestart" parent="FSMControl/Transitions" index="1" instance=ExtResource( 12 )]
+[node name="onRestart" parent="FSMControl/Transitions" index="1" instance=ExtResource( 13 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/GameOver") ]
 path2TargetState = NodePath("../../States/Playing")

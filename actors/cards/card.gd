@@ -8,9 +8,10 @@ func _ready():
 
 func _on_Character_mouse_entered():
 	focused = true
-	$AnimationPlayer.play("focus")
+	$AnimationPlayer.queue("focus")
 	
 	
 func _on_Piece_mouse_exited():
 	focused = false
-	$AnimationPlayer.play_backwards("focus")
+	$AnimationPlayer.queue("unfocus")
+

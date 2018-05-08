@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://actors/cards/card.gd" type="Script" id=1]
 [ext_resource path="res://assets/cards/card_ruby_king.png" type="Texture" id=2]
@@ -116,6 +116,25 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=9]
+
+resource_name = "unfocus"
+length = 0.3
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -300 ), Vector2( 0, 0 ) ]
+}
+
 [sub_resource type="Animation" id=7]
 
 length = 0.3
@@ -163,6 +182,7 @@ anims/idle = SubResource( 3 )
 anims/setup = SubResource( 4 )
 anims/stagger = SubResource( 5 )
 anims/summon = SubResource( 6 )
+anims/unfocus = SubResource( 9 )
 anims/walk = SubResource( 7 )
 blend_times = [  ]
 
