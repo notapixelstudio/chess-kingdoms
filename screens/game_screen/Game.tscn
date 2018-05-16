@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://screens/game_screen/World.gd" type="Script" id=1]
 [ext_resource path="res://screens/basic_screen.tscn" type="PackedScene" id=2]
@@ -9,10 +9,19 @@
 [ext_resource path="res://assets/cards/card_ruby_king1.png" type="Texture" id=7]
 [ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=8]
 [ext_resource path="res://addons/net.kivano.fsm/assets/icoControl.png" type="Texture" id=9]
-[ext_resource path="res://screens/game_screen/FSM/states/Playing/Playing.tscn" type="PackedScene" id=10]
-[ext_resource path="res://screens/game_screen/FSM/states/GameOver/GameOver.tscn" type="PackedScene" id=11]
-[ext_resource path="res://screens/game_screen/FSM/transitions/onGameOver/onGameOver.tscn" type="PackedScene" id=12]
-[ext_resource path="res://screens/game_screen/FSM/transitions/onRestart/onRestart.tscn" type="PackedScene" id=13]
+[ext_resource path="res://screens/game_screen/FSM/states/PreAction/PreAction.tscn" type="PackedScene" id=10]
+[ext_resource path="res://screens/game_screen/FSM/states/TurnAction/TurnAction.tscn" type="PackedScene" id=11]
+[ext_resource path="res://screens/game_screen/FSM/states/EndTurn/EndTurn.tscn" type="PackedScene" id=12]
+[ext_resource path="res://screens/game_screen/FSM/states/CardSelection/CardSelection.tscn" type="PackedScene" id=13]
+[ext_resource path="res://screens/game_screen/FSM/states/PieceSelection/PieceSelection.tscn" type="PackedScene" id=14]
+[ext_resource path="res://screens/game_screen/FSM/states/SelectCell/SelectCell.tscn" type="PackedScene" id=15]
+[ext_resource path="res://screens/game_screen/FSM/transitions/PreActionFinished/PreActionFinished.tscn" type="PackedScene" id=16]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnEndTurn/OnEndTurn.tscn" type="PackedScene" id=17]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnPieceSelection/OnPieceSelection.tscn" type="PackedScene" id=18]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnCardSelection/OnCardSelection.tscn" type="PackedScene" id=19]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnCardActivation/OnCardActivation.tscn" type="PackedScene" id=20]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnPieceActivation/OnPieceActivation.tscn" type="PackedScene" id=21]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnNextAction/OnNextAction.tscn" type="PackedScene" id=22]
 
 [node name="World" type="Node2D" index="0"]
 
@@ -40,6 +49,7 @@ _sections_unfolded = [ "Mouse" ]
 
 [node name="ChessBoard" parent="." index="2" instance=ExtResource( 3 )]
 
+editor/display_folded = true
 position = Vector2( 256, 64 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
@@ -81,17 +91,17 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 27.0
-margin_top = 528.0
-margin_right = 213.0
-margin_bottom = 561.0
+margin_left = 7.0
+margin_top = 539.0
+margin_right = 193.0
+margin_bottom = 572.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "White moves or summon"
 percent_visible = 1.0
 lines_skipped = 0
@@ -132,9 +142,35 @@ scale = Vector2( 0.3, 0.3 )
 
 texture = ExtResource( 7 )
 
-[node name="FSMControl" type="Control" parent="." index="6"]
+[node name="EndTurn" type="Button" parent="." index="6"]
 
-editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 811.0
+margin_top = 513.0
+margin_right = 979.0
+margin_bottom = 547.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "End Turn"
+flat = false
+align = 1
+_sections_unfolded = [ "Visibility" ]
+
+[node name="FSMControl" type="Control" parent="." index="7"]
+
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -148,7 +184,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 8 )
-_sections_unfolded = [ "Create new:", "Mouse" ]
+_sections_unfolded = [ "Create new:" ]
 __meta__ = {
 "_editor_icon": ExtResource( 9 )
 }
@@ -163,20 +199,37 @@ enableDebug = false
 "Create new:/Create state with name:" = null
 "Create new:/Create transition with name:" = null
 GraphData = {
-"GameOver": Vector2( 588, 188 ),
-"GameOver_": Vector2( 588, 188 ),
-"Playing": Vector2( 250, 143 ),
-"Playing_": Vector2( 250, 143 ),
-"Playing__": Vector2( -9, 27 ),
-"onGameOver": Vector2( 302, 301 ),
-"onGameOver_": Vector2( 302, 301 ),
-"onRestart": Vector2( 597, 26 ),
-"onRestart_": Vector2( 597, 26 )
+"CardSelection": Vector2( 754, 431 ),
+"CardSelection_": Vector2( 754, 431 ),
+"EndTurn": Vector2( 743, 47 ),
+"EndTurn_": Vector2( 743, 47 ),
+"OnCardActivation": Vector2( 758, 556 ),
+"OnCardActivation_": Vector2( 758, 556 ),
+"OnCardSelection": Vector2( 761, 315 ),
+"OnCardSelection_": Vector2( 761, 315 ),
+"OnEndTurn": Vector2( 744, 172 ),
+"OnEndTurn_": Vector2( 744, 172 ),
+"OnNextAction": Vector2( 448, 410 ),
+"OnNextAction_": Vector2( 448, 410 ),
+"OnPieceActivation": Vector2( 150, 568 ),
+"OnPieceActivation_": Vector2( 150, 568 ),
+"OnPieceSelection": Vector2( 156, 311 ),
+"OnPieceSelection_": Vector2( 156, 311 ),
+"PieceSelection": Vector2( 156, 440 ),
+"PieceSelection_": Vector2( 156, 440 ),
+"PreAction": Vector2( 121, 26 ),
+"PreActionFinished": Vector2( 117, 178 ),
+"PreActionFinished_": Vector2( 117, 178 ),
+"PreAction_": Vector2( 121, 26 ),
+"PreAction__": Vector2( -9, 27 ),
+"SelectCell": Vector2( 448, 571 ),
+"SelectCell_": Vector2( 448, 571 ),
+"TurnAction": Vector2( 443, 171 ),
+"TurnAction_": Vector2( 443, 171 )
 }
 
 [node name="States" type="Control" parent="FSMControl" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -189,16 +242,24 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="Playing" parent="FSMControl/States" index="0" instance=ExtResource( 10 )]
+[node name="PreAction" parent="FSMControl/States" index="0" instance=ExtResource( 10 )]
 
-[node name="GameOver" parent="FSMControl/States" index="1" instance=ExtResource( 11 )]
-
-[node name="Timer" type="Timer" parent="FSMControl/States/GameOver" index="0"]
+[node name="Timer" type="Timer" parent="FSMControl/States/PreAction" index="0"]
 
 process_mode = 1
-wait_time = 5.0
+wait_time = 3.0
 one_shot = false
 autostart = false
+
+[node name="TurnAction" parent="FSMControl/States" index="1" instance=ExtResource( 11 )]
+
+[node name="EndTurn" parent="FSMControl/States" index="2" instance=ExtResource( 12 )]
+
+[node name="CardSelection" parent="FSMControl/States" index="3" instance=ExtResource( 13 )]
+
+[node name="PieceSelection" parent="FSMControl/States" index="4" instance=ExtResource( 14 )]
+
+[node name="SelectCell" parent="FSMControl/States" index="5" instance=ExtResource( 15 )]
 
 [node name="Transitions" type="Control" parent="FSMControl" index="1"]
 
@@ -214,17 +275,43 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="onGameOver" parent="FSMControl/Transitions" index="0" instance=ExtResource( 12 )]
+[node name="PreActionFinished" parent="FSMControl/Transitions" index="0" instance=ExtResource( 16 )]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/Playing") ]
-path2TargetState = NodePath("../../States/GameOver")
+path2SourceStates = [ NodePath(""), NodePath("../../States/PreAction") ]
+path2TargetState = NodePath("../../States/TurnAction")
 
-[node name="onRestart" parent="FSMControl/Transitions" index="1" instance=ExtResource( 13 )]
+[node name="OnEndTurn" parent="FSMControl/Transitions" index="1" instance=ExtResource( 17 )]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/GameOver") ]
-path2TargetState = NodePath("../../States/Playing")
+path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
+path2TargetState = NodePath("../../States/EndTurn")
 
-[connection signal="timeout" from="FSMControl/States/GameOver/Timer" to="." method="_on_Timer_timeout"]
+[node name="OnPieceSelection" parent="FSMControl/Transitions" index="2" instance=ExtResource( 18 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
+path2TargetState = NodePath("../../States/PieceSelection")
+
+[node name="OnCardSelection" parent="FSMControl/Transitions" index="3" instance=ExtResource( 19 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
+path2TargetState = NodePath("../../States/CardSelection")
+
+[node name="OnCardActivation" parent="FSMControl/Transitions" index="4" instance=ExtResource( 20 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/CardSelection") ]
+path2TargetState = NodePath("../../States/SelectCell")
+
+[node name="OnPieceActivation" parent="FSMControl/Transitions" index="5" instance=ExtResource( 21 )]
+
+_sections_unfolded = [ "Pause" ]
+path2SourceStates = [ NodePath(""), NodePath("../../States/PieceSelection") ]
+path2TargetState = NodePath("../../States/SelectCell")
+
+[node name="OnNextAction" parent="FSMControl/Transitions" index="6" instance=ExtResource( 22 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/SelectCell"), NodePath("../../States/CardSelection"), NodePath("../../States/PieceSelection") ]
+path2TargetState = NodePath("../../States/TurnAction")
+
+[connection signal="timeout" from="FSMControl/States/PreAction/Timer" to="FSMControl/Transitions/PreActionFinished" method="_on_Timer_timeout"]
 
 
 [editable path="VBoxContainer/Card2"]

@@ -87,27 +87,22 @@ func get_legal_moves(piece):
 				if is_cell_vacant(piece.pos_in_the_grid, repeated_step):
 					legal_moves.append({"step":repeated_step, "action":MOVE})
 				else:
-					print("someone is on the way")
 					pos_to_check = piece.pos_in_the_grid + repeated_step
 					if is_within_the_grid(pos_to_check):
 						if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
 							legal_moves.append({"step":repeated_step, "action":ATTACK})
-						else: 
-							print("it is our friend")
+						
 					break
 		else: 
 			if is_cell_vacant(piece.pos_in_the_grid, step):
 				
 				legal_moves.append({"step":step, "action":MOVE})
 			else:
-				print("someone is on the way")
 				pos_to_check = piece.pos_in_the_grid + step
 				if is_within_the_grid(pos_to_check):
 					if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
 						legal_moves.append({"step":step, "action":ATTACK})
-					else: 
-						print("it is our friend")
-	print(legal_moves)
+					
 	return legal_moves
 
 # return the piece that occupies the cell, if hit the boundaries, return null
@@ -154,7 +149,6 @@ func shuffleList(list):
 		indexList.remove(x)
 		list.remove(x)
 	list = tmp_list
-	print(tmp_list)
 	return shuffledList
 
 func summon(king, piece_name):
@@ -173,7 +167,6 @@ func summon(king, piece_name):
 			possible_direction = pos
 			break
 		
-		print(possible_direction)
 	if possible_direction:
 		piece.pos_in_the_grid = king.pos_in_the_grid + possible_direction
 		grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = piece

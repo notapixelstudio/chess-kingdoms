@@ -7,7 +7,7 @@ extends "res://addons/net.kivano.fsm/content/FSMState.gd";
 ##################################################################################
 #####  Variables (Constants, Export Variables, Node Vars, Normal variables)  #####
 ######################### var myvar setget myvar_set,myvar_get ###################
-
+var pos
 ##################################################################################
 #########                       Getters and Setters                      #########
 ##################################################################################
@@ -24,13 +24,28 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 
 #when entering state, usually you will want to reset internal state here somehow
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
-	print("GAME OVER!!")
-	logicRoot.get_node("Label").set_text("GAME OVER!")
-	$Timer.start()
+	logicRoot.get_node("EndTurn").disabled = false
+	logicRoot.selected_piece = null
+	logicRoot.get_node("Label").text = "Player " + str(logicRoot.game_model.turn) + " in action"
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
-	pass
+	if Input.is_action_just_pressed("select_piece"):
+		print("Selection piece")
+		pos = Vector2(round((get_viewport().get_mouse_position().x - logicRoot.position.x - logicRoot.tile_size.x/2)/logicRoot.tile_size.x), 
+			round((get_viewport().get_mouse_position().y - logicRoot.position.y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
+		pos -= logicRoot.BOARD_OFFSET
+		if logicRoot.is_within_the_grid(pos):
+			# update with the offset
+			var selected_cell = model.grid[pos.x][pos.y]
+			if selected_cell:
+				print("there is something here: " + logicRoot.dic_side[selected_cell.side] +" "+ selected_cell.piece_name)
+				if selected_cell.state == selected_cell.IDLE and selected_cell.side == logicRoot.game_model.turn:
+					logicRoot.selected_piece = selected_cell
+				else:
+					print("but we cannot move it")
+			else: 
+				logicRoot.reset(logicRoot.cursor_map) 
 
 #when exiting state
 func exit(toState=null):
