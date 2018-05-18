@@ -19,6 +19,11 @@
 [ext_resource path="res://actors/characters/FSM/transitions/onMovementEnd/onMovementEnd.tscn" type="PackedScene" id=17]
 [ext_resource path="res://actors/characters/FSM/transitions/onPieceTaken/onPieceTaken.tscn" type="PackedScene" id=18]
 
+[sub_resource type="RectangleShape2D" id=7]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
 [sub_resource type="Animation" id=1]
 
 resource_name = "die"
@@ -131,65 +136,23 @@ tracks/0/keys = {
 "values": [ Vector2( -0.526489, 41.1203 ), Vector2( 0.52652, 35.5554 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=7]
-
-custom_solver_bias = 0.0
-extents = Vector2( 7.15493, 34.6039 )
-
-[node name="Piece" type="KinematicBody2D" groups=[
+[node name="Piece" type="KinematicBody2D" index="0" groups=[
 "character",
 ]]
 
-input_pickable = true
+input_pickable = false
 collision_layer = 1
 collision_mask = 10
-collision/safe_margin = 0.08
+collision/safe_margin = 0.001
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "collision" ]
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index", "collision" ]
 baseScale = 1
 
-[node name="StateInfo" type="Panel" parent="." index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -45.0
-margin_top = 30.0
-margin_right = 28.0
-margin_bottom = 52.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 16
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Theme" ]
-
-[node name="Label" type="Label" parent="StateInfo" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 3.0
-margin_top = 1.0
-margin_right = 90.0
-margin_bottom = 30.0
-rect_scale = Vector2( 0.8, 0.8 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-size_flags_stretch_ratio = 0.96
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "piece name"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Focus", "Mouse", "Rect", "Size Flags", "Theme", "custom_colors", "custom_fonts", "custom_styles" ]
+position = Vector2( -0.648163, -92.8207 )
+scale = Vector2( 3.48704, 3.11686 )
+shape = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 
@@ -236,27 +199,7 @@ scale = Vector2( 1, 0.263067 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="Area2D" type="Area2D" parent="." index="5"]
-
-editor/display_folded = true
-position = Vector2( -0.848083, -27.3905 )
-scale = Vector2( 0.880436, 0.956381 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Pickable", "Transform" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-
-position = Vector2( -1.51318, -7.47237 )
-scale = Vector2( 3.72025, 0.601167 )
-shape = SubResource( 7 )
-
-[node name="FSM2D" type="Node2D" parent="." index="6"]
+[node name="FSM2D" type="Node2D" parent="." index="5"]
 
 editor/display_folded = true
 visible = false
@@ -303,7 +246,7 @@ GraphData = {
 "Summoned_": Vector2( 400, 10 ),
 "Summoned__": Vector2( 403, 12 ),
 "Taken": Vector2( 160, 382 ),
-"Taken_": Vector2( 164, 392 ),
+"Taken_": Vector2( 160, 382 ),
 "Walking": Vector2( 910, 196 ),
 "Walking_": Vector2( 910, 196 ),
 "Walking__": Vector2( 910, 196 ),
@@ -389,12 +332,10 @@ path2TargetState = NodePath("../../States/Idle")
 path2SourceStates = [ NodePath(""), NodePath("../../States/Dead") ]
 path2TargetState = NodePath("../../States/Taken")
 
-[connection signal="mouse_entered" from="." to="." method="_on_Character_mouse_entered"]
-
-[connection signal="mouse_exited" from="." to="." method="_on_Piece_mouse_exited"]
-
-[connection signal="animation_finished" from="AnimationPlayer" to="FSM2D/Transitions/onPieceTaken" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="mouse_entered" from="." to="." method="_on_Piece_mouse_entered"]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="FSM2D/Transitions/onAnimationEnd" method="_on_AnimationPlayer_animation_finished"]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="FSM2D/Transitions/onPieceTaken" method="_on_AnimationPlayer_animation_finished"]
 
 
