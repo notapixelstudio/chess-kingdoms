@@ -70,7 +70,8 @@ func exit(toState=null):
 	logicRoot.selection = null
 	logicRoot.selected_piece = null
 	logicRoot.reset(logicRoot.cursor_map)
-	this_card.queue_free()
+	if this_card:
+		this_card.queue_free()
 
 
 ##################################################################################
