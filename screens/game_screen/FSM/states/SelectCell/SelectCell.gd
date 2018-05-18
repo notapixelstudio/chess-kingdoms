@@ -8,6 +8,7 @@ extends "res://addons/net.kivano.fsm/content/FSMState.gd";
 #####  Variables (Constants, Export Variables, Node Vars, Normal variables)  #####
 ######################### var myvar setget myvar_set,myvar_get ###################
 var pos
+var this_card
 ##################################################################################
 #########                       Getters and Setters                      #########
 ##################################################################################
@@ -25,14 +26,23 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 #when entering state, usually you will want to reset internal state here somehow
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
 	logicRoot.get_node("Label").text = "Please choose the target cell"
+	print(logicRoot.possible_moves)
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
-	if Input.is_action_pressed("select_piece"):
-		print("Selection cell")
+	if Input.is_action_just_pressed("select_piece"):
 		pos = Vector2(round((get_viewport().get_mouse_position().x - logicRoot.position.x - logicRoot.tile_size.x/2)/logicRoot.tile_size.x), 
 			round((get_viewport().get_mouse_position().y - logicRoot.position.y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
 		pos -= logicRoot.BOARD_OFFSET
+		print(model.selected_card)
+		print(pos)
+		print(logicRoot.possible_moves)
+		if logicRoot.is_within_the_grid(pos) and pos in logicRoot.possible_moves and model.selected_card:
+			var piece = model.summon(logicRoot.players[model.turn], model.selected_card.piece_name, pos)
+			piece.position = logicRoot.assign_position(piece.pos_in_the_grid)
+			logicRoot.add_child(piece)
+			print("boomba")
+		
 		if logicRoot.is_within_the_grid(pos) and logicRoot.selected_piece \
 		and pos in logicRoot.possible_moves and logicRoot.selected_piece.state == logicRoot.selected_piece.IDLE:
 				# state: MOVE OR TAKE
@@ -49,13 +59,19 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 				# this will be made by character.gd
 				# the position of the piece will be updated by the view.
 				logicRoot.selected_piece.target_pos = logicRoot.update_child_pos(logicRoot.selected_piece)
-				logicRoot.possible_moves = []
+
+		this_card = model.selected_card
+		logicRoot.possible_moves = []
+		logicRoot.game_model.selected_card = null
 
 
 #when exiting state
 func exit(toState=null):
+	logicRoot.selection = null
 	logicRoot.selected_piece = null
 	logicRoot.reset(logicRoot.cursor_map)
+	this_card.queue_free()
+
 
 ##################################################################################
 #########                       Connected Signals                        #########

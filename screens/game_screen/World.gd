@@ -16,6 +16,8 @@ var last_cursor_pos
 # variables for the game
 var possible_moves
 var selected_piece
+var selected_card
+var selection 
 
 var list_summonable_pieces = [
 	"knight", "rook", "bishop", "queen", "ferz", "alfil", "dabbaba", "centurion", "gold_general", "lance", "shogi_pawn", "wall",
@@ -26,7 +28,7 @@ var taken_grid = Vector2(10,0)
 var cont_taken = {model.PLAYER1:0, model.PLAYER2:0}
 
 # state variables
-var selection
+
 
 var map
 var tiledict
@@ -40,7 +42,7 @@ var dic_tiles = {
 	}
 
 func _ready():
-	selection = false
+	selection = null
 	game_model = model
 	players = {model.PLAYER1 : model.player1, model.PLAYER2: model.player2}
 	
@@ -87,7 +89,7 @@ func update_child_pos(child_node):
 	var target_pos = map.map_to_world(new_grid_pos) + half_tile_size
 	return target_pos
 
-func show_legal_moves(piece, legal_moves, map_to_show):
+func show_legal_moves(piece, legal_moves, map_to_show = cursor_map):
 	var grid_pos = piece.pos_in_the_grid
 	var action = "preview"
 	
@@ -135,43 +137,7 @@ func _input(event):
 			reset(preview_map)
 			
 	
-	if Input.is_action_pressed("select_piece"):
-		# state: SELECTION CELL
-		selection = true
-		"""
-		pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
-		pos -= BOARD_OFFSET
-		if is_within_the_grid(pos):
-			# update with the offset
-			var selected_cell = model.grid[pos.x][pos.y]
-			if selected_cell and not selected_piece:
-				selected_piece = selected_cell
-				print("there is something here: " + dic_side[selected_piece.side] +" "+ selected_piece.piece_name)
-				if selected_piece.state == selected_piece.IDLE and selected_piece.side == model.turn:
-					select_piece(selected_piece)
-				else:
-					print("but we cannot move it")
-				
-			elif selected_piece and pos in possible_moves and selected_piece.state == selected_piece.IDLE:
-				# state: MOVE OR TAKE
-				# this piece is going to move
-				selected_piece.target_pos_in_the_grid = pos
-				selected_piece.direction = pos - selected_piece.pos_in_the_grid 
-				
-				var taken_piece = model.move(selected_piece, pos)
-				if taken_piece:
-					taken_piece.pos_in_the_grid = Vector2(taken_grid.x+taken_piece.side, cont_taken[taken_piece.side])
-					cont_taken[taken_piece.side] += 1
-					taken_piece.taken_pos = map.map_to_world(taken_piece.pos_in_the_grid) + half_tile_size
-					
-				# this will be made by character.gd
-				# the position of the piece will be updated by the view.
-				selected_piece.target_pos = update_child_pos(selected_piece)
-				reset()
-
-			else: 
-				reset() 
-		"""
+	
 		
 	if Input.is_action_pressed("pause"):
 		if get_tree().is_paused():
@@ -189,3 +155,4 @@ func _on_Timer_timeout():
 
 func _process():
 	current_turn = model.turn
+	selected_card = model.selected_card

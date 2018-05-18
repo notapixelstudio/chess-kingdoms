@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://screens/game_screen/World.gd" type="Script" id=1]
 [ext_resource path="res://screens/basic_screen.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://screens/game_screen/FSM/transitions/OnCardActivation/OnCardActivation.tscn" type="PackedScene" id=20]
 [ext_resource path="res://screens/game_screen/FSM/transitions/OnPieceActivation/OnPieceActivation.tscn" type="PackedScene" id=21]
 [ext_resource path="res://screens/game_screen/FSM/transitions/OnNextAction/OnNextAction.tscn" type="PackedScene" id=22]
+[ext_resource path="res://screens/game_screen/FSM/transitions/NextTurn/NextTurn.tscn" type="PackedScene" id=23]
 
 [node name="World" type="Node2D" index="0"]
 
@@ -135,8 +136,8 @@ scale = Vector2( 0.3, 0.3 )
 [node name="Card2" parent="VBoxContainer" index="1" instance=ExtResource( 6 )]
 
 editor/display_folded = true
-position = Vector2( 143.78, 75.4838 )
-scale = Vector2( 0.3, 0.3 )
+position = Vector2( 153.724, 75.7493 )
+scale = Vector2( 0.29389, 0.316018 )
 
 [node name="Body" parent="VBoxContainer/Card2/Pivot" index="0"]
 
@@ -169,7 +170,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Visibility" ]
 
-[node name="FSMControl" type="Control" parent="." index="7"]
+[node name="Control" type="Control" parent="." index="7"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -201,34 +202,54 @@ enableDebug = false
 GraphData = {
 "CardSelection": Vector2( 754, 431 ),
 "CardSelection_": Vector2( 754, 431 ),
+"CardSelection__": Vector2( 754, 431 ),
 "EndTurn": Vector2( 743, 47 ),
 "EndTurn_": Vector2( 743, 47 ),
+"EndTurn__": Vector2( 743, 47 ),
+"NextTurn": Vector2( 445, 39 ),
+"NextTurn_": Vector2( 445, 39 ),
+"NextTurn__": Vector2( 445, 39 ),
+"OnAnotherCard": Vector2( 945, 322 ),
+"OnAnotherCard_": Vector2( 945, 322 ),
+"OnAnotherPiece": Vector2( -14, 346 ),
+"OnAnotherPiece_": Vector2( -14, 346 ),
+"OnAnotherPiece__": Vector2( -14, 346 ),
 "OnCardActivation": Vector2( 758, 556 ),
 "OnCardActivation_": Vector2( 758, 556 ),
+"OnCardActivation__": Vector2( 758, 556 ),
 "OnCardSelection": Vector2( 761, 315 ),
 "OnCardSelection_": Vector2( 761, 315 ),
+"OnCardSelection__": Vector2( 761, 315 ),
 "OnEndTurn": Vector2( 744, 172 ),
 "OnEndTurn_": Vector2( 744, 172 ),
+"OnEndTurn__": Vector2( 744, 172 ),
 "OnNextAction": Vector2( 448, 410 ),
 "OnNextAction_": Vector2( 448, 410 ),
+"OnNextAction__": Vector2( 448, 410 ),
 "OnPieceActivation": Vector2( 150, 568 ),
 "OnPieceActivation_": Vector2( 150, 568 ),
+"OnPieceActivation__": Vector2( 150, 568 ),
 "OnPieceSelection": Vector2( 156, 311 ),
 "OnPieceSelection_": Vector2( 156, 311 ),
+"OnPieceSelection__": Vector2( 156, 311 ),
 "PieceSelection": Vector2( 156, 440 ),
 "PieceSelection_": Vector2( 156, 440 ),
+"PieceSelection__": Vector2( 156, 440 ),
 "PreAction": Vector2( 121, 26 ),
 "PreActionFinished": Vector2( 117, 178 ),
 "PreActionFinished_": Vector2( 117, 178 ),
+"PreActionFinished__": Vector2( 117, 178 ),
 "PreAction_": Vector2( 121, 26 ),
-"PreAction__": Vector2( -9, 27 ),
+"PreAction__": Vector2( 121, 26 ),
 "SelectCell": Vector2( 448, 571 ),
 "SelectCell_": Vector2( 448, 571 ),
+"SelectCell__": Vector2( 448, 571 ),
 "TurnAction": Vector2( 443, 171 ),
-"TurnAction_": Vector2( 443, 171 )
+"TurnAction_": Vector2( 443, 171 ),
+"TurnAction__": Vector2( 443, 171 )
 }
 
-[node name="States" type="Control" parent="FSMControl" index="0"]
+[node name="States" type="Control" parent="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -242,26 +263,60 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="PreAction" parent="FSMControl/States" index="0" instance=ExtResource( 10 )]
+[node name="PreAction" parent="Control/States" index="0" instance=ExtResource( 10 )]
 
-[node name="Timer" type="Timer" parent="FSMControl/States/PreAction" index="0"]
+editor/display_folded = true
+
+[node name="Timer" type="Timer" parent="Control/States/PreAction" index="0"]
 
 process_mode = 1
-wait_time = 3.0
+wait_time = 2.0
 one_shot = false
 autostart = false
 
-[node name="TurnAction" parent="FSMControl/States" index="1" instance=ExtResource( 11 )]
+[node name="TurnAction" parent="Control/States" index="1" instance=ExtResource( 11 )]
 
-[node name="EndTurn" parent="FSMControl/States" index="2" instance=ExtResource( 12 )]
+[node name="EndTurn" parent="Control/States" index="2" instance=ExtResource( 12 )]
 
-[node name="CardSelection" parent="FSMControl/States" index="3" instance=ExtResource( 13 )]
+[node name="Timer" type="Timer" parent="Control/States/EndTurn" index="0"]
 
-[node name="PieceSelection" parent="FSMControl/States" index="4" instance=ExtResource( 14 )]
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
 
-[node name="SelectCell" parent="FSMControl/States" index="5" instance=ExtResource( 15 )]
+[node name="CardSelection" parent="Control/States" index="3" instance=ExtResource( 13 )]
 
-[node name="Transitions" type="Control" parent="FSMControl" index="1"]
+[node name="Button" type="Button" parent="Control/States/CardSelection" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 820.0
+margin_top = 379.0
+margin_right = 968.0
+margin_bottom = 413.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Play This Card"
+flat = false
+align = 1
+
+[node name="PieceSelection" parent="Control/States" index="4" instance=ExtResource( 14 )]
+
+[node name="SelectCell" parent="Control/States" index="5" instance=ExtResource( 15 )]
+
+[node name="Transitions" type="Control" parent="Control" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -275,43 +330,54 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="PreActionFinished" parent="FSMControl/Transitions" index="0" instance=ExtResource( 16 )]
+[node name="PreActionFinished" parent="Control/Transitions" index="0" instance=ExtResource( 16 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/PreAction") ]
 path2TargetState = NodePath("../../States/TurnAction")
 
-[node name="OnEndTurn" parent="FSMControl/Transitions" index="1" instance=ExtResource( 17 )]
+[node name="OnEndTurn" parent="Control/Transitions" index="1" instance=ExtResource( 17 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
 path2TargetState = NodePath("../../States/EndTurn")
 
-[node name="OnPieceSelection" parent="FSMControl/Transitions" index="2" instance=ExtResource( 18 )]
+[node name="OnPieceSelection" parent="Control/Transitions" index="2" instance=ExtResource( 18 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
 path2TargetState = NodePath("../../States/PieceSelection")
 
-[node name="OnCardSelection" parent="FSMControl/Transitions" index="3" instance=ExtResource( 19 )]
+[node name="OnCardSelection" parent="Control/Transitions" index="3" instance=ExtResource( 19 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
 path2TargetState = NodePath("../../States/CardSelection")
 
-[node name="OnCardActivation" parent="FSMControl/Transitions" index="4" instance=ExtResource( 20 )]
+[node name="OnCardActivation" parent="Control/Transitions" index="4" instance=ExtResource( 20 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/CardSelection") ]
 path2TargetState = NodePath("../../States/SelectCell")
 
-[node name="OnPieceActivation" parent="FSMControl/Transitions" index="5" instance=ExtResource( 21 )]
+[node name="OnPieceActivation" parent="Control/Transitions" index="5" instance=ExtResource( 21 )]
 
 _sections_unfolded = [ "Pause" ]
 path2SourceStates = [ NodePath(""), NodePath("../../States/PieceSelection") ]
 path2TargetState = NodePath("../../States/SelectCell")
 
-[node name="OnNextAction" parent="FSMControl/Transitions" index="6" instance=ExtResource( 22 )]
+[node name="OnNextAction" parent="Control/Transitions" index="6" instance=ExtResource( 22 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/SelectCell"), NodePath("../../States/CardSelection"), NodePath("../../States/PieceSelection") ]
 path2TargetState = NodePath("../../States/TurnAction")
 
-[connection signal="timeout" from="FSMControl/States/PreAction/Timer" to="FSMControl/Transitions/PreActionFinished" method="_on_Timer_timeout"]
+[node name="NextTurn" parent="Control/Transitions" index="7" instance=ExtResource( 23 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/EndTurn") ]
+path2TargetState = NodePath("../../States/PreAction")
+
+[connection signal="pressed" from="EndTurn" to="Control/Transitions/OnEndTurn" method="_on_EndTurn_pressed"]
+
+[connection signal="timeout" from="Control/States/PreAction/Timer" to="Control/Transitions/PreActionFinished" method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="Control/States/EndTurn/Timer" to="Control/States/EndTurn" method="_on_Timer_timeout"]
+
+[connection signal="pressed" from="Control/States/CardSelection/Button" to="Control/Transitions/OnCardActivation" method="_on_Button_pressed"]
 
 
 [editable path="VBoxContainer/Card2"]

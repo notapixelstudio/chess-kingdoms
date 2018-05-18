@@ -116,7 +116,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=7]
 
 resource_name = "unfocus"
 length = 0.3
@@ -135,7 +135,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -300 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 
 length = 0.3
 loop = true
@@ -153,7 +153,7 @@ tracks/0/keys = {
 "values": [ Vector2( -0.526489, 41.1203 ), Vector2( 0.52652, 35.5554 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 
 custom_solver_bias = 0.0
 extents = Vector2( 156.122, 142.327 )
@@ -182,8 +182,8 @@ anims/idle = SubResource( 3 )
 anims/setup = SubResource( 4 )
 anims/stagger = SubResource( 5 )
 anims/summon = SubResource( 6 )
-anims/unfocus = SubResource( 9 )
-anims/walk = SubResource( 7 )
+anims/unfocus = SubResource( 7 )
+anims/walk = SubResource( 8 )
 blend_times = [  ]
 
 [node name="Pivot" type="Position2D" parent="." index="1"]
@@ -207,7 +207,9 @@ playback/speed = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 
 position = Vector2( 4.98105, -106.487 )
-shape = SubResource( 8 )
+shape = SubResource( 9 )
+
+[connection signal="input_event" from="." to="." method="_on_Card_input_event"]
 
 [connection signal="mouse_entered" from="." to="." method="_on_Character_mouse_entered"]
 

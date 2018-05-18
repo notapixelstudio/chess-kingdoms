@@ -11,7 +11,6 @@ extends "res://addons/net.kivano.fsm/content/FSMTransition.gd";
 ##################################################################################
 #####  Variables (Constants, Export Variables, Node Vars, Normal variables)  #####
 ######################### var myvar setget myvar_set,myvar_get ###################
-var choose_cell = false
 var source_node
 ######################################
 ####### Getters
@@ -26,16 +25,9 @@ func transitionInit(inParam1=null, inParam2=null, inParam3=null, inParam4=null, 
 
 func prepare(inNewStateID, inArg0 = null, inArg1 = null, inArg2 = null): 
 	#you can optionally implement this to reset transition when related state has been activated
-	choose_cell = false
 	source_node = fsm.getStateFromID(inNewStateID)
+	
 
 func transitionCondition(inDeltaTime, inParam0=null, inParam1=null, inParam2=null, inParam3=null, inParam4=null): 
 	#YOU MUST IMPLEMENT TRANSITION CONDITION CHECK HERE: Return true/false
-	return choose_cell
-
-
-func _on_Button_pressed():
-	print("ready to fight")
-	logicRoot.show_legal_moves(source_node.player, source_node.moves)
-	choose_cell = true
-	
+	return source_node.timeout
