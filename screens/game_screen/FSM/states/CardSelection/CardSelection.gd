@@ -26,9 +26,9 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 
 #when entering state, usually you will want to reset internal state here somehow
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
-	print(model.selected_card)
-	select_card(model.selected_card)
-	player = logicRoot.players[model.turn]
+	print(view.selected_card)
+	select_card(view.selected_card)
+	player = logicRoot.players[logicRoot.current_turn]
 	var moves_in_the_grid = []
 	moves = model.get_legal_summon(player)
 	for movement in moves:

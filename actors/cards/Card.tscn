@@ -1,35 +1,18 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://actors/cards/card.gd" type="Script" id=1]
-[ext_resource path="res://assets/cards/card_ruby_king.png" type="Texture" id=2]
+[ext_resource path="res://assets/cards/layout_card.png" type="Texture" id=2]
+[ext_resource path="res://assets/chess/pixel_pieces/ruby_king.png" type="Texture" id=3]
+[ext_resource path="res://assets/theme/quote_theme.tres" type="Theme" id=4]
 
 [sub_resource type="Animation" id=1]
-
-resource_name = "die"
-length = 1.0
-loop = false
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.25, 0.35, 1 ),
-"transitions": PoolRealArray( 0.618091, 0.618091, 0.618091, 0.618091, 0.618091, 0.618091, 1 ),
-"update": 0,
-"values": [ Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ), Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ), Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ), Color( 0.925781, 0.0614777, 0.203277, 0 ) ]
-}
-
-[sub_resource type="Animation" id=2]
 
 resource_name = "focus"
 length = 0.3
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:position")
+tracks/0/path = NodePath("Template:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -41,32 +24,13 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -300 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-
-resource_name = "idle"
-length = 2.0
-loop = true
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 43 ), Vector2( 0, 34 ), Vector2( 0, 43 ) ]
-}
-
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 
 length = 1.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:modulate")
+tracks/0/path = NodePath("Template:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -78,33 +42,14 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-
-resource_name = "stagger"
-length = 0.35
-loop = false
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.25, 0.35 ),
-"transitions": PoolRealArray( 0.618091, 0.618091, 0.618091, 0.618091, 0.618091, 0.618091 ),
-"update": 0,
-"values": [ Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ), Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ), Color( 0.925781, 0.0614777, 0.203277, 1 ), Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 
 resource_name = "summon"
 length = 1.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:modulate")
+tracks/0/path = NodePath("Template:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -116,14 +61,14 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 
 resource_name = "unfocus"
 length = 0.3
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:position")
+tracks/0/path = NodePath("Template:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -135,39 +80,35 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -300 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="DynamicFont" id=5]
 
-length = 0.3
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( -0.526489, 41.1203 ), Vector2( 0.52652, 35.5554 ) ]
-}
+size = 0
+use_mipmaps = false
+use_filter = false
+_sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="RectangleShape2D" id=9]
-
-custom_solver_bias = 0.0
-extents = Vector2( 156.122, 142.327 )
-
-[node name="Card" type="KinematicBody2D" index="0" groups=[
+[node name="CardTemplate" type="Control" index="0" groups=[
 "character",
 ]]
 
-input_pickable = true
-collision_layer = 1
-collision_mask = 10
-collision/safe_margin = 0.08
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -194.0
+margin_top = -275.0
+margin_right = 186.0
+margin_bottom = 195.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Pickable", "Transform", "collision" ]
+_sections_unfolded = [ "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "collision" ]
+card_template = null
+card = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
 
@@ -176,43 +117,403 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/die = SubResource( 1 )
-anims/focus = SubResource( 2 )
-anims/idle = SubResource( 3 )
-anims/setup = SubResource( 4 )
-anims/stagger = SubResource( 5 )
-anims/summon = SubResource( 6 )
-anims/unfocus = SubResource( 7 )
-anims/walk = SubResource( 8 )
+anims/focus = SubResource( 1 )
+anims/setup = SubResource( 2 )
+anims/summon = SubResource( 3 )
+anims/unfocus = SubResource( 4 )
 blend_times = [  ]
 
-[node name="Pivot" type="Position2D" parent="." index="1"]
+[node name="BackgroundArtwork" type="ColorRect" parent="." index="1"]
 
-_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_top = 110.0
+margin_right = 350.0
+margin_bottom = 300.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Body" type="Sprite" parent="Pivot" index="0"]
+[node name="Template" type="TextureRect" parent="." index="2"]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 texture = ExtResource( 2 )
+expand = true
+stretch_mode = 0
 _sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
 
-[node name="Tween" type="Tween" parent="." index="2"]
+[node name="Artwork" type="TextureRect" parent="Template" index="0"]
 
-repeat = false
-playback_process_mode = 1
-playback_speed = 1.0
-playback/active = false
-playback/repeat = false
-playback/speed = 1.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 90.0
+margin_top = 90.0
+margin_right = 270.0
+margin_bottom = 270.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+[node name="Control" type="Control" parent="." index="3"]
 
-position = Vector2( 4.98105, -106.487 )
-shape = SubResource( 9 )
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
-[connection signal="input_event" from="." to="." method="_on_Card_input_event"]
+[node name="InfoCard" type="HBoxContainer" parent="Control" index="0"]
 
-[connection signal="mouse_entered" from="." to="." method="_on_Character_mouse_entered"]
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 262.0
+margin_right = 1.0
+margin_bottom = -165.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 1
+__meta__ = {
+"_edit_group_": true
+}
 
-[connection signal="mouse_exited" from="." to="." method="_on_Piece_mouse_exited"]
+[node name="PieceName" type="Label" parent="Control/InfoCard" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 103.0
+margin_top = 9.0
+margin_right = 140.0
+margin_bottom = 33.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "King "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Tribe" type="Label" parent="Control/InfoCard" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 140.0
+margin_top = 9.0
+margin_right = 189.0
+margin_bottom = 33.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Royal "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Profession" type="Label" parent="Control/InfoCard" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 189.0
+margin_top = 9.0
+margin_right = 276.0
+margin_bottom = 33.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Blacksmith"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="DescriptionBox" type="MarginContainer" parent="Control" index="1"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 47.0
+margin_top = 300.0
+margin_right = -160.0
+margin_bottom = 2.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/DescriptionBox" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 173.0
+margin_bottom = 172.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="description_text" type="Label" parent="Control/DescriptionBox/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 173.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Power" type="Label" parent="Control/DescriptionBox/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 24.0
+margin_right = 173.0
+margin_bottom = 48.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/Label = SubResource( 5 )
+text = "Forward shield"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="Quote" type="Label" parent="Control/DescriptionBox/VBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 48.0
+margin_right = 173.0
+margin_bottom = 137.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+theme = ExtResource( 4 )
+text = "\"I once smashed my finger and melt it into my hammer\" cit.
+"
+valign = 2
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="CardTitle" type="VBoxContainer" parent="Control" index="2"]
+
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -168.0
+margin_top = 42.0
+margin_right = 172.0
+margin_bottom = 110.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CardName" type="Label" parent="Control/CardTitle" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 10.0
+margin_right = 340.0
+margin_bottom = 34.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Fordjorn Ulssonn"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect" ]
+
+[node name="SubName" type="Label" parent="Control/CardTitle" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 34.0
+margin_right = 340.0
+margin_bottom = 58.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "the Shiledforger"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="Mana" type="Label" parent="Control" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 300.0
+margin_top = 50.0
+margin_right = 360.0
+margin_bottom = 100.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "0"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="DeckSize" type="Label" parent="Control" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.02632
+anchor_bottom = 0.17021
+margin_left = 163.0
+margin_top = 425.0
+margin_right = 212.998
+margin_bottom = 369.001
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "40"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="TimeUnit" type="Label" parent="Control" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 50.0
+margin_top = 60.0
+margin_right = 90.0
+margin_bottom = 84.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "1"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 
