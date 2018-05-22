@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://actors/cards/card.gd" type="Script" id=1]
-[ext_resource path="res://assets/cards/layout_card.png" type="Texture" id=2]
-[ext_resource path="res://assets/chess/pixel_pieces/ruby_king.png" type="Texture" id=3]
-[ext_resource path="res://assets/theme/quote_theme.tres" type="Theme" id=4]
+[ext_resource path="res://actors/cards/deck/this_card.tres" type="Resource" id=2]
+[ext_resource path="res://assets/cards/cardBack_red1.png" type="Texture" id=3]
+[ext_resource path="res://assets/cards/bg_texture.png" type="Texture" id=4]
+[ext_resource path="res://assets/cards/layout_card.png" type="Texture" id=5]
+[ext_resource path="res://assets/chess/pixel_pieces/ruby_king.png" type="Texture" id=6]
+[ext_resource path="res://assets/theme/quote_theme.tres" type="Theme" id=7]
 
 [sub_resource type="Animation" id=1]
 
@@ -87,28 +90,15 @@ use_mipmaps = false
 use_filter = false
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="CardTemplate" type="Control" index="0" groups=[
+[node name="CardTemplate" type="Node2D" groups=[
 "character",
 ]]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -194.0
-margin_top = -275.0
-margin_right = 186.0
-margin_bottom = 195.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "collision" ]
-card_template = null
-card = null
+_sections_unfolded = [ "Collision", "Focus", "Grow Direction", "Hint", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
+this_card = ExtResource( 2 )
+back_texture = ExtResource( 3 )
+back = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
 
@@ -123,65 +113,65 @@ anims/summon = SubResource( 3 )
 anims/unfocus = SubResource( 4 )
 blend_times = [  ]
 
-[node name="BackgroundArtwork" type="ColorRect" parent="." index="1"]
+[node name="BackgroundArtwork" type="TextureRect" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 110.0
-margin_right = 350.0
-margin_bottom = 300.0
+margin_right = 300.0
+margin_bottom = 200.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 1, 1, 1, 1 )
-_sections_unfolded = [ "Offset", "Transform" ]
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 0
 
 [node name="Template" type="TextureRect" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = -80.0
+margin_right = 339.0
+margin_bottom = 388.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 2 )
-expand = true
+texture = ExtResource( 5 )
 stretch_mode = 0
-_sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
+_sections_unfolded = [ "Animation", "Offset", "Rect", "Transform", "Visibility" ]
 
 [node name="Artwork" type="TextureRect" parent="Template" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 90.0
-margin_top = 90.0
-margin_right = 270.0
-margin_bottom = 270.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 99.0
+margin_top = 100.0
+margin_right = -110.0
+margin_bottom = -238.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 3 )
+texture = ExtResource( 6 )
 expand = true
 stretch_mode = 0
 
-[node name="Control" type="Control" parent="." index="3"]
+[node name="Control" type="Control" parent="Template" index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -192,8 +182,9 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+_sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="InfoCard" type="HBoxContainer" parent="Control" index="0"]
+[node name="InfoCard" type="HBoxContainer" parent="Template/Control" index="0"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -215,16 +206,16 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PieceName" type="Label" parent="Control/InfoCard" index="0"]
+[node name="PieceName" type="Label" parent="Template/Control/InfoCard" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 103.0
-margin_top = 9.0
-margin_right = 140.0
-margin_bottom = 33.0
+margin_left = 83.0
+margin_top = 8.0
+margin_right = 120.0
+margin_bottom = 32.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -237,16 +228,16 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect" ]
 
-[node name="Tribe" type="Label" parent="Control/InfoCard" index="1"]
+[node name="Tribe" type="Label" parent="Template/Control/InfoCard" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 140.0
-margin_top = 9.0
-margin_right = 189.0
-margin_bottom = 33.0
+margin_left = 120.0
+margin_top = 8.0
+margin_right = 169.0
+margin_bottom = 32.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -258,16 +249,16 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Profession" type="Label" parent="Control/InfoCard" index="2"]
+[node name="Profession" type="Label" parent="Template/Control/InfoCard" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 189.0
-margin_top = 9.0
-margin_right = 276.0
-margin_bottom = 33.0
+margin_left = 169.0
+margin_top = 8.0
+margin_right = 256.0
+margin_bottom = 32.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -279,7 +270,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="DescriptionBox" type="MarginContainer" parent="Control" index="1"]
+[node name="DescriptionBox" type="MarginContainer" parent="Template/Control" index="1"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -297,15 +288,15 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/DescriptionBox" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Template/Control/DescriptionBox" index="0"]
 
 editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 173.0
-margin_bottom = 172.0
+margin_right = 132.0
+margin_bottom = 170.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -314,13 +305,13 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="description_text" type="Label" parent="Control/DescriptionBox/VBoxContainer" index="0"]
+[node name="description_text" type="Label" parent="Template/Control/DescriptionBox/VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 173.0
+margin_right = 132.0
 margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -332,14 +323,14 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Power" type="Label" parent="Control/DescriptionBox/VBoxContainer" index="1"]
+[node name="Power" type="Label" parent="Template/Control/DescriptionBox/VBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 24.0
-margin_right = 173.0
+margin_right = 132.0
 margin_bottom = 48.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -354,22 +345,22 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="Quote" type="Label" parent="Control/DescriptionBox/VBoxContainer" index="2"]
+[node name="Quote" type="Label" parent="Template/Control/DescriptionBox/VBoxContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 48.0
-margin_right = 173.0
-margin_bottom = 137.0
+margin_right = 132.0
+margin_bottom = 160.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-theme = ExtResource( 4 )
+theme = ExtResource( 7 )
 text = "\"I once smashed my finger and melt it into my hammer\" cit.
 "
 valign = 2
@@ -379,17 +370,17 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="CardTitle" type="VBoxContainer" parent="Control" index="2"]
+[node name="CardTitle" type="VBoxContainer" parent="Template/Control" index="2"]
 
 editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.0
 anchor_right = 0.5
 anchor_bottom = 0.0
-margin_left = -168.0
-margin_top = 42.0
-margin_right = 172.0
-margin_bottom = 110.0
+margin_left = -167.5
+margin_top = 41.0
+margin_right = 172.5
+margin_bottom = 109.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -401,7 +392,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CardName" type="Label" parent="Control/CardTitle" index="0"]
+[node name="CardName" type="Label" parent="Template/Control/CardTitle" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -424,7 +415,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect" ]
 
-[node name="SubName" type="Label" parent="Control/CardTitle" index="1"]
+[node name="SubName" type="Label" parent="Template/Control/CardTitle" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -447,15 +438,15 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
 
-[node name="Mana" type="Label" parent="Control" index="3"]
+[node name="Mana" type="Label" parent="Template/Control" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 300.0
+margin_left = 278.0
 margin_top = 50.0
-margin_right = 360.0
+margin_right = 338.0
 margin_bottom = 100.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -470,16 +461,16 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="DeckSize" type="Label" parent="Control" index="4"]
+[node name="DeckSize" type="Label" parent="Template/Control" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.02632
 anchor_bottom = 0.17021
-margin_left = 163.0
+margin_left = 143.0
 margin_top = 425.0
-margin_right = 212.998
-margin_bottom = 369.001
+margin_right = 192.078
+margin_bottom = 369.342
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -493,15 +484,15 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="TimeUnit" type="Label" parent="Control" index="5"]
+[node name="TimeUnit" type="Label" parent="Template/Control" index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 50.0
+margin_left = 23.0
 margin_top = 60.0
-margin_right = 90.0
+margin_right = 63.0
 margin_bottom = 84.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false

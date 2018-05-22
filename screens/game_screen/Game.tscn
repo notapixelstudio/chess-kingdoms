@@ -1,31 +1,29 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://screens/game_screen/World.gd" type="Script" id=1]
 [ext_resource path="res://screens/basic_screen.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/chess/board/chess-board.tmx" type="PackedScene" id=3]
 [ext_resource path="res://screens/game_screen/GridVisualizer.gd" type="Script" id=4]
 [ext_resource path="res://screens/game_screen/Camera2D.gd" type="Script" id=5]
-[ext_resource path="res://screens/game_screen/VBoxContainer.gd" type="Script" id=6]
-[ext_resource path="res://actors/cards/Card.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/cards/cardBack_red1.png" type="Texture" id=8]
-[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=9]
-[ext_resource path="res://addons/net.kivano.fsm/assets/icoControl.png" type="Texture" id=10]
-[ext_resource path="res://screens/game_screen/FSM/states/PreAction/PreAction.tscn" type="PackedScene" id=11]
-[ext_resource path="res://screens/game_screen/FSM/states/TurnAction/TurnAction.tscn" type="PackedScene" id=12]
-[ext_resource path="res://screens/game_screen/FSM/states/EndTurn/EndTurn.tscn" type="PackedScene" id=13]
-[ext_resource path="res://screens/game_screen/FSM/states/CardSelection/CardSelection.tscn" type="PackedScene" id=14]
-[ext_resource path="res://screens/game_screen/FSM/states/PieceSelection/PieceSelection.tscn" type="PackedScene" id=15]
-[ext_resource path="res://screens/game_screen/FSM/states/SelectCell/SelectCell.tscn" type="PackedScene" id=16]
-[ext_resource path="res://screens/game_screen/FSM/transitions/PreActionFinished/PreActionFinished.tscn" type="PackedScene" id=17]
-[ext_resource path="res://screens/game_screen/FSM/transitions/OnEndTurn/OnEndTurn.tscn" type="PackedScene" id=18]
-[ext_resource path="res://screens/game_screen/FSM/transitions/OnPieceSelection/OnPieceSelection.tscn" type="PackedScene" id=19]
-[ext_resource path="res://screens/game_screen/FSM/transitions/OnCardSelection/OnCardSelection.tscn" type="PackedScene" id=20]
-[ext_resource path="res://screens/game_screen/FSM/transitions/OnCardActivation/OnCardActivation.tscn" type="PackedScene" id=21]
-[ext_resource path="res://screens/game_screen/FSM/transitions/OnPieceActivation/OnPieceActivation.tscn" type="PackedScene" id=22]
-[ext_resource path="res://screens/game_screen/FSM/transitions/OnNextAction/OnNextAction.tscn" type="PackedScene" id=23]
-[ext_resource path="res://screens/game_screen/FSM/transitions/NextTurn/NextTurn.tscn" type="PackedScene" id=24]
+[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=6]
+[ext_resource path="res://addons/net.kivano.fsm/assets/icoControl.png" type="Texture" id=7]
+[ext_resource path="res://screens/game_screen/FSM/states/PreAction/PreAction.tscn" type="PackedScene" id=8]
+[ext_resource path="res://screens/game_screen/FSM/states/TurnAction/TurnAction.tscn" type="PackedScene" id=9]
+[ext_resource path="res://screens/game_screen/FSM/states/EndTurn/EndTurn.tscn" type="PackedScene" id=10]
+[ext_resource path="res://screens/game_screen/FSM/states/CardSelection/CardSelection.tscn" type="PackedScene" id=11]
+[ext_resource path="res://screens/game_screen/FSM/states/PieceSelection/PieceSelection.tscn" type="PackedScene" id=12]
+[ext_resource path="res://screens/game_screen/FSM/states/SelectCell/SelectCell.tscn" type="PackedScene" id=13]
+[ext_resource path="res://screens/game_screen/FSM/transitions/PreActionFinished/PreActionFinished.tscn" type="PackedScene" id=14]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnEndTurn/OnEndTurn.tscn" type="PackedScene" id=15]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnPieceSelection/OnPieceSelection.tscn" type="PackedScene" id=16]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnCardSelection/OnCardSelection.tscn" type="PackedScene" id=17]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnCardActivation/OnCardActivation.tscn" type="PackedScene" id=18]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnPieceActivation/OnPieceActivation.tscn" type="PackedScene" id=19]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnNextAction/OnNextAction.tscn" type="PackedScene" id=20]
+[ext_resource path="res://screens/game_screen/FSM/transitions/NextTurn/NextTurn.tscn" type="PackedScene" id=21]
+[ext_resource path="res://actors/cards/Card.tscn" type="PackedScene" id=22]
 
-[node name="World" type="Node2D" index="0"]
+[node name="World" type="Node" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -110,201 +108,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Mouse", "Rect", "custom_colors" ]
 
-[node name="YourHand" type="HBoxContainer" parent="." index="5"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 257.0
-margin_top = 552.0
-margin_right = 768.0
-margin_bottom = 707.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-script = ExtResource( 6 )
-_sections_unfolded = [ "Mouse", "Rect" ]
-
-[node name="Container" type="Container" parent="YourHand" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Mouse", "Rect" ]
-
-[node name="Container2" type="Container" parent="YourHand" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Rect" ]
-
-[node name="Container3" type="Container" parent="YourHand" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="Container4" type="Container" parent="YourHand" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="Container5" type="Container" parent="YourHand" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="EnemyHand" type="HBoxContainer" parent="." index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 253.0
-margin_top = -90.0
-margin_right = 766.0
-margin_bottom = 65.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-script = ExtResource( 6 )
-_sections_unfolded = [ "Mouse", "Rect" ]
-
-[node name="Container" type="Container" parent="EnemyHand" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Mouse", "Rect" ]
-
-[node name="CardTemplate" parent="EnemyHand/Container" index="0" instance=ExtResource( 7 )]
-
-margin_left = 305.0
-margin_top = 22.0
-margin_right = 685.0
-margin_bottom = 492.0
-rect_scale = Vector2( 0.5, 0.5 )
-card_template = ExtResource( 8 )
-
-[node name="Container2" type="Container" parent="EnemyHand" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Rect" ]
-
-[node name="Container3" type="Container" parent="EnemyHand" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="Container4" type="Container" parent="EnemyHand" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="Container5" type="Container" parent="EnemyHand" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="EndTurn" type="Button" parent="." index="7"]
+[node name="EndTurn" type="Button" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -331,8 +135,9 @@ flat = false
 align = 1
 _sections_unfolded = [ "Visibility" ]
 
-[node name="Control" type="Control" parent="." index="8"]
+[node name="Control" type="Control" parent="." index="6"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -345,10 +150,10 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 9 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
-"_editor_icon": ExtResource( 10 )
+"_editor_icon": ExtResource( 7 )
 }
 path2LogicRoot = NodePath("..")
 onlyActiveStateOnTheScene = true
@@ -424,7 +229,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="PreAction" parent="Control/States" index="0" instance=ExtResource( 11 )]
+[node name="PreAction" parent="Control/States" index="0" instance=ExtResource( 8 )]
 
 editor/display_folded = true
 
@@ -435,9 +240,9 @@ wait_time = 2.0
 one_shot = false
 autostart = false
 
-[node name="TurnAction" parent="Control/States" index="1" instance=ExtResource( 12 )]
+[node name="TurnAction" parent="Control/States" index="1" instance=ExtResource( 9 )]
 
-[node name="EndTurn" parent="Control/States" index="2" instance=ExtResource( 13 )]
+[node name="EndTurn" parent="Control/States" index="2" instance=ExtResource( 10 )]
 
 [node name="Timer" type="Timer" parent="Control/States/EndTurn" index="0"]
 
@@ -446,7 +251,7 @@ wait_time = 2.0
 one_shot = false
 autostart = false
 
-[node name="CardSelection" parent="Control/States" index="3" instance=ExtResource( 14 )]
+[node name="CardSelection" parent="Control/States" index="3" instance=ExtResource( 11 )]
 
 [node name="Button" type="Button" parent="Control/States/CardSelection" index="0"]
 
@@ -473,9 +278,9 @@ text = "Play This Card"
 flat = false
 align = 1
 
-[node name="PieceSelection" parent="Control/States" index="4" instance=ExtResource( 15 )]
+[node name="PieceSelection" parent="Control/States" index="4" instance=ExtResource( 12 )]
 
-[node name="SelectCell" parent="Control/States" index="5" instance=ExtResource( 16 )]
+[node name="SelectCell" parent="Control/States" index="5" instance=ExtResource( 13 )]
 
 [node name="Transitions" type="Control" parent="Control" index="1"]
 
@@ -491,46 +296,342 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="PreActionFinished" parent="Control/Transitions" index="0" instance=ExtResource( 17 )]
+[node name="PreActionFinished" parent="Control/Transitions" index="0" instance=ExtResource( 14 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/PreAction") ]
 path2TargetState = NodePath("../../States/TurnAction")
 
-[node name="OnEndTurn" parent="Control/Transitions" index="1" instance=ExtResource( 18 )]
+[node name="OnEndTurn" parent="Control/Transitions" index="1" instance=ExtResource( 15 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
 path2TargetState = NodePath("../../States/EndTurn")
 
-[node name="OnPieceSelection" parent="Control/Transitions" index="2" instance=ExtResource( 19 )]
+[node name="OnPieceSelection" parent="Control/Transitions" index="2" instance=ExtResource( 16 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
 path2TargetState = NodePath("../../States/PieceSelection")
 
-[node name="OnCardSelection" parent="Control/Transitions" index="3" instance=ExtResource( 20 )]
+[node name="OnCardSelection" parent="Control/Transitions" index="3" instance=ExtResource( 17 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
 path2TargetState = NodePath("../../States/CardSelection")
 
-[node name="OnCardActivation" parent="Control/Transitions" index="4" instance=ExtResource( 21 )]
+[node name="OnCardActivation" parent="Control/Transitions" index="4" instance=ExtResource( 18 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/CardSelection") ]
 path2TargetState = NodePath("../../States/SelectCell")
 
-[node name="OnPieceActivation" parent="Control/Transitions" index="5" instance=ExtResource( 22 )]
+[node name="OnPieceActivation" parent="Control/Transitions" index="5" instance=ExtResource( 19 )]
 
 _sections_unfolded = [ "Pause" ]
 path2SourceStates = [ NodePath(""), NodePath("../../States/PieceSelection") ]
 path2TargetState = NodePath("../../States/SelectCell")
 
-[node name="OnNextAction" parent="Control/Transitions" index="6" instance=ExtResource( 23 )]
+[node name="OnNextAction" parent="Control/Transitions" index="6" instance=ExtResource( 20 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/SelectCell"), NodePath("../../States/CardSelection"), NodePath("../../States/PieceSelection") ]
 path2TargetState = NodePath("../../States/TurnAction")
 
-[node name="NextTurn" parent="Control/Transitions" index="7" instance=ExtResource( 24 )]
+[node name="NextTurn" parent="Control/Transitions" index="7" instance=ExtResource( 21 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/EndTurn") ]
 path2TargetState = NodePath("../../States/PreAction")
+
+[node name="EnemyHand" type="Control" parent="." index="7"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 243.0
+margin_top = 1.0
+margin_right = 817.0
+margin_bottom = 65.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="EnemyHand" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 406.0
+margin_bottom = 491.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect" ]
+
+[node name="CardTemplate2" parent="EnemyHand/CenterContainer" index="0" instance=ExtResource( 22 )]
+
+position = Vector2( -10, 0 )
+_sections_unfolded = [ "Anchor", "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
+
+[node name="CenterContainer3" type="CenterContainer" parent="EnemyHand" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 211.0
+margin_top = 1.0
+margin_right = 552.0
+margin_bottom = 379.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CardTemplate2" parent="EnemyHand/CenterContainer3" index="0" instance=ExtResource( 22 )]
+
+_sections_unfolded = [ "Anchor", "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
+
+[node name="CenterContainer4" type="CenterContainer" parent="EnemyHand" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 424.0
+margin_right = 765.0
+margin_bottom = 378.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CardTemplate2" parent="EnemyHand/CenterContainer4" index="0" instance=ExtResource( 22 )]
+
+_sections_unfolded = [ "Anchor", "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
+
+[node name="CenterContainer5" type="CenterContainer" parent="EnemyHand" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 318.0
+margin_right = 659.0
+margin_bottom = 378.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CardTemplate2" parent="EnemyHand/CenterContainer5" index="0" instance=ExtResource( 22 )]
+
+_sections_unfolded = [ "Anchor", "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
+
+[node name="CenterContainer2" type="CenterContainer" parent="EnemyHand" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 104.0
+margin_top = 1.0
+margin_right = 452.0
+margin_bottom = 382.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CardTemplate2" parent="EnemyHand/CenterContainer2" index="0" instance=ExtResource( 22 )]
+
+_sections_unfolded = [ "Anchor", "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
+
+[node name="EnemyHand2" type="Control" parent="." index="8"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 246.0
+margin_top = 589.0
+margin_right = 820.0
+margin_bottom = 653.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="EnemyHand2" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 406.0
+margin_bottom = 491.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect" ]
+
+[node name="CardTemplate2" parent="EnemyHand2/CenterContainer" index="0" instance=ExtResource( 22 )]
+
+position = Vector2( -10, 0 )
+_sections_unfolded = [ "Anchor", "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
+
+[node name="CenterContainer3" type="CenterContainer" parent="EnemyHand2" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 211.0
+margin_top = 1.0
+margin_right = 552.0
+margin_bottom = 379.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CardTemplate2" parent="EnemyHand2/CenterContainer3" index="0" instance=ExtResource( 22 )]
+
+_sections_unfolded = [ "Anchor", "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
+
+[node name="CenterContainer4" type="CenterContainer" parent="EnemyHand2" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 424.0
+margin_right = 765.0
+margin_bottom = 378.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CardTemplate2" parent="EnemyHand2/CenterContainer4" index="0" instance=ExtResource( 22 )]
+
+_sections_unfolded = [ "Anchor", "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
+
+[node name="CenterContainer5" type="CenterContainer" parent="EnemyHand2" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 318.0
+margin_right = 659.0
+margin_bottom = 378.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CardTemplate2" parent="EnemyHand2/CenterContainer5" index="0" instance=ExtResource( 22 )]
+
+_sections_unfolded = [ "Anchor", "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
+
+[node name="CenterContainer2" type="CenterContainer" parent="EnemyHand2" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 104.0
+margin_top = 1.0
+margin_right = 452.0
+margin_bottom = 382.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CardTemplate2" parent="EnemyHand2/CenterContainer2" index="0" instance=ExtResource( 22 )]
+
+_sections_unfolded = [ "Anchor", "Collision", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
 
 [connection signal="pressed" from="EndTurn" to="Control/Transitions/OnEndTurn" method="_on_EndTurn_pressed"]
 

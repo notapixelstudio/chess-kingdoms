@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cardBack_red1.png-2906cde11ac658fcf7d02306a45f2886.stex"
+path="res://.import/bg_texture.png-49d6f7f26113ce0212ae756f1e07c15c.stex"
 
 [deps]
 
-source_file="res://assets/cards/cardBack_red1.png"
-source_md5="e655283247610bca8cd0532b4e8019cb"
+source_file="res://assets/cards/bg_texture.png"
+source_md5="e44596766daa4ebc3d02a0f45a63bd21"
 
-dest_files=[ "res://.import/cardBack_red1.png-2906cde11ac658fcf7d02306a45f2886.stex" ]
-dest_md5="ff77fdd7fe32aa9d95e10685827d0836"
+dest_files=[ "res://.import/bg_texture.png-49d6f7f26113ce0212ae756f1e07c15c.stex" ]
+dest_md5="ad9c5342933f4d6126468ed70157f327"
 
 [params]
 

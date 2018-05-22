@@ -1,6 +1,6 @@
 # World.gd
 # This is the model. It will handle the state, getting data and modifying the model
-extends Node2D
+extends Node
 
 const BOARD_OFFSET = Vector2(4,1)
 
@@ -120,7 +120,7 @@ func _input(event):
 	var pos = 0
 	# this handles the preview when you hover on cells
 	if event is InputEventMouse:
-		pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
+		pos = Vector2(round((event.global_position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - tile_size.y/2)/tile_size.y))
 		pos -= BOARD_OFFSET
 		if is_within_the_grid(pos):
 			reset(preview_map)

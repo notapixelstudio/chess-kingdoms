@@ -35,8 +35,8 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 		logicRoot.selection = "card"
 		
 	if Input.is_action_just_pressed("select_piece"):
-		pos = Vector2(round((get_viewport().get_mouse_position().x - logicRoot.position.x - logicRoot.tile_size.x/2)/logicRoot.tile_size.x), 
-			round((get_viewport().get_mouse_position().y - logicRoot.position.y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
+		pos = Vector2(round((get_viewport().get_mouse_position().x - logicRoot.tile_size.x/2)/logicRoot.tile_size.x), 
+			round((get_viewport().get_mouse_position().y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
 		pos -= logicRoot.BOARD_OFFSET
 		if logicRoot.is_within_the_grid(pos):
 			# update with the offset

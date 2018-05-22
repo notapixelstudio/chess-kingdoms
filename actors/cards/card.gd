@@ -1,11 +1,12 @@
-extends Control
+extends Node2D
 
-export (Texture) var card_template
-export (Resource) var card
+export (Resource) var this_card
+export (Texture) var back_texture = "res://assets/cards/cardBack_red1.png"
+export (bool) var back = true
 
+var card_texture
 
 # structure of the card
-
 var selected = false
 var focused = false
 
@@ -13,11 +14,22 @@ var focused = false
 var piece_name = "shogi_pawn"
 var kingdom = "ruby"
 
+var list_power = []
+
+func disable_card():
+	$Template/Control.visible = false
+	$BackgroundArtwork.visible = false
+	$Template/Artwork.visible = false
+
 func _ready():
-	$Template.texture =  card_template
-	piece_name = "shogi_pawn"
-	kingdom = "ruby"
-	pass
+	if back:
+		disable_card()
+		card_texture = back_texture
+	else: 
+		card_texture = this_card.card_template
+	
+	$Template.texture = card_texture
+	
 
 func _on_Character_mouse_entered():
 	focused = true
