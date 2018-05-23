@@ -45,6 +45,8 @@ var dic_tiles = {
 
 func _ready():
 
+	# flip enemy hand
+	
 	game_model = model
 	players = {model.PLAYER1 : model.player1, model.PLAYER2: model.player2}
 	

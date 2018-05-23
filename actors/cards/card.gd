@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 export (Resource) var this_card
 export (Texture) var back_texture = "res://assets/cards/cardBack_red1.png"
@@ -17,9 +17,9 @@ var kingdom = "ruby"
 var list_power = []
 
 func disable_card():
-	$Template/Control.visible = false
-	$BackgroundArtwork.visible = false
-	$Template/Artwork.visible = false
+	$CardControl/Template/CardUI.visible = false
+	$CardControl/BackgroundArtwork.visible = false
+	$CardControl/Template/Artwork.visible = false
 
 func _ready():
 	if back:
@@ -28,7 +28,7 @@ func _ready():
 	else: 
 		card_texture = this_card.card_template
 	
-	$Template.texture = card_texture
+	$CardControl/Template.texture = card_texture
 	
 
 func _on_Character_mouse_entered():
