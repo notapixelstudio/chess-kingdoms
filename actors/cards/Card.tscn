@@ -15,7 +15,7 @@ length = 0.3
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Template:position")
+tracks/0/path = NodePath("Node/Template:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -33,7 +33,7 @@ length = 1.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Template:modulate")
+tracks/0/path = NodePath("Node/Template:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -52,7 +52,7 @@ length = 1.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Template:modulate")
+tracks/0/path = NodePath("Node/Template:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -71,7 +71,7 @@ length = 0.3
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Template:position")
+tracks/0/path = NodePath("Node/Template:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -90,7 +90,7 @@ use_mipmaps = false
 use_filter = false
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="CardTemplate" type="Node2D" groups=[
+[node name="CardTemplate" type="Node2D" index="0" groups=[
 "character",
 ]]
 
@@ -113,7 +113,27 @@ anims/summon = SubResource( 3 )
 anims/unfocus = SubResource( 4 )
 blend_times = [  ]
 
-[node name="BackgroundArtwork" type="TextureRect" parent="." index="1"]
+[node name="Node" type="Control" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -160.0
+margin_top = -190.0
+margin_right = -160.0
+margin_bottom = -190.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="BackgroundArtwork" type="TextureRect" parent="Node" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -131,15 +151,14 @@ texture = ExtResource( 4 )
 expand = true
 stretch_mode = 0
 
-[node name="Template" type="TextureRect" parent="." index="2"]
+[node name="Template" type="TextureRect" parent="Node" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = -80.0
 margin_right = 339.0
-margin_bottom = 388.0
+margin_bottom = 468.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -150,7 +169,7 @@ texture = ExtResource( 5 )
 stretch_mode = 0
 _sections_unfolded = [ "Animation", "Offset", "Rect", "Transform", "Visibility" ]
 
-[node name="Artwork" type="TextureRect" parent="Template" index="0"]
+[node name="Artwork" type="TextureRect" parent="Node/Template" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -170,7 +189,7 @@ texture = ExtResource( 6 )
 expand = true
 stretch_mode = 0
 
-[node name="Control" type="Control" parent="Template" index="1"]
+[node name="Control" type="Control" parent="Node/Template" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -184,7 +203,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="InfoCard" type="HBoxContainer" parent="Template/Control" index="0"]
+[node name="InfoCard" type="HBoxContainer" parent="Node/Template/Control" index="0"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -206,7 +225,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PieceName" type="Label" parent="Template/Control/InfoCard" index="0"]
+[node name="PieceName" type="Label" parent="Node/Template/Control/InfoCard" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -228,7 +247,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect" ]
 
-[node name="Tribe" type="Label" parent="Template/Control/InfoCard" index="1"]
+[node name="Tribe" type="Label" parent="Node/Template/Control/InfoCard" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -249,7 +268,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Profession" type="Label" parent="Template/Control/InfoCard" index="2"]
+[node name="Profession" type="Label" parent="Node/Template/Control/InfoCard" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -270,7 +289,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="DescriptionBox" type="MarginContainer" parent="Template/Control" index="1"]
+[node name="DescriptionBox" type="MarginContainer" parent="Node/Template/Control" index="1"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -288,7 +307,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Template/Control/DescriptionBox" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Node/Template/Control/DescriptionBox" index="0"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -305,7 +324,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="description_text" type="Label" parent="Template/Control/DescriptionBox/VBoxContainer" index="0"]
+[node name="description_text" type="Label" parent="Node/Template/Control/DescriptionBox/VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -323,7 +342,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Power" type="Label" parent="Template/Control/DescriptionBox/VBoxContainer" index="1"]
+[node name="Power" type="Label" parent="Node/Template/Control/DescriptionBox/VBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -345,7 +364,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="Quote" type="Label" parent="Template/Control/DescriptionBox/VBoxContainer" index="2"]
+[node name="Quote" type="Label" parent="Node/Template/Control/DescriptionBox/VBoxContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -370,7 +389,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="CardTitle" type="VBoxContainer" parent="Template/Control" index="2"]
+[node name="CardTitle" type="VBoxContainer" parent="Node/Template/Control" index="2"]
 
 editor/display_folded = true
 anchor_left = 0.5
@@ -392,7 +411,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CardName" type="Label" parent="Template/Control/CardTitle" index="0"]
+[node name="CardName" type="Label" parent="Node/Template/Control/CardTitle" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -415,7 +434,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect" ]
 
-[node name="SubName" type="Label" parent="Template/Control/CardTitle" index="1"]
+[node name="SubName" type="Label" parent="Node/Template/Control/CardTitle" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -438,7 +457,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
 
-[node name="Mana" type="Label" parent="Template/Control" index="3"]
+[node name="Mana" type="Label" parent="Node/Template/Control" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -461,7 +480,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="DeckSize" type="Label" parent="Template/Control" index="4"]
+[node name="DeckSize" type="Label" parent="Node/Template/Control" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -484,7 +503,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="TimeUnit" type="Label" parent="Template/Control" index="5"]
+[node name="TimeUnit" type="Label" parent="Node/Template/Control" index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0

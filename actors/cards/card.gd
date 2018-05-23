@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 export (Resource) var this_card
 export (Texture) var back_texture = "res://assets/cards/cardBack_red1.png"
