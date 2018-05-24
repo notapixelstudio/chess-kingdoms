@@ -38,6 +38,7 @@ func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inA
 		moves_in_the_grid.append(player.pos_in_the_grid + movement["step"])
 	logicRoot.possible_moves = moves_in_the_grid
 	possible_moves = logicRoot.possible_moves
+	view.possible_moves = possible_moves
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):

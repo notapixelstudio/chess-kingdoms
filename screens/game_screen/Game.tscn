@@ -19,10 +19,10 @@
 [ext_resource path="res://screens/game_screen/FSM/transitions/OnCardSelection/OnCardSelection.tscn" type="PackedScene" id=17]
 [ext_resource path="res://screens/game_screen/FSM/transitions/OnCardActivation/OnCardActivation.tscn" type="PackedScene" id=18]
 [ext_resource path="res://screens/game_screen/FSM/transitions/OnPieceActivation/OnPieceActivation.tscn" type="PackedScene" id=19]
-[ext_resource path="res://screens/game_screen/FSM/transitions/OnNextAction/OnNextAction.tscn" type="PackedScene" id=20]
-[ext_resource path="res://screens/game_screen/FSM/transitions/NextTurn/NextTurn.tscn" type="PackedScene" id=21]
+[ext_resource path="res://screens/game_screen/FSM/transitions/NextTurn/NextTurn.tscn" type="PackedScene" id=20]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnNextAction/OnNextAction.tscn" type="PackedScene" id=21]
 
-[node name="World" type="Node"]
+[node name="World" type="Node" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -187,27 +187,27 @@ GraphData = {
 "OnEndTurn": Vector2( 744, 172 ),
 "OnEndTurn_": Vector2( 744, 172 ),
 "OnEndTurn__": Vector2( 744, 172 ),
-"OnNextAction": Vector2( 448, 410 ),
-"OnNextAction_": Vector2( 448, 410 ),
-"OnNextAction__": Vector2( 448, 410 ),
+"OnNextAction": Vector2( 448, 415 ),
+"OnNextAction_": Vector2( 449, 428 ),
+"OnNextAction__": Vector2( 449, 428 ),
 "OnPieceActivation": Vector2( 150, 568 ),
 "OnPieceActivation_": Vector2( 150, 568 ),
 "OnPieceActivation__": Vector2( 150, 568 ),
 "OnPieceSelection": Vector2( 156, 311 ),
 "OnPieceSelection_": Vector2( 156, 311 ),
 "OnPieceSelection__": Vector2( 156, 311 ),
-"PieceSelection": Vector2( 156, 440 ),
-"PieceSelection_": Vector2( 156, 440 ),
-"PieceSelection__": Vector2( 156, 440 ),
+"PieceSelection": Vector2( 157, 449 ),
+"PieceSelection_": Vector2( 157, 449 ),
+"PieceSelection__": Vector2( 157, 449 ),
 "PreAction": Vector2( 121, 26 ),
 "PreActionFinished": Vector2( 117, 178 ),
 "PreActionFinished_": Vector2( 117, 178 ),
 "PreActionFinished__": Vector2( 117, 178 ),
 "PreAction_": Vector2( 121, 26 ),
 "PreAction__": Vector2( 121, 26 ),
-"SelectCell": Vector2( 448, 571 ),
-"SelectCell_": Vector2( 448, 571 ),
-"SelectCell__": Vector2( 448, 571 ),
+"SelectCell": Vector2( 456, 579 ),
+"SelectCell_": Vector2( 456, 579 ),
+"SelectCell__": Vector2( 456, 579 ),
 "TurnAction": Vector2( 443, 171 ),
 "TurnAction_": Vector2( 443, 171 ),
 "TurnAction__": Vector2( 443, 171 )
@@ -350,15 +350,15 @@ _sections_unfolded = [ "Pause" ]
 path2SourceStates = [ NodePath(""), NodePath("../../States/PieceSelection") ]
 path2TargetState = NodePath("../../States/SelectCell")
 
-[node name="OnNextAction" parent="Control/Transitions" index="6" instance=ExtResource( 20 )]
-
-path2SourceStates = [ NodePath(""), NodePath("../../States/SelectCell"), NodePath("../../States/CardSelection"), NodePath("../../States/PieceSelection") ]
-path2TargetState = NodePath("../../States/TurnAction")
-
-[node name="NextTurn" parent="Control/Transitions" index="7" instance=ExtResource( 21 )]
+[node name="NextTurn" parent="Control/Transitions" index="6" instance=ExtResource( 20 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/EndTurn") ]
 path2TargetState = NodePath("../../States/PreAction")
+
+[node name="OnNextAction" parent="Control/Transitions" index="7" instance=ExtResource( 21 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/SelectCell"), NodePath("../../States/CardSelection"), NodePath("../../States/PieceSelection") ]
+path2TargetState = NodePath("../../States/TurnAction")
 
 [node name="EnemyHand" type="Control" parent="." index="7"]
 
