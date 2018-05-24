@@ -11,6 +11,7 @@ const MOVES = "moves"
 const PIECE_DEF_JSON = "res://assets/logic/piece_def.json_data"
 
 onready var Piece = preload("res://actors/characters/character.tscn")
+
 var player1 
 var player2
 

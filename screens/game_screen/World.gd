@@ -43,9 +43,9 @@ var dic_tiles = {
 	"preview":21
 	}
 
-func _ready():
+onready var Card = preload("res://actors/cards/Card.tscn")
 
-	# flip enemy hand
+func _ready():
 	
 	game_model = model
 	players = {model.PLAYER1 : model.player1, model.PLAYER2: model.player2}
@@ -73,6 +73,18 @@ func _ready():
 	model.player2.position = assign_position(model.player2.pos_in_the_grid)
 	# model.grid[model.player2.pos_in_the_grid.x][model.player2.pos_in_the_grid.y] = model.player2
 	add_child(model.player2)
+	
+	# hide enemy hand
+	for card in $EnemyHand.get_children():
+		var c = Card.instance()
+		card.add_child(c)
+	# flip your hand
+	for card in $YourHand.get_children():
+		print(card)
+		var c  = Card.instance()
+		card.add_child(c)
+		if card.get_child(0):
+			card.get_child(0).back = false
 
 func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array

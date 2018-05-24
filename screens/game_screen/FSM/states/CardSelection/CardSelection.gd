@@ -8,6 +8,8 @@ extends "res://addons/net.kivano.fsm/content/FSMState.gd";
 #####  Variables (Constants, Export Variables, Node Vars, Normal variables)  #####
 ######################### var myvar setget myvar_set,myvar_get ###################
 var possible_moves
+var this_card
+var prev_container
 var player
 var moves
 ##################################################################################
@@ -27,6 +29,7 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 #when entering state, usually you will want to reset internal state here somehow
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
 	print(view.selected_card)
+	this_card  = view.selected_card
 	select_card(view.selected_card)
 	player = logicRoot.players[logicRoot.current_turn]
 	var moves_in_the_grid = []
@@ -38,11 +41,14 @@ func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inA
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
-	pass
+	if view.selected_card != this_card:
+		fsm.setState(name)
 
 #when exiting state
 func exit(toState=null):
-	pass
+	if not toState:
+		deselect_card(this_card)
+	
 
 ##################################################################################
 #########                       Connected Signals                        #########
@@ -56,8 +62,16 @@ func exit(toState=null):
 #########                         Public Methods                         #########
 ##################################################################################
 func select_card(card):
-	card.position = Vector2(628,-350)
-	card.scale = Vector2(0.60, 0.60)
+	prev_container = card.get_parent()
+	prev_container.remove_child(card)
+	$CenterContainer.add_child(card)
+
+func deselect_card(card):
+	# first you have to remove it and then added
+	$CenterContainer.remove_child(card)
+	prev_container.add_child(card)
+
+
 	
 ##################################################################################
 #########                         Inner Methods                          #########

@@ -5,6 +5,12 @@ extends Resource
 export (Texture) var card_template
 export (String) var kingdom = "ruby"
 export (String) var piece_name = "shogi_pawn"
+export (String) var powers = "shield"
+export (String) var tribe = "royal" 
+export (String) var profession = "blacksmith"
+export (int) var mana_cost = 1
+export (int) var time_cost = 1
+
 
 
 # structure of the card

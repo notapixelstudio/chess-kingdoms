@@ -7,3 +7,4 @@ enum SELECT {PIECE, CARD}
 var selection
 var selected_card
 var selected_piece
+var possible_moves
