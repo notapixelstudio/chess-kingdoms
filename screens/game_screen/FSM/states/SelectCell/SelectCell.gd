@@ -31,26 +31,28 @@ func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inA
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
 	if Input.is_action_just_pressed("select_piece"):
-		pos = Vector2(round((get_viewport().get_mouse_position().x - logicRoot.position.x - logicRoot.tile_size.x/2)/logicRoot.tile_size.x), 
-			round((get_viewport().get_mouse_position().y - logicRoot.position.y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
+		pos = Vector2(round((get_viewport().get_mouse_position().x - logicRoot.tile_size.x/2)/logicRoot.tile_size.x), 
+			round((get_viewport().get_mouse_position().y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
 		pos -= logicRoot.BOARD_OFFSET
-		print(model.selected_card)
-		print(pos)
-		print(logicRoot.possible_moves)
-		if logicRoot.is_within_the_grid(pos) and pos in logicRoot.possible_moves and model.selected_card:
-			var piece = model.summon(logicRoot.players[model.turn], model.selected_card.piece_name, pos)
+		if logicRoot.is_within_the_grid(pos) and pos in logicRoot.possible_moves and view.selected_card:
+			var piece = model.summon(logicRoot.players[logicRoot.current_turn], view.selected_card.piece_name, pos)
 			piece.position = logicRoot.assign_position(piece.pos_in_the_grid)
 			logicRoot.add_child(piece)
-			print("boomba")
+			
+			# end of this action
+			this_card = view.selected_card
+			view.selected_card = null
+			view.possible_moves = null
+			logicRoot.possible_moves = null
 		
-		if logicRoot.is_within_the_grid(pos) and logicRoot.selected_piece \
-		and pos in logicRoot.possible_moves and logicRoot.selected_piece.state == logicRoot.selected_piece.IDLE:
+		if logicRoot.is_within_the_grid(pos) and view.selected_piece \
+		and pos in logicRoot.possible_moves:
 				# state: MOVE OR TAKE
 				# this piece is going to move
-				logicRoot.selected_piece.target_pos_in_the_grid = pos
-				logicRoot.selected_piece.direction = pos - logicRoot.selected_piece.pos_in_the_grid 
+				view.selected_piece.target_pos_in_the_grid = pos
+				view.selected_piece.direction = pos - view.selected_piece.pos_in_the_grid 
 				
-				var taken_piece = model.move(logicRoot.selected_piece, pos)
+				var taken_piece = model.move(view.selected_piece, pos)
 				if taken_piece:
 					taken_piece.pos_in_the_grid = Vector2(logicRoot.taken_grid.x+taken_piece.side, logicRoot.cont_taken[taken_piece.side])
 					logicRoot.cont_taken[taken_piece.side] += 1
@@ -58,11 +60,11 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 					
 				# this will be made by character.gd
 				# the position of the piece will be updated by the view.
-				logicRoot.selected_piece.target_pos = logicRoot.update_child_pos(logicRoot.selected_piece)
-
-		this_card = model.selected_card
-		logicRoot.possible_moves = []
-		logicRoot.game_model.selected_card = null
+				view.selected_piece.target_pos = logicRoot.update_child_pos(view.selected_piece)
+				
+				# end of this action
+				logicRoot.possible_moves = []
+		
 
 
 #when exiting state

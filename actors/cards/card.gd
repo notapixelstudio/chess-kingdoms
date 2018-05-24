@@ -1,37 +1,51 @@
-extends KinematicBody2D
+extends Node2D
 
+export (Resource) var this_card
+export (Texture) var back_texture = "res://assets/cards/cardBack_red1.png"
+var back = true setget flipcard
+
+var card_texture
+
+# structure of the card
+var piece_name
 var selected = false
 var focused = false
 
 # Structure of the card
-var piece_name = "shogi_pawn"
-var kingdom = "ruby"
+
+var list_power = []
 
 func _ready():
-	piece_name = "shogi_pawn"
-	kingdom = "ruby"
-	pass
+	piece_name = this_card.piece_name
+	flipcard(true)
+	
+func toggle_card(value):
+	$CardControl/Template/CardUI.visible = value
+	$CardControl/BackgroundArtwork.visible = value
+	$CardControl/Template/Artwork.visible = value
 
-func _on_Character_mouse_entered():
+func flipcard(new_value):
+	back = new_value
+	card_texture = back_texture if back else this_card.card_template
+	toggle_card(not back)	
+	$CardControl/Template.texture = card_texture
+
+
+func _on_mouse_entered():
 	focused = true
-	if not selected:
+	if not selected and not back:
 		$AnimationPlayer.queue("focus")
-
-	
-	
-func _on_Piece_mouse_exited():
+		
+func _on_mouse_exited():
 	focused = false
-	if not selected:
+	if not selected and not back:
 		$AnimationPlayer.queue("unfocus")
 
-
-
-func _on_Card_input_event(viewport, event, shape_idx):
+func _on_input_event(viewport, event, shape_idx):
 	if event.is_class("InputEventMouseButton") \
     and event.button_index == BUTTON_LEFT \
     and event.pressed and not selected:
-		print("Clicked")
 		selected = true
-		model.selected_card = self
+		view.selected_card = self
 		$AnimationPlayer.queue("unfocus")
 		return(self) # returns a reference to this node

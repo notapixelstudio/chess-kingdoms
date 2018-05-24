@@ -31,19 +31,19 @@ func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inA
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
-	if logicRoot.game_model.selected_card:
+	if view.selected_card:
 		logicRoot.selection = "card"
 		
 	if Input.is_action_just_pressed("select_piece"):
-		pos = Vector2(round((get_viewport().get_mouse_position().x - logicRoot.position.x - logicRoot.tile_size.x/2)/logicRoot.tile_size.x), 
-			round((get_viewport().get_mouse_position().y - logicRoot.position.y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
+		pos = Vector2(round((get_viewport().get_mouse_position().x - logicRoot.tile_size.x/2)/logicRoot.tile_size.x), 
+			round((get_viewport().get_mouse_position().y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
 		pos -= logicRoot.BOARD_OFFSET
 		if logicRoot.is_within_the_grid(pos):
 			# update with the offset
 			var selected_cell = model.grid[pos.x][pos.y]
 			if selected_cell:
 				print("there is something here: " + logicRoot.dic_side[selected_cell.side] +" "+ selected_cell.piece_name)
-				if selected_cell.state == selected_cell.IDLE and selected_cell.side == logicRoot.game_model.turn:
+				if selected_cell.state == selected_cell.IDLE and selected_cell.side == logicRoot.current_turn:
 					logicRoot.selected_piece = selected_cell
 					logicRoot.selection = "piece"
 				else:
