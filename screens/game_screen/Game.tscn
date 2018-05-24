@@ -188,7 +188,7 @@ GraphData = {
 "OnEndTurn_": Vector2( 744, 172 ),
 "OnEndTurn__": Vector2( 744, 172 ),
 "OnNextAction": Vector2( 448, 415 ),
-"OnNextAction_": Vector2( 449, 428 ),
+"OnNextAction_": Vector2( 448, 415 ),
 "OnNextAction__": Vector2( 449, 428 ),
 "OnPieceActivation": Vector2( 150, 568 ),
 "OnPieceActivation_": Vector2( 150, 568 ),

@@ -28,6 +28,7 @@ func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inA
 	logicRoot.get_node("EndTurn").disabled = false
 	logicRoot.selected_piece = null
 	logicRoot.get_node("Label").text = "Player " + str(logicRoot.game_model.turn) + " in action"
+	 
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
@@ -41,7 +42,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 		if logicRoot.is_within_the_grid(pos):
 			# update with the offset
 			var selected_cell = model.grid[pos.x][pos.y]
-			if selected_cell:
+			if selected_cell and not selected_cell.exhausted:
 				print("there is something here: " + logicRoot.dic_side[selected_cell.side] +" "+ selected_cell.piece_name)
 				if selected_cell.state == selected_cell.IDLE and selected_cell.side == logicRoot.current_turn:
 					logicRoot.selected_piece = selected_cell
@@ -53,7 +54,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 
 #when exiting state
 func exit(toState=null):
-	pass
+	print(logicRoot.selected_piece)
 
 ##################################################################################
 #########                       Connected Signals                        #########

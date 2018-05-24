@@ -27,11 +27,14 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
 	logicRoot.get_node("Label").text = "Please choose the target cell"
 	print(logicRoot.possible_moves)
+	print(logicRoot.selected_piece)
 	print("WE ARE IN " + name + " FROM " + fromStateID)
+	this_card = null
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
 	if Input.is_action_just_pressed("select_piece"):
+		
 		pos = Vector2(round((get_viewport().get_mouse_position().x - logicRoot.tile_size.x/2)/logicRoot.tile_size.x), 
 			round((get_viewport().get_mouse_position().y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
 		pos -= logicRoot.BOARD_OFFSET
@@ -39,6 +42,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 			var piece = model.summon(logicRoot.players[logicRoot.current_turn], view.selected_card.piece_name, pos)
 			piece.position = logicRoot.assign_position(piece.pos_in_the_grid)
 			logicRoot.add_child(piece)
+			logicRoot.active_pieces.append(piece)
 			
 			# end of this action
 			this_card = view.selected_card
@@ -46,8 +50,9 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 			view.possible_moves = null
 			logicRoot.possible_moves = null
 		
-		if logicRoot.is_within_the_grid(pos) and view.selected_piece \
+		if logicRoot.is_within_the_grid(pos) and logicRoot.selected_piece \
 		and pos in logicRoot.possible_moves:
+				view.selected_piece = logicRoot.selected_piece
 				# state: MOVE OR TAKE
 				# this piece is going to move
 				view.selected_piece.target_pos_in_the_grid = pos
@@ -72,6 +77,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 func exit(toState=null):
 	logicRoot.selection = null
 	logicRoot.selected_piece = null
+	view.selected_piece =  null
 	logicRoot.reset(logicRoot.cursor_map)
 	if this_card:
 		this_card.queue_free()
