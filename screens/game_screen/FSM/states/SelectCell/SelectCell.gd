@@ -75,6 +75,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 func exit(toState=null):
 	logicRoot.selection = null
 	logicRoot.selected_piece = null
+	view.selected_piece =  null
 	logicRoot.reset(logicRoot.cursor_map)
 	if this_card:
 		this_card.queue_free()
