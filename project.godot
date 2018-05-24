@@ -17,6 +17,7 @@ config/icon="res://assets/chess/pieces/chess_piece_0_centurion.png"
 [autoload]
 
 model="*res://globals/Model.gd"
+view="*res://globals/UI.gd"
 
 [editor_plugins]
 

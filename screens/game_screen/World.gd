@@ -1,6 +1,6 @@
 # World.gd
 # This is the model. It will handle the state, getting data and modifying the model
-extends Node2D
+extends Node
 
 const BOARD_OFFSET = Vector2(4,1)
 
@@ -27,8 +27,10 @@ var half_tile_size
 var taken_grid = Vector2(10,0)
 var cont_taken = {model.PLAYER1:0, model.PLAYER2:0}
 
-# state variables
+var hand
+var deck
 
+# state variables
 
 var map
 var tiledict
@@ -41,8 +43,10 @@ var dic_tiles = {
 	"preview":21
 	}
 
+onready var Card = preload("res://actors/cards/Card.tscn")
+
 func _ready():
-	selection = null
+	
 	game_model = model
 	players = {model.PLAYER1 : model.player1, model.PLAYER2: model.player2}
 	
@@ -54,10 +58,10 @@ func _ready():
 	tile_size = map.get_cell_size()
 	half_tile_size = tile_size / 2
 
-	
-	
+	selection = null
 	possible_moves = []
 	selected_piece = null
+	selected_card = null
 	
 	# in order to put the object at the center
 	#Player1
@@ -69,15 +73,18 @@ func _ready():
 	model.player2.position = assign_position(model.player2.pos_in_the_grid)
 	# model.grid[model.player2.pos_in_the_grid.x][model.player2.pos_in_the_grid.y] = model.player2
 	add_child(model.player2)
-
-	var squire = null
-	squire = model.summon(model.player1, model.list_piece_name[randi()%len(model.list_piece_name)])
-	squire.position = assign_position(squire.pos_in_the_grid)
-	add_child(squire)
-
-	squire = model.summon(model.player2, model.list_piece_name[randi()% len(model.list_piece_name)])
-	squire.position = assign_position(squire.pos_in_the_grid)
-	add_child(squire)
+	
+	# hide enemy hand
+	for card in $EnemyHand.get_children():
+		var c = Card.instance()
+		card.add_child(c)
+	# flip your hand
+	for card in $YourHand.get_children():
+		print(card)
+		var c  = Card.instance()
+		card.add_child(c)
+		if card.get_child(0):
+			card.get_child(0).back = false
 
 func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
@@ -92,7 +99,6 @@ func update_child_pos(child_node):
 func show_legal_moves(piece, legal_moves, map_to_show = cursor_map):
 	var grid_pos = piece.pos_in_the_grid
 	var action = "preview"
-	
 	for cell in legal_moves:
 		# cell[action] could be move, attack
 		if map_to_show == cursor_map:
@@ -114,18 +120,21 @@ func select_piece(piece):
 	for movement in moves:
 		moves_in_the_grid.append(piece.pos_in_the_grid + movement["step"])
 	possible_moves = moves_in_the_grid
+	return possible_moves
 
 func assign_position(pos_in_the_grid):
 	return map.map_to_world(pos_in_the_grid+ BOARD_OFFSET) + half_tile_size
 
 func _input(event):
-	# this is case of moving
+	
+	# GAME OVER CONDITION
 	if not model.playing:
 		return
 	
 	var pos = 0
+	# this handles the preview when you hover on cells
 	if event is InputEventMouse:
-		pos = Vector2(round((event.global_position.x - position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - position.y - tile_size.y/2)/tile_size.y))
+		pos = Vector2(round((event.global_position.x - tile_size.x/2)/tile_size.x), round((event.global_position.y - tile_size.y/2)/tile_size.y))
 		pos -= BOARD_OFFSET
 		if is_within_the_grid(pos):
 			reset(preview_map)
@@ -137,8 +146,6 @@ func _input(event):
 			reset(preview_map)
 			
 	
-	
-		
 	if Input.is_action_pressed("pause"):
 		if get_tree().is_paused():
 			get_tree().set_pause(false)
@@ -153,6 +160,6 @@ func _on_Timer_timeout():
 	model.reset()
 	get_tree().reload_current_scene()
 
-func _process():
+func _process(delta):
 	current_turn = model.turn
-	selected_card = model.selected_card
+	selected_card = view.selected_card
