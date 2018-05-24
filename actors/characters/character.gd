@@ -8,6 +8,7 @@ const SETUP = "setup"
 const ATTACK = "attack"
 const DIE = "die"
 const STAGGER = "stagger"
+const EXHAUSTED = "exhausted"
 
 const TOP = Vector2(0, -1)
 const RIGHT = Vector2(1, 0)
@@ -23,6 +24,8 @@ var velocity = Vector2()
 
 var target_pos = Vector2()
 var is_moving = false
+# when first summoned it is exhausted
+var exhausted = true
 
 var type
 var state
@@ -98,15 +101,19 @@ func _physics_process(delta):
 		var distance_to_target = Vector2(abs(target_pos.x - position.x), abs(target_pos.y - pos.y))
 		if distance_to_target == Vector2():
 			is_moving = false
+			exhausted = true
 		if abs(velocity.x) > distance_to_target.x: 
 			velocity.x = distance_to_target.x * target_pos.x
 			is_moving = false
 			target_pos = Vector2()
+			exhausted = true
 		if abs(velocity.y) > distance_to_target.y: 
 			velocity.y = distance_to_target.y * target_pos.y
 			is_moving = false
 			target_pos = Vector2()
+			exhausted = true
 		move_and_collide(velocity)
+		
 
 	
 func _on_Piece_mouse_exited():

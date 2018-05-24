@@ -29,6 +29,7 @@ func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inA
 	print(logicRoot.possible_moves)
 	print(logicRoot.selected_piece)
 	print("WE ARE IN " + name + " FROM " + fromStateID)
+	this_card = null
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
@@ -41,6 +42,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 			var piece = model.summon(logicRoot.players[logicRoot.current_turn], view.selected_card.piece_name, pos)
 			piece.position = logicRoot.assign_position(piece.pos_in_the_grid)
 			logicRoot.add_child(piece)
+			logicRoot.active_pieces.append(piece)
 			
 			# end of this action
 			this_card = view.selected_card

@@ -26,6 +26,7 @@ var tile_size
 var half_tile_size
 var taken_grid = Vector2(10,0)
 var cont_taken = {model.PLAYER1:0, model.PLAYER2:0}
+var active_pieces = []
 
 var hand
 var deck
@@ -68,11 +69,14 @@ func _ready():
 	model.player1.position = assign_position(model.player1.pos_in_the_grid)
 	# model.grid[model.player1.pos_in_the_grid.x][model.player1.pos_in_the_grid.y] = model.player1
 	add_child(model.player1)
-
+	active_pieces.append(model.player1)
+	
 	#Player2
 	model.player2.position = assign_position(model.player2.pos_in_the_grid)
 	# model.grid[model.player2.pos_in_the_grid.x][model.player2.pos_in_the_grid.y] = model.player2
 	add_child(model.player2)
+	
+	active_pieces.append(model.player2)
 	
 	# hide enemy hand
 	for card in $EnemyHand.get_children():
@@ -162,4 +166,5 @@ func _on_Timer_timeout():
 
 func _process(delta):
 	current_turn = model.turn
+	view.current_turn = current_turn 
 	selected_card = view.selected_card

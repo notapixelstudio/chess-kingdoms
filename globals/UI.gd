@@ -8,3 +8,4 @@ var selection
 var selected_card
 var selected_piece
 var possible_moves
+var current_turn
