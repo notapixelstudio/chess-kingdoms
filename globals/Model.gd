@@ -189,8 +189,9 @@ func shuffleList(list):
 	list = tmp_list
 	return shuffledList
 
-func summon(king, piece_name, target_pos = null):
+func summon(king, card, target_pos = null):
 	var piece = Piece.instance()
+	var piece_name = card.piece_name
 	piece.piece_name = piece_name
 	piece.side = king.side 
 	var possible_direction = Vector2()
@@ -209,6 +210,7 @@ func summon(king, piece_name, target_pos = null):
 	if possible_direction:
 		piece.pos_in_the_grid = king.pos_in_the_grid + possible_direction
 		grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = piece
+		current_mana_count -= card.mana_cost
 		# change_turn()
 		return piece
 	else:

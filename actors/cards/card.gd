@@ -8,6 +8,7 @@ var card_texture
 
 # structure of the card
 var piece_name
+var mana_cost
 var selected = false
 var focused = false
 
@@ -17,6 +18,7 @@ var list_power = []
 
 func _ready():
 	piece_name = this_card.piece_name
+	mana_cost = this_card.mana_cost
 	flipcard(true)
 	
 func toggle_card(value):

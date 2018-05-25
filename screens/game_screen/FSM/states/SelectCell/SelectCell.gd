@@ -39,7 +39,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 			round((get_viewport().get_mouse_position().y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
 		pos -= logicRoot.BOARD_OFFSET
 		if logicRoot.is_within_the_grid(pos) and pos in logicRoot.possible_moves and view.selected_card:
-			var piece = model.summon(logicRoot.players[logicRoot.current_turn], view.selected_card.piece_name, pos)
+			var piece = model.summon(logicRoot.players[logicRoot.current_turn], view.selected_card, pos)
 			piece.position = logicRoot.assign_position(piece.pos_in_the_grid)
 			logicRoot.add_child(piece)
 			logicRoot.active_pieces.append(piece)
