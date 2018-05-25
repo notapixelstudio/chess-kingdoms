@@ -48,9 +48,9 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 			# update with the offset
 			var selected_cell = model.grid[pos.x][pos.y]
 
-			if selected_cell and not selected_cell.exhausted and model.current_unit_count >0:
+			if selected_cell and not selected_cell.exhausted:
 				print("there is something here: " + logicRoot.dic_side[selected_cell.side] +" "+ selected_cell.piece_name)
-				if selected_cell.state == selected_cell.IDLE and selected_cell.side == logicRoot.current_turn:
+				if selected_cell.side == logicRoot.current_turn and model.current_unit_count >= selected_cell.time_unit_cost:
 					logicRoot.selected_piece = selected_cell
 					logicRoot.selection = "piece"
 				else:
