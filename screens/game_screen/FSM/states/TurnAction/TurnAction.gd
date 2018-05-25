@@ -27,7 +27,7 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
 	logicRoot.get_node("EndTurn").disabled = false
 	logicRoot.selected_piece = null
-	logicRoot.get_node("Label").text = "Player " + str(logicRoot.game_model.turn) + " in action"
+	logicRoot.set_turn_msg("Player " + str(logicRoot.game_model.turn) + " in action")
 	 
 
 #when updating state, paramx can be used only if updating fsm manually

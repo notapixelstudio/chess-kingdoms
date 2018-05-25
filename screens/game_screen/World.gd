@@ -168,3 +168,8 @@ func _process(delta):
 	current_turn = model.turn
 	view.current_turn = current_turn 
 	selected_card = view.selected_card
+	$GUI/VBoxContainer/HBoxContainer/TimeUnit.set_counter(model.current_unit_count)
+	$GUI/VBoxContainer/HBoxContainer/ManaUnit.set_counter(model.current_mana_count)
+
+func set_turn_msg(msg):
+	$GUI/VBoxContainer/Label.text = msg

@@ -43,6 +43,9 @@ var taken_pos
 # Shadoran-specific
 var kingdom
 
+# structure of piece
+var time_unit_cost = 1
+
 export var baseScale = 1
 onready var representation = get_node("AnimationPlayer")
 onready var pivot = get_node("Pivot")

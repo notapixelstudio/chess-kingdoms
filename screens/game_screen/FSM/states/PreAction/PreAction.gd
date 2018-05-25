@@ -25,7 +25,9 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 #when entering state, usually you will want to reset internal state here somehow
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
 	$Timer.start()
-	logicRoot.get_node("Label").text = "Drawing a card"
+	logicRoot.get_node("GUI/VBoxContainer/HBoxContainer/TimeUnit").set_counter(model.current_unit_count)
+	logicRoot.get_node("GUI/VBoxContainer/HBoxContainer/ManaUnit").set_counter(model.current_mana_count)
+	logicRoot.get_node("GUI/VBoxContainer/Label").text = "Drawing a card"
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
