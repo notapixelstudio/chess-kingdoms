@@ -193,6 +193,8 @@ func summon(king, card, target_pos = null):
 	var piece = Piece.instance()
 	var piece_name = card.piece_name
 	piece.piece_name = piece_name
+	piece.kingdom = card.data.kingdom
+	print(piece.kingdom)
 	piece.side = king.side 
 	var possible_direction = Vector2()
 	var all = []

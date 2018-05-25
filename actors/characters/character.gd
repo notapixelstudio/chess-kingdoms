@@ -41,7 +41,7 @@ var target_pos_in_the_grid
 var taken_pos
 
 # Shadoran-specific
-var kingdom
+var kingdom = "ruby"
 
 # structure of piece
 var time_unit_cost = 1
@@ -51,7 +51,6 @@ onready var representation = get_node("AnimationPlayer")
 onready var pivot = get_node("Pivot")
 
 func _ready():
-	kingdom = "ruby"
 	representation.play(SETUP)
 	battlefield = get_parent()
 	representation.play("summon")

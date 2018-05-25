@@ -135,7 +135,7 @@ tracks/0/keys = {
 "values": [ Vector2( -0.526489, 41.1203 ), Vector2( 0.52652, 35.5554 ) ]
 }
 
-[node name="Piece" type="KinematicBody2D" index="0" groups=[
+[node name="Piece" type="KinematicBody2D" groups=[
 "character",
 ]]
 

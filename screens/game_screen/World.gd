@@ -81,11 +81,13 @@ func _ready():
 	# hide enemy hand
 	for card in $EnemyHand.get_children():
 		var c = Card.instance()
+		c.data = load("res://actors/cards/deck/emerald_pawn.tres")
 		card.add_child(c)
 	# flip your hand
 	for card in $YourHand.get_children():
 		print(card)
 		var c  = Card.instance()
+		c.data = load("res://actors/cards/deck/amber_pawn.tres")
 		card.add_child(c)
 		if card.get_child(0):
 			card.get_child(0).back = false
