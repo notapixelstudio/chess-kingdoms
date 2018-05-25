@@ -135,7 +135,7 @@ tracks/0/keys = {
 "values": [ Vector2( -0.526489, 41.1203 ), Vector2( 0.52652, 35.5554 ) ]
 }
 
-[node name="Piece" type="KinematicBody2D" groups=[
+[node name="Piece" type="KinematicBody2D" index="0" groups=[
 "character",
 ]]
 
@@ -223,7 +223,7 @@ GraphData = {
 "Attack": Vector2( 943, 535 ),
 "Attack_": Vector2( 943, 535 ),
 "Attack__": Vector2( 943, 535 ),
-"Dead": Vector2( 390, 552 ),
+"Dead": Vector2( 371, 623 ),
 "Dead_": Vector2( 390, 552 ),
 "Dead__": Vector2( 390, 552 ),
 "Exhausted": Vector2( 644, 518 ),
@@ -263,7 +263,7 @@ GraphData = {
 "onAttackEnd__": Vector2( 790, 404 ),
 "onAttack_": Vector2( 721, 300 ),
 "onAttack__": Vector2( 721, 300 ),
-"onDeadHit": Vector2( 392, 370 ),
+"onDeadHit": Vector2( 376, 434 ),
 "onDeadHit_": Vector2( 392, 370 ),
 "onDeadHit__": Vector2( 392, 370 ),
 "onEnemyExist": Vector2( 1108, 338 ),
@@ -326,7 +326,7 @@ path2TargetState = NodePath("../../States/Walking")
 
 [node name="onDeadHit" parent="FSM2D/Transitions" index="4" instance=ExtResource( 17 )]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/Idle") ]
+path2SourceStates = [ NodePath(""), NodePath("../../States/Idle"), NodePath("../../States/Exhausted") ]
 path2TargetState = NodePath("../../States/Dead")
 
 [node name="onMovementEnd" parent="FSM2D/Transitions" index="5" instance=ExtResource( 18 )]
