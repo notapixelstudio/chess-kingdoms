@@ -1,4 +1,4 @@
-extends "res://addons/net.kivano.fsm/content/FSMState.gd";
+extends "res://addons/net.kivano.fsm/content/FSMState.gd"
 ################################### R E A D M E ##################################
 # For more informations check script attached to FSM node
 #
@@ -13,8 +13,8 @@ var this_card
 #########                       Getters and Setters                      #########
 ##################################################################################
 #you will want to use those
-func getFSM(): return fsm; #defined in parent class
-func getLogicRoot(): return logicRoot; #defined in parent class 
+func getFSM(): return fsm #defined in parent class
+func getLogicRoot(): return logicRoot #defined in parent class 
 
 ##################################################################################
 #########                 Implement those below ancestor                 #########
