@@ -135,7 +135,7 @@ tracks/0/keys = {
 "values": [ Vector2( -0.526489, 41.1203 ), Vector2( 0.52652, 35.5554 ) ]
 }
 
-[node name="Piece" type="KinematicBody2D" groups=[
+[node name="Piece" type="KinematicBody2D" index="0" groups=[
 "character",
 ]]
 
@@ -149,9 +149,9 @@ baseScale = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( -0.648163, -92.8207 )
 scale = Vector2( 3.48704, 3.11686 )
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 
@@ -198,7 +198,28 @@ scale = Vector2( 1, 0.263067 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="FSM2D" type="Node2D" parent="." index="5"]
+[node name="Kingdom" type="Label" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -33.0
+margin_top = 16.0
+margin_right = 34.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Kingdom"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="FSM2D" type="Node2D" parent="." index="6"]
 
 editor/display_folded = true
 visible = false

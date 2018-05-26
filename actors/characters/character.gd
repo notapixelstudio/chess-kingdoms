@@ -58,6 +58,7 @@ func _ready():
 	face_with_side()
 	#$StateInfo/Label.set_text(self.piece_name)
 	set_piece_texture("res://assets/chess/pixel_pieces/"+kingdom+"_"+piece_name+".png")
+	$Kingdom.text = kingdom
 	moves = model.get_moves(self.piece_name)
 
 func animate(keyword):

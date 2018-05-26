@@ -72,7 +72,7 @@ func _ready():
 	player2 = Piece.instance()
 	player2.piece_name = "king"
 	player2.side = PLAYER2
-	player1.kingdom = "emerald"
+	player2.kingdom = "emerald"
 	player2.pos_in_the_grid = Vector2(0,4)
 
 	players_struct[PLAYER2] = {"king":player2, MANA: mana_count, TIME_UNIT: unit_count}
