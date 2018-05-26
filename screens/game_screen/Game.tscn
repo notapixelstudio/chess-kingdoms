@@ -24,7 +24,7 @@
 [ext_resource path="res://screens/game_screen/FSM/transitions/NextTurn/NextTurn.tscn" type="PackedScene" id=22]
 [ext_resource path="res://screens/game_screen/FSM/transitions/OnNextAction/OnNextAction.tscn" type="PackedScene" id=23]
 
-[node name="World" type="Node"]
+[node name="World" type="Node" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -209,6 +209,7 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Control" type="Control" parent="." index="6"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -435,20 +436,20 @@ path2TargetState = NodePath("../../States/PreAction")
 path2SourceStates = [ NodePath(""), NodePath("../../States/SelectCell"), NodePath("../../States/CardSelection"), NodePath("../../States/PieceSelection") ]
 path2TargetState = NodePath("../../States/TurnAction")
 
-[node name="EnemyHand" type="Control" parent="." index="7"]
+[node name="Hand0" type="Control" parent="." index="7"]
 
 editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 225.0
-margin_top = -79.0
-margin_right = 826.0
-margin_bottom = 62.0
+margin_left = 196.0
+margin_top = 580.0
+margin_right = 797.0
+margin_bottom = 721.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
@@ -457,7 +458,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="EnemyHand" index="0"]
+[node name="CenterContainer" type="CenterContainer" parent="Hand0" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -475,7 +476,155 @@ size_flags_vertical = 1
 use_top_left = true
 _sections_unfolded = [ "Mouse", "Rect" ]
 
-[node name="CenterContainer2" type="CenterContainer" parent="EnemyHand" index="1"]
+[node name="CenterContainer2" type="CenterContainer" parent="Hand0" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 104.0
+margin_top = 1.0
+margin_right = 452.0
+margin_bottom = 472.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Rect" ]
+
+[node name="CenterContainer3" type="CenterContainer" parent="Hand0" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 211.0
+margin_top = 1.0
+margin_right = 552.0
+margin_bottom = 472.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer4" type="CenterContainer" parent="Hand0" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 318.0
+margin_right = 659.0
+margin_bottom = 471.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer5" type="CenterContainer" parent="Hand0" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 424.0
+margin_right = 765.0
+margin_bottom = 471.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer6" type="CenterContainer" parent="Hand0" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 530.0
+margin_right = 871.0
+margin_bottom = 471.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Hand1" type="Control" parent="." index="8"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 225.0
+margin_top = -79.0
+margin_right = 826.0
+margin_bottom = 62.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Hand1" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 337.0
+margin_bottom = 475.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = true
+_sections_unfolded = [ "Mouse", "Rect" ]
+
+[node name="CenterContainer2" type="CenterContainer" parent="Hand1" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -495,7 +644,7 @@ size_flags_vertical = 1
 use_top_left = false
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Margin", "Mouse", "Rect" ]
 
-[node name="CenterContainer3" type="CenterContainer" parent="EnemyHand" index="2"]
+[node name="CenterContainer3" type="CenterContainer" parent="Hand1" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -518,7 +667,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CenterContainer4" type="CenterContainer" parent="EnemyHand" index="3"]
+[node name="CenterContainer4" type="CenterContainer" parent="Hand1" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -540,7 +689,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CenterContainer5" type="CenterContainer" parent="EnemyHand" index="4"]
+[node name="CenterContainer5" type="CenterContainer" parent="Hand1" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -562,155 +711,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CenterContainer6" type="CenterContainer" parent="EnemyHand" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 530.0
-margin_right = 871.0
-margin_bottom = 471.0
-rect_scale = Vector2( 0.3, 0.3 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-use_top_left = false
-_sections_unfolded = [ "Mouse", "Rect" ]
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="YourHand" type="Control" parent="." index="8"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 196.0
-margin_top = 580.0
-margin_right = 797.0
-margin_bottom = 721.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Mouse", "Rect" ]
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CenterContainer" type="CenterContainer" parent="YourHand" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 337.0
-margin_bottom = 475.0
-rect_scale = Vector2( 0.3, 0.3 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-use_top_left = true
-_sections_unfolded = [ "Mouse", "Rect" ]
-
-[node name="CenterContainer2" type="CenterContainer" parent="YourHand" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 104.0
-margin_top = 1.0
-margin_right = 452.0
-margin_bottom = 472.0
-rect_scale = Vector2( 0.3, 0.3 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-use_top_left = false
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Rect" ]
-
-[node name="CenterContainer3" type="CenterContainer" parent="YourHand" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 211.0
-margin_top = 1.0
-margin_right = 552.0
-margin_bottom = 472.0
-rect_scale = Vector2( 0.3, 0.3 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-use_top_left = false
-_sections_unfolded = [ "Mouse", "Rect" ]
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CenterContainer4" type="CenterContainer" parent="YourHand" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 318.0
-margin_right = 659.0
-margin_bottom = 471.0
-rect_scale = Vector2( 0.3, 0.3 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-use_top_left = false
-_sections_unfolded = [ "Mouse", "Rect" ]
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CenterContainer5" type="CenterContainer" parent="YourHand" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 424.0
-margin_right = 765.0
-margin_bottom = 471.0
-rect_scale = Vector2( 0.3, 0.3 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-use_top_left = false
-_sections_unfolded = [ "Mouse", "Rect" ]
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CenterContainer6" type="CenterContainer" parent="YourHand" index="5"]
+[node name="CenterContainer6" type="CenterContainer" parent="Hand1" index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0

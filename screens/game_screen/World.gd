@@ -79,12 +79,12 @@ func _ready():
 	active_pieces.append(model.player2)
 	
 	# hide enemy hand
-	for card in $EnemyHand.get_children():
+	for card in get_node("Hand1").get_children():
 		var c = Card.instance()
 		c.data = load("res://actors/cards/deck/emerald_pawn.tres")
 		card.add_child(c)
 	# flip your hand
-	for card in $YourHand.get_children():
+	for card in get_node("Hand0").get_children():
 		print(card)
 		var c  = Card.instance()
 		c.data = load("res://actors/cards/deck/amber_pawn.tres")
