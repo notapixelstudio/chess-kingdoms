@@ -2,6 +2,22 @@
 # Global singleton that have the state of the grid. And its changing state.
 extends Node
 
+# powers:
+
+var powers = {
+	"shield": "protected from forward attacks"
+}
+
+# MANA and TIME UNIT
+const MANA = "mana"
+const TIME_UNIT = "time_unit"
+const MAX_MANA = 9
+const MAX_TIME = 6 # it is actually 3 
+var mana_count
+var current_mana_count
+var unit_count
+var current_unit_count
+
 var grid_size = Vector2(8, 8)
 var grid = []
 var piece_defs = {}
@@ -14,6 +30,7 @@ onready var Piece = preload("res://actors/characters/character.tscn")
 
 var player1 
 var player2
+var players_struct = {}
 
 var rand_dir = [-1, 0, 1]
 enum players {PLAYER1,PLAYER2}
@@ -27,9 +44,14 @@ const SUMMON = "summon"
 const MAX_COUNT = 20
 var playing
 
+
 var selected_card
 
 func _ready():
+	mana_count = 2
+	current_mana_count = mana_count
+	unit_count = 1
+	current_unit_count = unit_count
 	randomize()
 	# list characters
 	# Create the grid Array with null in it.
@@ -50,13 +72,16 @@ func _ready():
 	player1.kingdom = "amber"
 	player1.set_piece_texture("res://assets/chess/pixel_pieces/ruby_king.png")
 	
+	players_struct[PLAYER1] = {"king":player1, MANA: mana_count, TIME_UNIT: unit_count}
 	# REMEMBER to add_child to the root
 	
 	player2 = Piece.instance()
 	player2.piece_name = "king"
 	player2.side = PLAYER2
-	player1.kingdom = "emerald"
+	player2.kingdom = "emerald"
 	player2.pos_in_the_grid = Vector2(0,4)
+
+	players_struct[PLAYER2] = {"king":player2, MANA: mana_count, TIME_UNIT: unit_count}
 
 	# add players to the grid
 	grid[player1.pos_in_the_grid.x][player1.pos_in_the_grid.y] = player1
@@ -65,7 +90,13 @@ func _ready():
 
 func change_turn():
 	turn = (turn + 1) % 2
-
+	players_struct[turn][MANA] = min(players_struct[turn][MANA] + 1, MAX_MANA)
+	players_struct[turn][TIME_UNIT] = min(players_struct[turn][TIME_UNIT] + 1, MAX_TIME)
+	current_unit_count = players_struct[turn][TIME_UNIT]
+	print(str(current_unit_count), str(floor(float(current_unit_count)/2)))
+	current_unit_count = floor(float(current_unit_count)/2)
+	
+	current_mana_count = players_struct[turn][MANA]
 
 func get_moves(piece_name):
 	# function that get the json for the legal moves. 
@@ -101,7 +132,10 @@ func get_legal_moves(piece):
 					pos_to_check = piece.pos_in_the_grid + repeated_step
 					if is_within_the_grid(pos_to_check):
 						if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
-							legal_moves.append({"step":repeated_step, "action":ATTACK})
+							if "shield" in grid[pos_to_check.x][pos_to_check.y].power and piece.pos_in_the_grid.y == pos_to_check.y:
+								print("this piece is protected")
+							else:
+								legal_moves.append({"step":repeated_step, "action":ATTACK})
 						
 					break
 		else: 
@@ -112,7 +146,11 @@ func get_legal_moves(piece):
 				pos_to_check = piece.pos_in_the_grid + step
 				if is_within_the_grid(pos_to_check):
 					if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
-						legal_moves.append({"step":step, "action":ATTACK})
+						
+						if "shield" in grid[pos_to_check.x][pos_to_check.y].power and piece.pos_in_the_grid.y == pos_to_check.y:
+							print("this piece is protected")
+						else:
+							legal_moves.append({"step":step, "action":ATTACK})
 					
 	return legal_moves
 
@@ -141,6 +179,9 @@ func move(piece, new_pos):
 	
 	grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = null
 	var taken_piece = null
+
+	current_unit_count -= piece.time_unit_cost
+	
 	if grid[new_pos.x][new_pos.y]:
 		taken_piece = take_piece(piece, grid[new_pos.x][new_pos.y])
 	grid[new_pos.x][new_pos.y] = piece
@@ -161,9 +202,12 @@ func shuffleList(list):
 	list = tmp_list
 	return shuffledList
 
-func summon(king, piece_name, target_pos = null):
+func summon(king, card, target_pos = null):
 	var piece = Piece.instance()
+	var piece_name = card.piece_name
 	piece.piece_name = piece_name
+	piece.kingdom = card.data.kingdom
+	print(piece.kingdom)
 	piece.side = king.side 
 	var possible_direction = Vector2()
 	var all = []
@@ -181,6 +225,7 @@ func summon(king, piece_name, target_pos = null):
 	if possible_direction:
 		piece.pos_in_the_grid = king.pos_in_the_grid + possible_direction
 		grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = piece
+		current_mana_count -= card.mana_cost
 		# change_turn()
 		return piece
 	else:

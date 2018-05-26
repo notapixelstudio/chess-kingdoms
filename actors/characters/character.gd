@@ -41,14 +41,17 @@ var target_pos_in_the_grid
 var taken_pos
 
 # Shadoran-specific
-var kingdom
+var kingdom = "ruby"
+var power = []
+
+# structure of piece
+var time_unit_cost = 1
 
 export var baseScale = 1
 onready var representation = get_node("AnimationPlayer")
 onready var pivot = get_node("Pivot")
 
 func _ready():
-	kingdom = "ruby"
 	representation.play(SETUP)
 	battlefield = get_parent()
 	representation.play("summon")
@@ -56,6 +59,9 @@ func _ready():
 	face_with_side()
 	#$StateInfo/Label.set_text(self.piece_name)
 	set_piece_texture("res://assets/chess/pixel_pieces/"+kingdom+"_"+piece_name+".png")
+	$Kingdom.text = kingdom
+	if kingdom == "ruby":
+		power.append("shield")
 	moves = model.get_moves(self.piece_name)
 
 func animate(keyword):

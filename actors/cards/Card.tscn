@@ -1,21 +1,19 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://actors/cards/card.gd" type="Script" id=1]
-[ext_resource path="res://actors/cards/deck/this_card.tres" type="Resource" id=2]
-[ext_resource path="res://assets/cards/cardBack_red1.png" type="Texture" id=3]
-[ext_resource path="res://assets/cards/bg_texture.png" type="Texture" id=4]
-[ext_resource path="res://assets/cards/layout_card.png" type="Texture" id=5]
-[ext_resource path="res://assets/chess/pixel_pieces/ruby_king.png" type="Texture" id=6]
-[ext_resource path="res://assets/theme/quote_theme.tres" type="Theme" id=7]
+[ext_resource path="res://assets/cards/cardBack_red1.png" type="Texture" id=2]
+[ext_resource path="res://assets/cards/bg_texture.png" type="Texture" id=3]
+[ext_resource path="res://assets/cards/layout_card.png" type="Texture" id=4]
+[ext_resource path="res://assets/chess/pixel_pieces/ruby_king.png" type="Texture" id=5]
+[ext_resource path="res://assets/theme/quote_theme.tres" type="Theme" id=6]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=2]
 
-resource_name = "focus"
 length = 0.3
 loop = false
 step = 0.1
@@ -32,7 +30,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -300 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 
 length = 1.0
 loop = false
@@ -50,9 +48,8 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 
-resource_name = "summon"
 length = 1.0
 loop = false
 step = 0.1
@@ -69,9 +66,8 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 
-resource_name = "unfocus"
 length = 0.3
 loop = false
 step = 0.1
@@ -88,21 +84,20 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -300 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 
 size = 0
 use_mipmaps = false
 use_filter = false
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="CardNode" type="Node2D" index="0" groups=[
+[node name="CardNode" type="Node2D" groups=[
 "character",
 ]]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Focus", "Grow Direction", "Hint", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
-this_card = ExtResource( 2 )
-back_texture = ExtResource( 3 )
+back_texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 
@@ -119,7 +114,7 @@ audio_bus_name = "Master"
 
 position = Vector2( 168.375, 237.125 )
 scale = Vector2( 17.0481, 23.2981 )
-shape = SubResource( 6 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 
@@ -128,10 +123,10 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/focus = SubResource( 1 )
-anims/setup = SubResource( 2 )
-anims/summon = SubResource( 3 )
-anims/unfocus = SubResource( 4 )
+anims/focus = SubResource( 2 )
+anims/setup = SubResource( 3 )
+anims/summon = SubResource( 4 )
+anims/unfocus = SubResource( 5 )
 blend_times = [  ]
 
 [node name="CardControl" type="Control" parent="." index="2"]
@@ -167,7 +162,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 expand = true
 stretch_mode = 0
 _sections_unfolded = [ "Mouse" ]
@@ -186,7 +181,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 stretch_mode = 0
 _sections_unfolded = [ "Animation", "Mouse", "Offset", "Rect", "Transform", "Visibility" ]
 
@@ -206,10 +201,10 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 expand = true
 stretch_mode = 0
-_sections_unfolded = [ "Mouse" ]
+_sections_unfolded = [ "Mouse", "Rect" ]
 
 [node name="CardUI" type="Control" parent="CardControl/Template" index="1"]
 
@@ -382,7 +377,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/Label = SubResource( 5 )
+custom_fonts/Label = SubResource( 6 )
 text = "Forward shield"
 percent_visible = 1.0
 lines_skipped = 0
@@ -404,7 +399,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-theme = ExtResource( 7 )
+theme = ExtResource( 6 )
 text = "\"I once smashed my finger and melt it into my hammer\" cit.
 "
 valign = 2

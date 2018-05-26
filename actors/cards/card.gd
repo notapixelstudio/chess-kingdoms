@@ -1,13 +1,15 @@
 extends Node2D
 
-export (Resource) var this_card
+# export (Resource) var data setget setup
 export (Texture) var back_texture = "res://assets/cards/cardBack_red1.png"
 var back = true setget flipcard
-
+var data setget setup
 var card_texture
 
 # structure of the card
 var piece_name
+var kingdom
+var mana_cost
 var selected = false
 var focused = false
 
@@ -15,9 +17,15 @@ var focused = false
 
 var list_power = []
 
-func _ready():
-	piece_name = this_card.piece_name
+
+func setup(card):
+	data = card
+	piece_name = data.piece_name
+	mana_cost = data.mana_cost
+	print(data)
+	$CardControl/Template/Artwork.texture = data.artwork
 	flipcard(true)
+	
 	
 func toggle_card(value):
 	$CardControl/Template/CardUI.visible = value
@@ -26,8 +34,10 @@ func toggle_card(value):
 
 func flipcard(new_value):
 	back = new_value
-	card_texture = back_texture if back else this_card.card_template
-	toggle_card(not back)	
+	toggle_card(not back)
+	print(data)
+	print(data.card_template)
+	card_texture = back_texture if back else data.card_template
 	$CardControl/Template.texture = card_texture
 
 

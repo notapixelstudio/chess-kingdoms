@@ -24,8 +24,12 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 
 #when entering state, usually you will want to reset internal state here somehow
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
+	
+	for card in logicRoot.get_node("Hand" + str(view.current_turn)).get_children():
+		if card.get_child(0):
+			card.get_child(0).back = true
 	logicRoot.get_node("EndTurn").disabled = false
-	logicRoot.get_node("Label").text = "Turn over"
+	logicRoot.set_turn_msg("Turn over")
 	timeout = false
 	$Timer.start()
 

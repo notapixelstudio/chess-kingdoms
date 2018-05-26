@@ -1,4 +1,4 @@
-extends "res://addons/net.kivano.fsm/content/FSMState.gd";
+extends "res://addons/net.kivano.fsm/content/FSMState.gd"
 ################################### R E A D M E ##################################
 # For more informations check script attached to FSM node
 #
@@ -16,8 +16,8 @@ var moves
 #########                       Getters and Setters                      #########
 ##################################################################################
 #you will want to use those
-func getFSM(): return fsm; #defined in parent class
-func getLogicRoot(): return logicRoot; #defined in parent class 
+func getFSM(): return fsm #defined in parent class
+func getLogicRoot(): return logicRoot #defined in parent class 
 
 ##################################################################################
 #########                 Implement those below ancestor                 #########
@@ -43,11 +43,13 @@ func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inA
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
 	if view.selected_card != this_card:
+		print("boom")
 		fsm.setState(name)
 
 #when exiting state
 func exit(toState=null):
-	if not toState:
+	
+	if not toState or toState == name:
 		deselect_card(this_card)
 	
 

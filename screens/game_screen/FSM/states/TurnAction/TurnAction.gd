@@ -1,4 +1,4 @@
-extends "res://addons/net.kivano.fsm/content/FSMState.gd";
+extends "res://addons/net.kivano.fsm/content/FSMState.gd"
 ################################### R E A D M E ##################################
 # For more informations check script attached to FSM node
 #
@@ -13,8 +13,8 @@ var selection
 #########                       Getters and Setters                      #########
 ##################################################################################
 #you will want to use those
-func getFSM(): return fsm; #defined in parent class
-func getLogicRoot(): return logicRoot; #defined in parent class 
+func getFSM(): return fsm #defined in parent class
+func getLogicRoot(): return logicRoot #defined in parent class 
 
 ##################################################################################
 #########                 Implement those below ancestor                 #########
@@ -27,14 +27,19 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
 	logicRoot.get_node("EndTurn").disabled = false
 	logicRoot.selected_piece = null
-	logicRoot.get_node("Label").text = "Player " + str(logicRoot.game_model.turn) + " in action"
+	logicRoot.set_turn_msg("Player " + str(logicRoot.game_model.turn) + " in action")
 	 
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
-	if view.selected_card:
-		logicRoot.selection = "card"
-		
+	if view.selected_card :
+		if view.selected_card.mana_cost <= model.current_mana_count :
+			logicRoot.selection = "card"
+		else:
+			view.selected_card.selected = false
+			view.selected_card = null
+			print("you don't have enough mana")
+
 	if Input.is_action_just_pressed("select_piece"):
 		pos = Vector2(round((get_viewport().get_mouse_position().x - logicRoot.tile_size.x/2)/logicRoot.tile_size.x), 
 			round((get_viewport().get_mouse_position().y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
@@ -42,9 +47,10 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 		if logicRoot.is_within_the_grid(pos):
 			# update with the offset
 			var selected_cell = model.grid[pos.x][pos.y]
+
 			if selected_cell and not selected_cell.exhausted:
 				print("there is something here: " + logicRoot.dic_side[selected_cell.side] +" "+ selected_cell.piece_name)
-				if selected_cell.state == selected_cell.IDLE and selected_cell.side == logicRoot.current_turn:
+				if selected_cell.side == logicRoot.current_turn and model.current_unit_count >= selected_cell.time_unit_cost:
 					logicRoot.selected_piece = selected_cell
 					logicRoot.selection = "piece"
 				else:

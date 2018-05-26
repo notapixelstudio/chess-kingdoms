@@ -1,4 +1,4 @@
-extends "res://addons/net.kivano.fsm/content/FSMState.gd";
+extends "res://addons/net.kivano.fsm/content/FSMState.gd"
 ################################### R E A D M E ##################################
 # For more informations check script attached to FSM node
 #
@@ -13,8 +13,8 @@ var this_card
 #########                       Getters and Setters                      #########
 ##################################################################################
 #you will want to use those
-func getFSM(): return fsm; #defined in parent class
-func getLogicRoot(): return logicRoot; #defined in parent class 
+func getFSM(): return fsm #defined in parent class
+func getLogicRoot(): return logicRoot #defined in parent class 
 
 ##################################################################################
 #########                 Implement those below ancestor                 #########
@@ -25,7 +25,7 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 
 #when entering state, usually you will want to reset internal state here somehow
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
-	logicRoot.get_node("Label").text = "Please choose the target cell"
+	logicRoot.set_turn_msg("Please choose the target cell")
 	print(logicRoot.possible_moves)
 	print(logicRoot.selected_piece)
 	print("WE ARE IN " + name + " FROM " + fromStateID)
@@ -39,7 +39,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 			round((get_viewport().get_mouse_position().y - logicRoot.tile_size.y/2)/logicRoot.tile_size.y))
 		pos -= logicRoot.BOARD_OFFSET
 		if logicRoot.is_within_the_grid(pos) and pos in logicRoot.possible_moves and view.selected_card:
-			var piece = model.summon(logicRoot.players[logicRoot.current_turn], view.selected_card.piece_name, pos)
+			var piece = model.summon(logicRoot.players[logicRoot.current_turn], view.selected_card, pos)
 			piece.position = logicRoot.assign_position(piece.pos_in_the_grid)
 			logicRoot.add_child(piece)
 			logicRoot.active_pieces.append(piece)

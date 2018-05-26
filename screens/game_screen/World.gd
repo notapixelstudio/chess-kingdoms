@@ -79,13 +79,16 @@ func _ready():
 	active_pieces.append(model.player2)
 	
 	# hide enemy hand
-	for card in $EnemyHand.get_children():
+	for card in get_node("Hand1").get_children():
 		var c = Card.instance()
+		c.data = load("res://actors/cards/deck/ruby_pawn.tres")
 		card.add_child(c)
 	# flip your hand
-	for card in $YourHand.get_children():
+	for card in get_node("Hand0").get_children():
 		print(card)
 		var c  = Card.instance()
+		c.data = load("res://actors/cards/deck/ruby_lance.tres")
+		print(c.data.kingdom)
 		card.add_child(c)
 		if card.get_child(0):
 			card.get_child(0).back = false
@@ -168,3 +171,8 @@ func _process(delta):
 	current_turn = model.turn
 	view.current_turn = current_turn 
 	selected_card = view.selected_card
+	$GUI/VBoxContainer/HBoxContainer/TimeUnit.set_counter(model.current_unit_count)
+	$GUI/VBoxContainer/HBoxContainer/ManaUnit.set_counter(model.current_mana_count)
+
+func set_turn_msg(msg):
+	$GUI/VBoxContainer/Label.text = msg
