@@ -2,6 +2,12 @@
 # Global singleton that have the state of the grid. And its changing state.
 extends Node
 
+# powers:
+
+var powers = {
+	"shield": "protected from forward attacks"
+}
+
 # MANA and TIME UNIT
 const MANA = "mana"
 const TIME_UNIT = "time_unit"
@@ -126,7 +132,10 @@ func get_legal_moves(piece):
 					pos_to_check = piece.pos_in_the_grid + repeated_step
 					if is_within_the_grid(pos_to_check):
 						if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
-							legal_moves.append({"step":repeated_step, "action":ATTACK})
+							if "shield" in grid[pos_to_check.x][pos_to_check.y].power and piece.pos_in_the_grid.x == pos_to_check.x:
+								print("this piece is protected")
+							else:
+								legal_moves.append({"step":repeated_step, "action":ATTACK})
 						
 					break
 		else: 
@@ -137,7 +146,10 @@ func get_legal_moves(piece):
 				pos_to_check = piece.pos_in_the_grid + step
 				if is_within_the_grid(pos_to_check):
 					if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
-						legal_moves.append({"step":step, "action":ATTACK})
+						if "shield" in grid[pos_to_check.x][pos_to_check.y].power and piece.pos_in_the_grid.x == pos_to_check.x:
+							print("this piece is protected")
+						else:
+							legal_moves.append({"step":step, "action":ATTACK})
 					
 	return legal_moves
 

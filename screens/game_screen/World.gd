@@ -81,7 +81,7 @@ func _ready():
 	# hide enemy hand
 	for card in get_node("Hand1").get_children():
 		var c = Card.instance()
-		c.data = load("res://actors/cards/deck/emerald_pawn.tres")
+		c.data = load("res://actors/cards/deck/ruby_pawn.tres")
 		card.add_child(c)
 	# flip your hand
 	for card in get_node("Hand0").get_children():

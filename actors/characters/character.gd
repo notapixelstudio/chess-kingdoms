@@ -42,6 +42,7 @@ var taken_pos
 
 # Shadoran-specific
 var kingdom = "ruby"
+var power = []
 
 # structure of piece
 var time_unit_cost = 1
@@ -59,6 +60,8 @@ func _ready():
 	#$StateInfo/Label.set_text(self.piece_name)
 	set_piece_texture("res://assets/chess/pixel_pieces/"+kingdom+"_"+piece_name+".png")
 	$Kingdom.text = kingdom
+	if kingdom == "ruby":
+		power.append("shield")
 	moves = model.get_moves(self.piece_name)
 
 func animate(keyword):
