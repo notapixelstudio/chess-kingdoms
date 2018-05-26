@@ -87,7 +87,8 @@ func _ready():
 	for card in get_node("Hand0").get_children():
 		print(card)
 		var c  = Card.instance()
-		c.data = load("res://actors/cards/deck/amber_pawn.tres")
+		c.data = load("res://actors/cards/deck/ruby_lance.tres")
+		print(c.data.kingdom)
 		card.add_child(c)
 		if card.get_child(0):
 			card.get_child(0).back = false
