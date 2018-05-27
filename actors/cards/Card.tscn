@@ -91,7 +91,7 @@ use_mipmaps = false
 use_filter = false
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="CardNode" type="Node2D" groups=[
+[node name="CardNode" type="Node2D" index="0" groups=[
 "character",
 ]]
 

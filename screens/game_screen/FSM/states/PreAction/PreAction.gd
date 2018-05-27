@@ -30,6 +30,7 @@ func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inA
 	logicRoot.get_node("GUI/VBoxContainer/HBoxContainer/TimeUnit").set_counter(model.current_unit_count)
 	logicRoot.get_node("GUI/VBoxContainer/HBoxContainer/ManaUnit").set_counter(model.current_mana_count)
 	logicRoot.get_node("GUI/VBoxContainer/Label").text = "Drawing a card"
+	
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
@@ -37,6 +38,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 
 #when exiting state
 func exit(toState=null):
+	logicRoot.draw_card(1)
 	for card in logicRoot.get_node("Hand" + str(logicRoot.current_turn)).get_children():
 		if card.get_child(0):
 			card.get_child(0).back = false

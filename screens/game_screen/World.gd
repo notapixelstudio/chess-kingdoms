@@ -6,7 +6,7 @@ const BOARD_OFFSET = Vector2(4,1)
 
 # reference to model
 var game_model 
-var current_turn
+var current_turn = 0
 
 # cursor
 var preview_map
@@ -183,5 +183,14 @@ func add_card(hand, card):
 			container.add_child(card)
 			found = true
 			break
-	
 	return found
+
+func draw_card(amount):
+	var current_hand = get_node("Hand"+str(current_turn))
+	var current_deck = get_node("Deck"+str(current_turn)+"/Deck")
+	var result = false
+	var drawn_cards = current_deck.draw(amount)
+	for card in drawn_cards:
+		result = add_card(current_hand, card)
+		if not result: 
+			return result 
