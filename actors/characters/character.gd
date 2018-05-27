@@ -19,6 +19,7 @@ const LEFT = Vector2(-1, 0)
 var taken = false
 const MAX_SPEED = 0.5
 
+var sprite 
 var speed = 0
 var velocity = Vector2()
 
@@ -58,7 +59,8 @@ func _ready():
 	# set_piece_texture("res://assets/chess/pieces/chess_piece_"+str(side)+"_"+piece_name+".png")
 	face_with_side()
 	#$StateInfo/Label.set_text(self.piece_name)
-	set_piece_texture("res://assets/chess/pixel_pieces/"+kingdom+"_"+piece_name+".png")
+	# set_piece_texture("res://assets/chess/pixel_pieces/"+kingdom+"_"+piece_name+".png")
+	$Pivot/Body.texture = sprite
 	$Kingdom.text = kingdom
 	if kingdom == "ruby":
 		power.append("shield")

@@ -55,8 +55,7 @@ func toggle_card(value):
 func flipcard(new_value):
 	back = new_value
 	toggle_card(not back)
-	print(data)
-	print(data.card_template)
+
 	card_texture = back_texture if back else data.card_template
 	$CardControl/Template.texture = card_texture
 

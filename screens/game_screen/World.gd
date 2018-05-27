@@ -47,7 +47,7 @@ var dic_tiles = {
 onready var Card = preload("res://actors/cards/Card.tscn")
 
 func _ready():
-	
+	randomize()
 	game_model = model
 	players = {model.PLAYER1 : model.player1, model.PLAYER2: model.player2}
 	
@@ -78,20 +78,19 @@ func _ready():
 	
 	active_pieces.append(model.player2)
 	
+	# Create decks
+	var hand0 = $Deck0/Deck.draw(4)
+	var hand1 = $Deck1/Deck.draw(4)
+	
 	# hide enemy hand
-	for card in get_node("Hand1").get_children():
-		var c = Card.instance()
-		c.data = load("res://actors/cards/deck/ruby_pawn.tres")
-		card.add_child(c)
-	# flip your hand
-	for card in get_node("Hand0").get_children():
-		print(card)
-		var c  = Card.instance()
-		c.data = load("res://actors/cards/deck/ruby_lance.tres")
-		print(c.data.kingdom)
-		card.add_child(c)
-		if card.get_child(0):
-			card.get_child(0).back = false
+
+	for card in hand0:
+		if not add_card(get_node("Hand0"), card):
+			print("Hand is full")
+
+	for card in hand1:
+		if not add_card(get_node("Hand1"), card):
+			print("Hand is full")
 
 func update_child_pos(child_node):
 	# Move a child to a new position in the grid Array
@@ -176,3 +175,13 @@ func _process(delta):
 
 func set_turn_msg(msg):
 	$GUI/VBoxContainer/Label.text = msg
+
+func add_card(hand, card):
+	var found = false
+	for container in hand.get_children():
+		if not container.get_children():
+			container.add_child(card)
+			found = true
+			break
+	
+	return found

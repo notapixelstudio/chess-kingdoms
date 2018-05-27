@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://screens/game_screen/World.gd" type="Script" id=1]
 [ext_resource path="res://screens/basic_screen.tscn" type="PackedScene" id=2]
@@ -23,8 +23,9 @@
 [ext_resource path="res://screens/game_screen/FSM/transitions/OnPieceActivation/OnPieceActivation.tscn" type="PackedScene" id=21]
 [ext_resource path="res://screens/game_screen/FSM/transitions/NextTurn/NextTurn.tscn" type="PackedScene" id=22]
 [ext_resource path="res://screens/game_screen/FSM/transitions/OnNextAction/OnNextAction.tscn" type="PackedScene" id=23]
+[ext_resource path="res://actors/cards/Deck.tscn" type="PackedScene" id=24]
 
-[node name="World" type="Node"]
+[node name="World" type="Node" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -50,6 +51,7 @@ _sections_unfolded = [ "Mouse" ]
 
 [node name="GUI" type="MarginContainer" parent="." index="2"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -209,6 +211,7 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Control" type="Control" parent="." index="6"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -731,6 +734,96 @@ _sections_unfolded = [ "Mouse", "Rect" ]
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="Deck0" type="Control" parent="." index="9"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 87.0
+margin_top = 298.0
+margin_right = 235.0
+margin_bottom = 474.0
+rect_scale = Vector2( 0.7, 0.7 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Deck" parent="Deck0" index="0" instance=ExtResource( 24 )]
+
+position = Vector2( 81.1812, 94.7115 )
+
+[node name="Label" type="Label" parent="Deck0" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Player0 deck"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Deck1" type="Control" parent="." index="10"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 71.0
+margin_top = 124.0
+margin_right = 264.0
+margin_bottom = 303.0
+rect_scale = Vector2( 0.7, 0.7 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Deck" parent="Deck1" index="0" instance=ExtResource( 24 )]
+
+position = Vector2( 95.6779, 89.235 )
+
+[node name="Label" type="Label" parent="Deck1" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Player1 deck"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [connection signal="pressed" from="EndTurn" to="Control/Transitions/OnEndTurn" method="_on_EndTurn_pressed"]
 

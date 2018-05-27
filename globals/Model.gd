@@ -65,6 +65,8 @@ func _ready():
 	for k in piece_defs.keys():
 		if k != "king":
 			list_piece_name.append(k)
+	
+	# TODO: We need to get this information directly from the King CARD
 	player1 = Piece.instance()
 	player1.piece_name = "king"
 	player1.side = PLAYER1
@@ -207,7 +209,8 @@ func summon(king, card, target_pos = null):
 	var piece_name = card.piece_name
 	piece.piece_name = piece_name
 	piece.kingdom = card.data.kingdom
-	print(piece.kingdom)
+	# TODO: depends where is the artwork
+	piece.sprite = card.data.artwork
 	piece.side = king.side 
 	var possible_direction = Vector2()
 	var all = []
