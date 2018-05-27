@@ -95,8 +95,7 @@ func change_turn():
 	players_struct[turn][MANA] = min(players_struct[turn][MANA] + 1, MAX_MANA)
 	players_struct[turn][TIME_UNIT] = min(players_struct[turn][TIME_UNIT] + 1, MAX_TIME)
 	current_unit_count = players_struct[turn][TIME_UNIT]
-	print(str(current_unit_count), str(floor(float(current_unit_count)/2)))
-	current_unit_count = floor(float(current_unit_count)/2)
+	
 	
 	current_mana_count = players_struct[turn][MANA]
 
@@ -212,6 +211,8 @@ func summon(king, card, target_pos = null):
 	# TODO: depends where is the artwork
 	piece.sprite = card.data.artwork
 	piece.side = king.side 
+	for power in card.data.powers:
+		piece.powers.append(power)
 	var possible_direction = Vector2()
 	var all = []
 	if not target_pos:

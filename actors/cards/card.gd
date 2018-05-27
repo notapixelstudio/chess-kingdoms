@@ -24,8 +24,10 @@ func set_infocard(data_card):
 	info.get_node("InfoCard/PieceName").text = data_card.piece_name
 	info.get_node("InfoCard/Tribe").text = data_card.tribe
 	info.get_node("InfoCard/Profession").text = data_card.profession
-	
-	info.get_node("DescriptionBox/VBoxContainer/Power").text = data_card.powers
+	var powerstring = ""
+	for power in data_card.powers:
+		powerstring += power + " "
+	info.get_node("DescriptionBox/VBoxContainer/Power").text = powerstring
 	
 	info.get_node("CardTitle/CardName").text = data_card.character_name
 	info.get_node("CardTitle/SubName").text = data_card.title

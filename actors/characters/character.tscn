@@ -221,7 +221,6 @@ max_lines_visible = -1
 
 [node name="FSM2D" type="Node2D" parent="." index="6"]
 
-editor/display_folded = true
 visible = false
 position = Vector2( 1.67087, 1.56916 )
 script = ExtResource( 4 )

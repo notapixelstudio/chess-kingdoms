@@ -43,7 +43,7 @@ var taken_pos
 
 # Shadoran-specific
 var kingdom = "ruby"
-var power = []
+var powers = []
 
 # structure of piece
 var time_unit_cost = 1
@@ -62,9 +62,10 @@ func _ready():
 	# set_piece_texture("res://assets/chess/pixel_pieces/"+kingdom+"_"+piece_name+".png")
 	$Pivot/Body.texture = sprite
 	$Kingdom.text = kingdom
-	if kingdom == "ruby":
-		power.append("shield")
 	moves = model.get_moves(self.piece_name)
+	
+	if "restless" in powers:
+		exhausted = false
 
 func animate(keyword):
 	representation.play(keyword)
