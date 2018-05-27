@@ -133,7 +133,7 @@ func get_legal_moves(piece):
 					pos_to_check = piece.pos_in_the_grid + repeated_step
 					if is_within_the_grid(pos_to_check):
 						if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
-							if "shield" in grid[pos_to_check.x][pos_to_check.y].power and piece.pos_in_the_grid.y == pos_to_check.y:
+							if "shield" in grid[pos_to_check.x][pos_to_check.y].powers and piece.pos_in_the_grid.y == pos_to_check.y:
 								print("this piece is protected")
 							else:
 								legal_moves.append({"step":repeated_step, "action":ATTACK})
@@ -147,8 +147,7 @@ func get_legal_moves(piece):
 				pos_to_check = piece.pos_in_the_grid + step
 				if is_within_the_grid(pos_to_check):
 					if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
-						
-						if "shield" in grid[pos_to_check.x][pos_to_check.y].power and piece.pos_in_the_grid.y == pos_to_check.y:
+						if "shield" in grid[pos_to_check.x][pos_to_check.y].powers and piece.pos_in_the_grid.y == pos_to_check.y:
 							print("this piece is protected")
 						else:
 							legal_moves.append({"step":step, "action":ATTACK})

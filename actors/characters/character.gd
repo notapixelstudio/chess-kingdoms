@@ -44,6 +44,8 @@ var taken_pos
 # Shadoran-specific
 var kingdom = "ruby"
 var powers = []
+var action_left = 0
+var has_celerity = false
 
 # structure of piece
 var time_unit_cost = 1
@@ -63,7 +65,8 @@ func _ready():
 	$Pivot/Body.texture = sprite
 	$Kingdom.text = kingdom
 	moves = model.get_moves(self.piece_name)
-	
+	if "celerity" in powers:
+		has_celerity = true
 	if "restless" in powers:
 		exhausted = false
 
@@ -88,16 +91,6 @@ func set_piece_texture(img_filename):
 func _physics_process(delta):
 	speed = 0
 	
-	if Input.is_action_just_pressed("ui_up"):
-		direction.y = -1
-	elif Input.is_action_just_pressed("ui_down"):
-		direction.y = 1
-
-	if Input.is_action_just_pressed("ui_left"):
-		direction.x = -1
-	elif Input.is_action_just_pressed("ui_right"):
-		direction.x = 1
-
 	if not is_moving and target_pos != Vector2():
 		# Actually I think target_pos cannot be NON vacant
 		# if battlefield.is_cell_vacant(position, target_pos):
@@ -113,22 +106,9 @@ func _physics_process(delta):
 			exhausted = true
 		if abs(velocity.x) > distance_to_target.x: 
 			velocity.x = distance_to_target.x * target_pos.x
-			is_moving = false
-			target_pos = Vector2()
-			exhausted = true
+			target_pos = Vector2()	
 		if abs(velocity.y) > distance_to_target.y: 
-			velocity.y = distance_to_target.y * target_pos.y
-			is_moving = false
-			target_pos = Vector2()
-			exhausted = true
+			velocity.y = distance_to_target.y * target_pos.y	
+			target_pos = Vector2()	
 		move_and_collide(velocity)
 		
-
-	
-func _on_Piece_mouse_exited():
-	legal_moves = get_node("/root/World").reset_cells()
-
-
-func _on_Piece_mouse_entered():
-	print("area entered")
-	legal_moves = get_node("/root/World").get_legal_moves(self)

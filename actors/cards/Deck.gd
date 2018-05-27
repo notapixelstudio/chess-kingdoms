@@ -1,6 +1,5 @@
 extends Node2D
 
-var counselor_name
 var cards = []
 onready var Card = preload("res://actors/cards/Card.tscn")
 const DIR_RESOURCES = "res://actors/cards/deck/"
