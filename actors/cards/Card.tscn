@@ -91,12 +91,12 @@ use_mipmaps = false
 use_filter = false
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="CardNode" type="Node2D" groups=[
+[node name="CardNode" type="Node2D" index="0" groups=[
 "character",
 ]]
 
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Focus", "Grow Direction", "Hint", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Z Index", "collision" ]
+_sections_unfolded = [ "Collision", "Focus", "Grow Direction", "Hint", "Material", "Mouse", "Pause", "Pickable", "Rect", "Size Flags", "Theme", "Transform", "Visibility", "Z Index", "collision" ]
 back_texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
@@ -204,7 +204,7 @@ size_flags_vertical = 1
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 0
-_sections_unfolded = [ "Mouse", "Rect" ]
+_sections_unfolded = [ "Mouse", "Rect", "Visibility" ]
 
 [node name="CardUI" type="Control" parent="CardControl/Template" index="1"]
 
@@ -222,6 +222,7 @@ _sections_unfolded = [ "Anchor", "Margin", "Mouse", "Visibility" ]
 
 [node name="InfoCard" type="HBoxContainer" parent="CardControl/Template/CardUI" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -248,9 +249,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 83.0
+margin_left = 78.0
 margin_top = 8.0
-margin_right = 120.0
+margin_right = 115.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -264,7 +265,28 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Mouse", "Rect" ]
 
-[node name="Tribe" type="Label" parent="CardControl/Template/CardUI/InfoCard" index="1"]
+[node name="Separator" type="Label" parent="CardControl/Template/CardUI/InfoCard" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 115.0
+margin_top = 8.0
+margin_right = 120.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "•"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Tribe" type="Label" parent="CardControl/Template/CardUI/InfoCard" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -286,7 +308,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="Profession" type="Label" parent="CardControl/Template/CardUI/InfoCard" index="2"]
+[node name="Separator2" type="Label" parent="CardControl/Template/CardUI/InfoCard" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -294,7 +316,28 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 169.0
 margin_top = 8.0
-margin_right = 256.0
+margin_right = 174.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "•"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Profession" type="Label" parent="CardControl/Template/CardUI/InfoCard" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 174.0
+margin_top = 8.0
+margin_right = 261.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -310,6 +353,7 @@ _sections_unfolded = [ "Mouse" ]
 
 [node name="DescriptionBox" type="MarginContainer" parent="CardControl/Template/CardUI" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0

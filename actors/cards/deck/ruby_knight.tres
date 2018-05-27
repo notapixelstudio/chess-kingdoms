@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
-[ext_resource path="res://assets/chess/pixel_pieces/sapphire_shogi_pawn.png" type="Texture" id=1]
+[ext_resource path="res://assets/chess/pieces/chess_piece_0_knight.png" type="Texture" id=1]
 [ext_resource path="res://assets/cards/layout_card.png" type="Texture" id=2]
 [ext_resource path="res://actors/cards/specific_card.gd" type="Script" id=3]
 
@@ -10,13 +10,13 @@ script = ExtResource( 3 )
 _sections_unfolded = [ "Resource" ]
 card_template = ExtResource( 2 )
 artwork = ExtResource( 1 )
-character_name = "Seth Cohal"
-title = "The humble soldier"
-kingdom = "sapphire"    
-piece_name = "shogi_pawn"
+character_name = "Lord Plumstel"
+title = "The gnarly knight"
+kingdom = "ruby"
+piece_name = "knight"
 powers = "shield"
-tribe = "soldier"
+tribe = "beast"
 profession = "blacksmith"
-mana_cost = 2
+mana_cost = 1
 time_cost = 1
 

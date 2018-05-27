@@ -17,12 +17,32 @@ var focused = false
 
 var list_power = []
 
+var list_modulation = {"ruby": Color(0.66, 0, 0 , 1), "emerald": Color("#00d24c"), "sapphire":Color("#0da0e6"), "amber":Color("#e6a000")}
 
+func set_infocard(data_card):
+	var info = $CardControl/Template/CardUI
+	info.get_node("InfoCard/PieceName").text = data_card.piece_name
+	info.get_node("InfoCard/Tribe").text = data_card.tribe
+	info.get_node("InfoCard/Profession").text = data_card.profession
+	
+	info.get_node("DescriptionBox/VBoxContainer/Power").text = data_card.powers
+	
+	info.get_node("CardTitle/CardName").text = data_card.character_name
+	info.get_node("CardTitle/SubName").text = data_card.title
+	
+	info.get_node("Mana").text = str(data_card.mana_cost)
+	info.get_node("TimeUnit").text = str(data_card.time_cost)
+	
+	
 func setup(card):
 	data = card
 	piece_name = data.piece_name
 	mana_cost = data.mana_cost
-	print(data)
+	set_infocard(card)
+	
+	# set color  to the artwork
+	$CardControl/Template/Artwork.set_modulate(list_modulation[data.kingdom])
+	
 	$CardControl/Template/Artwork.texture = data.artwork
 	flipcard(true)
 	

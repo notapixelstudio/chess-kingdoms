@@ -4,6 +4,8 @@ extends Resource
 
 export (Texture) var card_template
 export (Texture) var artwork
+export (String) var character_name = "Forjen Ulmsson"
+export (String) var title = "The shieldforger"
 export (String) var kingdom = "ruby"
 export (String) var piece_name = "shogi_pawn"
 export (String) var powers = "shield"

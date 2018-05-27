@@ -10,11 +10,13 @@ script = ExtResource( 3 )
 _sections_unfolded = [ "Resource" ]
 card_template = ExtResource( 2 )
 artwork = ExtResource( 1 )
+character_name = "Greg Pulham"
+title = "The lightning sword"
 kingdom = "amber"
 piece_name = "shogi_pawn"
-powers = "shield"
-tribe = "royal"
+powers = "quick"
+tribe = "soldier"
 profession = "blacksmith"
-mana_cost = 1
+mana_cost = 2
 time_cost = 1
 

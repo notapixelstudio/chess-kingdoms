@@ -24,7 +24,7 @@
 [ext_resource path="res://screens/game_screen/FSM/transitions/NextTurn/NextTurn.tscn" type="PackedScene" id=22]
 [ext_resource path="res://screens/game_screen/FSM/transitions/OnNextAction/OnNextAction.tscn" type="PackedScene" id=23]
 
-[node name="World" type="Node" index="0"]
+[node name="World" type="Node"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -209,7 +209,6 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Control" type="Control" parent="." index="6"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -335,11 +334,11 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 812.0
-margin_top = 134.0
-margin_right = 1149.0
-margin_bottom = 603.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = 785.0
+margin_top = 96.0
+margin_right = 1122.0
+margin_bottom = 565.0
+rect_scale = Vector2( 0.7, 0.7 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -359,9 +358,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 820.0
-margin_top = 379.0
+margin_top = 433.0
 margin_right = 968.0
-margin_bottom = 413.0
+margin_bottom = 467.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
