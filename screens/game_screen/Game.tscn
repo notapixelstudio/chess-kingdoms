@@ -25,7 +25,7 @@
 [ext_resource path="res://screens/game_screen/FSM/transitions/OnNextAction/OnNextAction.tscn" type="PackedScene" id=23]
 [ext_resource path="res://actors/cards/Deck.tscn" type="PackedScene" id=24]
 
-[node name="World" type="Node"]
+[node name="World" type="Node" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]

@@ -44,7 +44,7 @@ var taken_pos
 # Shadoran-specific
 var kingdom = "ruby"
 var powers = []
-var action_left = 0
+var move_again = false
 var has_celerity = false
 
 # structure of piece
@@ -65,9 +65,10 @@ func _ready():
 	$Pivot/Body.texture = sprite
 	$Kingdom.text = kingdom
 	moves = model.get_moves(self.piece_name)
-	if "celerity" in powers:
-		has_celerity = true
 	if "restless" in powers:
+		has_celerity = true
+		move_again = true
+	if "swarm" in powers:
 		exhausted = false
 
 func animate(keyword):
@@ -103,7 +104,10 @@ func _physics_process(delta):
 		var distance_to_target = Vector2(abs(target_pos.x - position.x), abs(target_pos.y - pos.y))
 		if distance_to_target == Vector2():
 			is_moving = false
-			exhausted = true
+			if move_again:
+				move_again = false
+			else:
+				exhausted = true
 		if abs(velocity.x) > distance_to_target.x: 
 			velocity.x = distance_to_target.x * target_pos.x
 			target_pos = Vector2()	

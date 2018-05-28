@@ -72,7 +72,7 @@ func _ready():
 	player1.side = PLAYER1
 	player1.pos_in_the_grid = Vector2(7,4)
 	player1.kingdom = "amber"
-	player1.set_piece_texture("res://assets/chess/pixel_pieces/ruby_king.png")
+	player1.sprite = load("res://assets/chess/pixel_pieces/ruby_king.png")
 	
 	players_struct[PLAYER1] = {"king":player1, MANA: mana_count, TIME_UNIT: unit_count}
 	# REMEMBER to add_child to the root
@@ -82,6 +82,7 @@ func _ready():
 	player2.side = PLAYER2
 	player2.kingdom = "emerald"
 	player2.pos_in_the_grid = Vector2(0,4)
+	player2.sprite = load("res://assets/chess/pixel_pieces/ruby_king.png")
 
 	players_struct[PLAYER2] = {"king":player2, MANA: mana_count, TIME_UNIT: unit_count}
 
@@ -95,8 +96,7 @@ func change_turn():
 	players_struct[turn][MANA] = min(players_struct[turn][MANA] + 1, MAX_MANA)
 	players_struct[turn][TIME_UNIT] = min(players_struct[turn][TIME_UNIT] + 1, MAX_TIME)
 	current_unit_count = players_struct[turn][TIME_UNIT]
-	
-	
+
 	current_mana_count = players_struct[turn][MANA]
 
 func get_moves(piece_name):
