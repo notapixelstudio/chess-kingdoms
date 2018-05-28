@@ -4,8 +4,11 @@ extends Node
 
 # powers:
 
-var powers = {
-	"shield": "protected from forward attacks"
+var powers_definition = {
+	"shield": "protected from forward attacks",
+	"restless": "can move twice",
+	"swarm": "when summoned, can move immediately after",
+	"quick": "use half of the unit time cost"
 }
 
 # MANA and TIME UNIT
