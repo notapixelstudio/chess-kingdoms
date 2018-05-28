@@ -21,16 +21,16 @@ var list_modulation = {"ruby": Color(0.66, 0, 0 , 1), "emerald": Color("#00d24c"
 
 func set_infocard(data_card):
 	var info = $CardControl/Template/CardUI
-	info.get_node("InfoCard/PieceName").text = capitalize(data_card.piece_name)
-	info.get_node("InfoCard/Tribe").text = capitalize(data_card.tribe)
-	info.get_node("InfoCard/Profession").text = capitalize(data_card.profession)
+	info.get_node("InfoCard/PieceName").text = data_card.piece_name.capitalize()
+	info.get_node("InfoCard/Tribe").text = data_card.tribe.capitalize()
+	info.get_node("InfoCard/Profession").text = data_card.profession.capitalize()
 	var powerstring = ""
 	for power in data_card.powers:
 		powerstring += power + " "
-	info.get_node("DescriptionBox/VBoxContainer/Power").text = capitalize(powerstring)
+	info.get_node("DescriptionBox/VBoxContainer/Power").text = powerstring.capitalize()
 	
-	info.get_node("CardTitle/CardName").text = capitalize(data_card.character_name) 
-	info.get_node("CardTitle/SubName").text = capitalize(data_card.title)
+	info.get_node("CardTitle/CardName").text = data_card.character_name.capitalize()
+	info.get_node("CardTitle/SubName").text = data_card.title.capitalize()
 	
 	info.get_node("Mana").text = str(data_card.mana_cost)
 	info.get_node("TimeUnit").text = str(data_card.time_cost)

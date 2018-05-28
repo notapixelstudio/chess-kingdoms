@@ -46,6 +46,7 @@ var kingdom = "ruby"
 var powers = []
 var move_again = false
 var has_celerity = false
+var card
 
 # structure of piece
 var time_unit_cost = 1

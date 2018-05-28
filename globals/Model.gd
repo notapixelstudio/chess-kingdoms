@@ -210,6 +210,7 @@ func summon(king, card, target_pos = null):
 	var piece_name = card.piece_name
 	piece.piece_name = piece_name
 	piece.kingdom = card.data.kingdom
+	piece.card = card
 	# TODO: depends where is the artwork
 	piece.sprite = card.data.artwork
 	piece.side = king.side 
