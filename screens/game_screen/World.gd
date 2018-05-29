@@ -67,12 +67,18 @@ func _ready():
 	# in order to put the object at the center
 	#Player1
 	model.player1.position = assign_position(model.player1.pos_in_the_grid)
+	model.player1.card = Card.instance()
+	model.player1.card.data = load("res://actors/cards/deck/ruby_king.tres")
+	model.player1.card.back = false
 	# model.grid[model.player1.pos_in_the_grid.x][model.player1.pos_in_the_grid.y] = model.player1
 	add_child(model.player1)
 	active_pieces.append(model.player1)
 	
 	#Player2
 	model.player2.position = assign_position(model.player2.pos_in_the_grid)
+	model.player2.card = Card.instance()
+	model.player2.card.data = load("res://actors/cards/deck/ruby_king.tres")
+	model.player2.card.back = false
 	# model.grid[model.player2.pos_in_the_grid.x][model.player2.pos_in_the_grid.y] = model.player2
 	add_child(model.player2)
 	
@@ -144,11 +150,14 @@ func _input(event):
 		pos -= BOARD_OFFSET
 		if is_within_the_grid(pos):
 			reset(preview_map)
+			unfocus_card()
 			var selected_cell1 = model.grid[pos.x][pos.y]
 			if selected_cell1 != selected_piece and selected_cell1 and selected_cell1.state == selected_cell1.IDLE:
+				focus_card(selected_cell1)
 				var moves = model.get_legal_moves(selected_cell1)
 				show_legal_moves(selected_cell1, moves, preview_map)
 		else:
+			unfocus_card()
 			reset(preview_map)
 			
 	
@@ -160,6 +169,14 @@ func _input(event):
 
 func reset(map_to_reset):
 	reset_cells(map_to_reset)
+
+func unfocus_card():
+	get_node("FocusCard0").remove_child(get_node("FocusCard0").get_child(0))
+	get_node("FocusCard1").remove_child(get_node("FocusCard1").get_child(0))
+
+func focus_card(piece):
+	get_node("FocusCard"+str(piece.side)).remove_child(get_node("FocusCard"+str(piece.side)).get_child(0))
+	get_node("FocusCard"+str(piece.side)).add_child(piece.card)
 
 func _on_Timer_timeout():
 	print("timeout")

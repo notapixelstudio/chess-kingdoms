@@ -61,17 +61,6 @@ func flipcard(new_value):
 	card_texture = back_texture if back else data.card_template
 	$CardControl/Template.texture = card_texture
 
-
-func _on_mouse_entered():
-	focused = true
-	if not selected and not back:
-		$AnimationPlayer.queue("focus")
-		
-func _on_mouse_exited():
-	focused = false
-	if not selected and not back:
-		$AnimationPlayer.queue("unfocus")
-
 func _on_input_event(viewport, event, shape_idx):
 	if event.is_class("InputEventMouseButton") \
     and event.button_index == BUTTON_LEFT \

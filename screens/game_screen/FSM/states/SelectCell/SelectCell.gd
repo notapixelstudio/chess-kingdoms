@@ -80,7 +80,7 @@ func exit(toState=null):
 	view.selected_piece =  null
 	logicRoot.reset(logicRoot.cursor_map)
 	if this_card:
-		this_card.queue_free()
+		this_card.get_parent().remove_child(this_card)
 
 
 ##################################################################################

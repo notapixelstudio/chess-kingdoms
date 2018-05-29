@@ -101,7 +101,6 @@ back_texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -595,9 +594,5 @@ max_lines_visible = -1
 _sections_unfolded = [ "Mouse" ]
 
 [connection signal="input_event" from="Area2D" to="." method="_on_input_event"]
-
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_mouse_entered"]
-
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_mouse_exited"]
 
 

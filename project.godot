@@ -19,6 +19,11 @@ config/icon="res://assets/chess/pieces/chess_piece_0_centurion.png"
 model="*res://globals/Model.gd"
 view="*res://globals/UI.gd"
 
+[display]
+
+window/size/width=1280
+window/size/height=720
+
 [editor_plugins]
 
 enabled=PoolStringArray( "godot-git-control.funabab", "net.kivano.fsm", "vnen.tiled_importer" )
