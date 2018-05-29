@@ -64,7 +64,7 @@ func flipcard(new_value):
 func _on_input_event(viewport, event, shape_idx):
 	if event.is_class("InputEventMouseButton") \
     and event.button_index == BUTTON_LEFT \
-    and event.pressed and not selected:
+    and event.pressed and not selected and not back:
 		selected = true
 		view.selected_card = self
 		$AnimationPlayer.queue("unfocus")
