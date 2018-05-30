@@ -49,7 +49,8 @@ var has_celerity = false
 var card
 
 # structure of piece
-var time_unit_cost = 1
+var time_unit_cost 
+var time_unit_multiplier = 2
 
 export var baseScale = 1
 onready var representation = get_node("AnimationPlayer")
@@ -66,6 +67,11 @@ func _ready():
 	$Pivot/Body.texture = sprite
 	$Kingdom.text = kingdom
 	moves = model.get_moves(self.piece_name)
+	
+	if "quick" in powers:
+		time_unit_multiplier = 1
+	time_unit_cost = card.data.time_cost * time_unit_multiplier
+
 	if "restless" in powers:
 		has_celerity = true
 		move_again = true

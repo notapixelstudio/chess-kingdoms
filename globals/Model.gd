@@ -53,7 +53,7 @@ var selected_card
 func _ready():
 	mana_count = 2
 	current_mana_count = mana_count
-	unit_count = 1
+	unit_count = 2
 	current_unit_count = unit_count
 	randomize()
 	# list characters
@@ -99,7 +99,6 @@ func change_turn():
 	players_struct[turn][MANA] = min(players_struct[turn][MANA] + 1, MAX_MANA)
 	players_struct[turn][TIME_UNIT] = min(players_struct[turn][TIME_UNIT] + 1, MAX_TIME)
 	current_unit_count = players_struct[turn][TIME_UNIT]
-
 	current_mana_count = players_struct[turn][MANA]
 
 func get_moves(piece_name):

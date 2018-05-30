@@ -40,7 +40,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 func exit(toState=null):
 	logicRoot.draw_card(1)
 	for card in logicRoot.get_node("Hand" + str(logicRoot.current_turn)).get_children():
-		if card.get_child(0):
+		if card.get_children().size()> 0:
 			card.get_child(0).back = false
 
 	for piece in logicRoot.active_pieces:

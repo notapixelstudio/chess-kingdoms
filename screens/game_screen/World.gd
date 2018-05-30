@@ -45,7 +45,7 @@ var dic_tiles = {
 	}
 
 onready var Card = preload("res://actors/cards/Card.tscn")
-
+var card_focused
 func _ready():
 	randomize()
 	game_model = model
@@ -171,12 +171,16 @@ func reset(map_to_reset):
 	reset_cells(map_to_reset)
 
 func unfocus_card():
-	get_node("FocusCard0").remove_child(get_node("FocusCard0").get_child(0))
-	get_node("FocusCard1").remove_child(get_node("FocusCard1").get_child(0))
+	if card_focused:
+		get_node(card_focused).remove_child(get_node(card_focused).get_child(0))
+	card_focused = null
+	
 
 func focus_card(piece):
-	get_node("FocusCard"+str(piece.side)).remove_child(get_node("FocusCard"+str(piece.side)).get_child(0))
-	get_node("FocusCard"+str(piece.side)).add_child(piece.card)
+	card_focused = "FocusCard"+str(piece.side)
+	if get_node(card_focused).get_children().size() < 0:
+		get_node(card_focused).remove_child(get_node(card_focused).get_child(0))
+	get_node(card_focused).add_child(piece.card)
 
 func _on_Timer_timeout():
 	print("timeout")
@@ -187,7 +191,8 @@ func _process(delta):
 	current_turn = model.turn
 	view.current_turn = current_turn 
 	selected_card = view.selected_card
-	$GUI/VBoxContainer/HBoxContainer/TimeUnit.set_counter(model.current_unit_count)
+	var current_unit_count = floor(float(model.current_unit_count)/2)
+	$GUI/VBoxContainer/HBoxContainer/TimeUnit.set_counter(current_unit_count)
 	$GUI/VBoxContainer/HBoxContainer/ManaUnit.set_counter(model.current_mana_count)
 
 func set_turn_msg(msg):
