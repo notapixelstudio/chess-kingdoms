@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/layout_card.png-b8f866ae9c6f3ea0e6a8bf07a13fe572.stex"
+path="res://.import/clessidra0.png-3f17fbe69810eedbc7375f21fa321f29.stex"
 
 [deps]
 
-source_file="res://assets/cards/layout_card.png"
-source_md5="85f4b328cc00550144bfcf704801d13a"
+source_file="res://assets/clessidra0.png"
+source_md5="f1e64e2f1ebc8452e4bd34c8ec174e0c"
 
-dest_files=[ "res://.import/layout_card.png-b8f866ae9c6f3ea0e6a8bf07a13fe572.stex" ]
-dest_md5="679838976f2a0f567b75e5fc31fcf6ea"
+dest_files=[ "res://.import/clessidra0.png-3f17fbe69810eedbc7375f21fa321f29.stex" ]
+dest_md5="c689f52f2fab53c5bd43436b7a864f1a"
 
 [params]
 

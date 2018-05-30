@@ -13,6 +13,7 @@ export (String) var tribe = "royal"
 export (String) var profession = "blacksmith"
 export (int) var mana_cost = 1
 export (int) var time_cost = 1
+export (String) var quote = "\"I once smashed my finger and melt it into my hammer\" cit."
 
 
 

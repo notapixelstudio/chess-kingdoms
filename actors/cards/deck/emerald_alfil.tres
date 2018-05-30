@@ -14,9 +14,10 @@ character_name = "Sigmund Boyle"
 title = "The swarming priest"
 kingdom = "emerald"
 piece_name = "alfil"
-powers = ["restless"]
+powers = [ "restless" ]
 tribe = "clerical"
 profession = "blacksmith"
 mana_cost = 1
 time_cost = 1
+quote = "\"I did not! smashed my finger and melt it into my hammer\" cit."
 

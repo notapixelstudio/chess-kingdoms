@@ -28,6 +28,7 @@ func set_infocard(data_card):
 	for power in data_card.powers:
 		powerstring += power + " "
 	info.get_node("DescriptionBox/VBoxContainer/Power").text = powerstring.capitalize()
+	info.get_node("DescriptionBox/VBoxContainer/Quote").text = data_card.quote.capitalize()
 	
 	info.get_node("CardTitle/CardName").text = data_card.character_name.capitalize()
 	info.get_node("CardTitle/SubName").text = data_card.title.capitalize()

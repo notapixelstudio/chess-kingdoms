@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/layout_card.png-b8f866ae9c6f3ea0e6a8bf07a13fe572.stex"
+path="res://.import/layout_card_wo_mana.png-c764d937919ef83c1d667b9619b3ebdb.stex"
 
 [deps]
 
-source_file="res://assets/cards/layout_card.png"
-source_md5="85f4b328cc00550144bfcf704801d13a"
+source_file="res://assets/cards/layout_card_wo_mana.png"
+source_md5="64aba9389589f1cbdde459ced86be45b"
 
-dest_files=[ "res://.import/layout_card.png-b8f866ae9c6f3ea0e6a8bf07a13fe572.stex" ]
-dest_md5="679838976f2a0f567b75e5fc31fcf6ea"
+dest_files=[ "res://.import/layout_card_wo_mana.png-c764d937919ef83c1d667b9619b3ebdb.stex" ]
+dest_md5="d3c37e48e047d4bd0fbecebff718f71d"
 
 [params]
 

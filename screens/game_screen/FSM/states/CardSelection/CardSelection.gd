@@ -71,6 +71,7 @@ func select_card(card):
 
 func deselect_card(card):
 	# first you have to remove it and then added
+	card.selected = false
 	$CenterContainer.remove_child(card)
 	prev_container.add_child(card)
 
