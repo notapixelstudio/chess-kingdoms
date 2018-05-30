@@ -1,41 +1,41 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://screens/game_screen/World.gd" type="Script" id=1]
-[ext_resource path="res://assets/chess/board/chess-board.tmx" type="PackedScene" id=2]
-[ext_resource path="res://screens/game_screen/GridVisualizer.gd" type="Script" id=3]
-[ext_resource path="res://screens/game_screen/Camera2D.gd" type="Script" id=4]
-[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=5]
-[ext_resource path="res://addons/net.kivano.fsm/assets/icoControl.png" type="Texture" id=6]
-[ext_resource path="res://screens/game_screen/FSM/states/Playing/Playing.tscn" type="PackedScene" id=7]
-[ext_resource path="res://screens/game_screen/FSM/states/GameOver/GameOver.tscn" type="PackedScene" id=8]
-[ext_resource path="res://screens/game_screen/FSM/transitions/onGameOver/onGameOver.tscn" type="PackedScene" id=9]
-[ext_resource path="res://screens/game_screen/FSM/transitions/onRestart/onRestart.tscn" type="PackedScene" id=10]
+[ext_resource path="res://screens/basic_screen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GUI/RupeeCounter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GUI/BombCounter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/chess/board/chess-board.tmx" type="PackedScene" id=5]
+[ext_resource path="res://screens/game_screen/GridVisualizer.gd" type="Script" id=6]
+[ext_resource path="res://screens/game_screen/Camera2D.gd" type="Script" id=7]
+[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=8]
+[ext_resource path="res://addons/net.kivano.fsm/assets/icoControl.png" type="Texture" id=9]
+[ext_resource path="res://screens/game_screen/FSM/states/PreAction/PreAction.tscn" type="PackedScene" id=10]
+[ext_resource path="res://screens/game_screen/FSM/states/TurnAction/TurnAction.tscn" type="PackedScene" id=11]
+[ext_resource path="res://screens/game_screen/FSM/states/EndTurn/EndTurn.tscn" type="PackedScene" id=12]
+[ext_resource path="res://screens/game_screen/FSM/states/CardSelection/CardSelection.tscn" type="PackedScene" id=13]
+[ext_resource path="res://screens/game_screen/FSM/states/PieceSelection/PieceSelection.tscn" type="PackedScene" id=14]
+[ext_resource path="res://screens/game_screen/FSM/states/SelectCell/SelectCell.tscn" type="PackedScene" id=15]
+[ext_resource path="res://screens/game_screen/FSM/transitions/PreActionFinished/PreActionFinished.tscn" type="PackedScene" id=16]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnEndTurn/OnEndTurn.tscn" type="PackedScene" id=17]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnPieceSelection/OnPieceSelection.tscn" type="PackedScene" id=18]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnCardSelection/OnCardSelection.tscn" type="PackedScene" id=19]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnCardActivation/OnCardActivation.tscn" type="PackedScene" id=20]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnPieceActivation/OnPieceActivation.tscn" type="PackedScene" id=21]
+[ext_resource path="res://screens/game_screen/FSM/transitions/NextTurn/NextTurn.tscn" type="PackedScene" id=22]
+[ext_resource path="res://screens/game_screen/FSM/transitions/OnNextAction/OnNextAction.tscn" type="PackedScene" id=23]
+[ext_resource path="res://actors/cards/Deck.tscn" type="PackedScene" id=24]
 
-[node name="World" type="Node2D" index="0"]
+[node name="World" type="Node"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="GridVisualizer" type="TileMap" parent="." index="0"]
+[node name="BasicScreen" parent="." index="0" instance=ExtResource( 2 )]
 
-mode = 0
-tile_set = null
-cell_size = Vector2( 64, 64 )
-cell_quadrant_size = 16
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-cell_half_offset = 2
-cell_tile_origin = 0
-cell_y_sort = false
-cell_clip_uv = false
-collision_use_kinematic = false
-collision_friction = 1.0
-collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
-occluder_light_mask = 1
-format = 1
-tile_data = PoolIntArray(  )
-_sections_unfolded = [ "Cell", "Collision" ]
+margin_left = -3.0
+margin_top = 2.0
+margin_right = 37.0
+margin_bottom = 42.0
 
 [node name="ColorRect" type="ColorRect" parent="." index="1"]
 
@@ -43,26 +43,122 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1020.0
-margin_bottom = 620.0
+margin_right = 1321.0
+margin_bottom = 791.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 1 )
+_sections_unfolded = [ "Mouse" ]
+
+[node name="GUI" type="MarginContainer" parent="." index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_top = 471.0
+margin_right = 208.0
+margin_bottom = 575.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0, 0, 0, 1 )
 
-[node name="ChessBoard" parent="." index="2" instance=ExtResource( 2 )]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI" index="0"]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 200.0
+margin_bottom = 104.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 200.0
+margin_bottom = 80.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="TimeUnit" parent="GUI/VBoxContainer/HBoxContainer" index="0" instance=ExtResource( 3 )]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 100.0
+margin_bottom = 80.0
+
+[node name="ManaUnit" parent="GUI/VBoxContainer/HBoxContainer" index="1" instance=ExtResource( 4 )]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 100.0
+margin_top = 0.0
+margin_right = 200.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="GUI/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 80.0
+margin_right = 200.0
+margin_bottom = 104.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "White moves or summon"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Mouse", "Rect", "custom_colors" ]
+
+[node name="ChessBoard" parent="." index="3" instance=ExtResource( 5 )]
+
+editor/display_folded = true
 position = Vector2( 256, 64 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Node2D" type="Node2D" parent="ChessBoard" index="1"]
 
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="3"]
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
 
 position = Vector2( 0, 1.81888 )
 anchor_mode = 0
@@ -87,51 +183,57 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 4 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Limit", "Smoothing" ]
 
-[node name="Label" type="Label" parent="." index="4"]
+[node name="EndTurn" type="Button" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 27.0
-margin_top = 528.0
-margin_right = 167.0
-margin_bottom = 561.0
+margin_left = 811.0
+margin_top = 513.0
+margin_right = 979.0
+margin_bottom = 547.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+focus_mode = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "White moves or summon"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Rect", "custom_colors" ]
+size_flags_vertical = 1
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "End Turn"
+flat = false
+align = 1
+_sections_unfolded = [ "Visibility" ]
 
-[node name="FSMControl" type="Control" parent="." index="5"]
+[node name="Control" type="Control" parent="." index="6"]
 
 editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 20.0
+margin_top = 81.0
+margin_right = 60.0
+margin_bottom = 121.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 5 )
+script = ExtResource( 8 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
-"_editor_icon": ExtResource( 6 )
+"_editor_icon": ExtResource( 9 )
 }
 path2LogicRoot = NodePath("..")
 onlyActiveStateOnTheScene = true
@@ -144,18 +246,56 @@ enableDebug = false
 "Create new:/Create state with name:" = null
 "Create new:/Create transition with name:" = null
 GraphData = {
-"GameOver": Vector2( 588, 188 ),
-"GameOver_": Vector2( 588, 188 ),
-"Playing": Vector2( 249, 33 ),
-"Playing_": Vector2( 249, 33 ),
-"Playing__": Vector2( -9, 27 ),
-"onGameOver": Vector2( 250, 181 ),
-"onGameOver_": Vector2( 250, 181 ),
-"onRestart": Vector2( 597, 26 ),
-"onRestart_": Vector2( 597, 26 )
+"CardSelection": Vector2( 754, 431 ),
+"CardSelection_": Vector2( 754, 431 ),
+"CardSelection__": Vector2( 754, 431 ),
+"EndTurn": Vector2( 743, 47 ),
+"EndTurn_": Vector2( 743, 47 ),
+"EndTurn__": Vector2( 743, 47 ),
+"NextTurn": Vector2( 445, 39 ),
+"NextTurn_": Vector2( 445, 39 ),
+"NextTurn__": Vector2( 445, 39 ),
+"OnAnotherCard": Vector2( 945, 322 ),
+"OnAnotherCard_": Vector2( 945, 322 ),
+"OnAnotherPiece": Vector2( -14, 346 ),
+"OnAnotherPiece_": Vector2( -14, 346 ),
+"OnAnotherPiece__": Vector2( -14, 346 ),
+"OnCardActivation": Vector2( 758, 556 ),
+"OnCardActivation_": Vector2( 758, 556 ),
+"OnCardActivation__": Vector2( 758, 556 ),
+"OnCardSelection": Vector2( 761, 315 ),
+"OnCardSelection_": Vector2( 761, 315 ),
+"OnCardSelection__": Vector2( 761, 315 ),
+"OnEndTurn": Vector2( 744, 172 ),
+"OnEndTurn_": Vector2( 744, 172 ),
+"OnEndTurn__": Vector2( 744, 172 ),
+"OnNextAction": Vector2( 448, 415 ),
+"OnNextAction_": Vector2( 448, 415 ),
+"OnNextAction__": Vector2( 449, 428 ),
+"OnPieceActivation": Vector2( 150, 568 ),
+"OnPieceActivation_": Vector2( 150, 568 ),
+"OnPieceActivation__": Vector2( 150, 568 ),
+"OnPieceSelection": Vector2( 156, 311 ),
+"OnPieceSelection_": Vector2( 156, 311 ),
+"OnPieceSelection__": Vector2( 156, 311 ),
+"PieceSelection": Vector2( 157, 449 ),
+"PieceSelection_": Vector2( 157, 449 ),
+"PieceSelection__": Vector2( 157, 449 ),
+"PreAction": Vector2( 121, 26 ),
+"PreActionFinished": Vector2( 117, 178 ),
+"PreActionFinished_": Vector2( 117, 178 ),
+"PreActionFinished__": Vector2( 117, 178 ),
+"PreAction_": Vector2( 121, 26 ),
+"PreAction__": Vector2( 121, 26 ),
+"SelectCell": Vector2( 456, 579 ),
+"SelectCell_": Vector2( 456, 579 ),
+"SelectCell__": Vector2( 456, 579 ),
+"TurnAction": Vector2( 443, 171 ),
+"TurnAction_": Vector2( 443, 171 ),
+"TurnAction__": Vector2( 443, 171 )
 }
 
-[node name="States" type="Control" parent="FSMControl" index="0"]
+[node name="States" type="Control" parent="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -163,25 +303,91 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+_sections_unfolded = [ "Mouse" ]
 
-[node name="Playing" parent="FSMControl/States" index="0" instance=ExtResource( 7 )]
-
-[node name="GameOver" parent="FSMControl/States" index="1" instance=ExtResource( 8 )]
+[node name="PreAction" parent="Control/States" index="0" instance=ExtResource( 10 )]
 
 editor/display_folded = true
 
-[node name="Timer" type="Timer" parent="FSMControl/States/GameOver" index="0"]
+[node name="Timer" type="Timer" parent="Control/States/PreAction" index="0"]
 
 process_mode = 1
-wait_time = 5.0
+wait_time = 2.0
 one_shot = false
 autostart = false
 
-[node name="Transitions" type="Control" parent="FSMControl" index="1"]
+[node name="TurnAction" parent="Control/States" index="1" instance=ExtResource( 11 )]
+
+[node name="EndTurn" parent="Control/States" index="2" instance=ExtResource( 12 )]
+
+editor/display_folded = true
+
+[node name="Timer" type="Timer" parent="Control/States/EndTurn" index="0"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[node name="CardSelection" parent="Control/States" index="3" instance=ExtResource( 13 )]
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/States/CardSelection" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 785.0
+margin_top = 96.0
+margin_right = 1122.0
+margin_bottom = 565.0
+rect_scale = Vector2( 0.7, 0.7 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Button" type="Button" parent="Control/States/CardSelection" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 820.0
+margin_top = 433.0
+margin_right = 968.0
+margin_bottom = 467.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Play This Card"
+flat = false
+align = 1
+
+[node name="PieceSelection" parent="Control/States" index="4" instance=ExtResource( 14 )]
+
+[node name="SelectCell" parent="Control/States" index="5" instance=ExtResource( 15 )]
+
+[node name="Transitions" type="Control" parent="Control" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -189,21 +395,482 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Mouse" ]
+
+[node name="PreActionFinished" parent="Control/Transitions" index="0" instance=ExtResource( 16 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/PreAction") ]
+path2TargetState = NodePath("../../States/TurnAction")
+
+[node name="OnEndTurn" parent="Control/Transitions" index="1" instance=ExtResource( 17 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
+path2TargetState = NodePath("../../States/EndTurn")
+
+[node name="OnPieceSelection" parent="Control/Transitions" index="2" instance=ExtResource( 18 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
+path2TargetState = NodePath("../../States/PieceSelection")
+
+[node name="OnCardSelection" parent="Control/Transitions" index="3" instance=ExtResource( 19 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/TurnAction") ]
+path2TargetState = NodePath("../../States/CardSelection")
+
+[node name="OnCardActivation" parent="Control/Transitions" index="4" instance=ExtResource( 20 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/CardSelection") ]
+path2TargetState = NodePath("../../States/SelectCell")
+
+[node name="OnPieceActivation" parent="Control/Transitions" index="5" instance=ExtResource( 21 )]
+
+_sections_unfolded = [ "Pause" ]
+path2SourceStates = [ NodePath(""), NodePath("../../States/PieceSelection") ]
+path2TargetState = NodePath("../../States/SelectCell")
+
+[node name="NextTurn" parent="Control/Transitions" index="6" instance=ExtResource( 22 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/EndTurn") ]
+path2TargetState = NodePath("../../States/PreAction")
+
+[node name="OnNextAction" parent="Control/Transitions" index="7" instance=ExtResource( 23 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/SelectCell"), NodePath("../../States/CardSelection"), NodePath("../../States/PieceSelection") ]
+path2TargetState = NodePath("../../States/TurnAction")
+
+[node name="Hand0" type="Control" parent="." index="7"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 196.0
+margin_top = 580.0
+margin_right = 797.0
+margin_bottom = 721.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Hand0" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 337.0
+margin_bottom = 475.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = true
+_sections_unfolded = [ "Mouse", "Rect" ]
+
+[node name="CenterContainer2" type="CenterContainer" parent="Hand0" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 104.0
+margin_top = 1.0
+margin_right = 452.0
+margin_bottom = 472.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Rect" ]
+
+[node name="CenterContainer3" type="CenterContainer" parent="Hand0" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 211.0
+margin_top = 1.0
+margin_right = 552.0
+margin_bottom = 472.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer4" type="CenterContainer" parent="Hand0" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 318.0
+margin_right = 659.0
+margin_bottom = 471.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer5" type="CenterContainer" parent="Hand0" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 424.0
+margin_right = 765.0
+margin_bottom = 471.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer6" type="CenterContainer" parent="Hand0" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 530.0
+margin_right = 871.0
+margin_bottom = 471.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Hand1" type="Control" parent="." index="8"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 225.0
+margin_top = -79.0
+margin_right = 826.0
+margin_bottom = 62.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Hand1" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 337.0
+margin_bottom = 475.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = true
+_sections_unfolded = [ "Mouse", "Rect" ]
+
+[node name="CenterContainer2" type="CenterContainer" parent="Hand1" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 104.0
+margin_top = 1.0
+margin_right = 452.0
+margin_bottom = 472.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Margin", "Mouse", "Rect" ]
+
+[node name="CenterContainer3" type="CenterContainer" parent="Hand1" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 211.0
+margin_top = 1.0
+margin_right = 552.0
+margin_bottom = 472.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Focus", "Mouse", "Pause", "Rect", "Visibility" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer4" type="CenterContainer" parent="Hand1" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 318.0
+margin_right = 659.0
+margin_bottom = 471.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer5" type="CenterContainer" parent="Hand1" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 424.0
+margin_right = 765.0
+margin_bottom = 471.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CenterContainer6" type="CenterContainer" parent="Hand1" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 530.0
+margin_right = 871.0
+margin_bottom = 471.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+use_top_left = false
+_sections_unfolded = [ "Mouse", "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Deck0" type="Control" parent="." index="9"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 87.0
+margin_top = 298.0
+margin_right = 235.0
+margin_bottom = 474.0
+rect_scale = Vector2( 0.7, 0.7 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Deck" parent="Deck0" index="0" instance=ExtResource( 24 )]
+
+position = Vector2( 81.1812, 94.7115 )
+
+[node name="Label" type="Label" parent="Deck0" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Player0 deck"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Deck1" type="Control" parent="." index="10"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 71.0
+margin_top = 124.0
+margin_right = 264.0
+margin_bottom = 303.0
+rect_scale = Vector2( 0.7, 0.7 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Deck" parent="Deck1" index="0" instance=ExtResource( 24 )]
+
+position = Vector2( 95.6779, 89.235 )
+
+[node name="Label" type="Label" parent="Deck1" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Player1 deck"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="FocusCard1" type="Control" parent="." index="11"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 11.0
+margin_top = 176.0
+margin_right = 132.0
+margin_bottom = 365.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="onGameOver" parent="FSMControl/Transitions" index="0" instance=ExtResource( 9 )]
+[node name="FocusCard0" type="Control" parent="." index="12"]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/Playing") ]
-path2TargetState = NodePath("../../States/GameOver")
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 877.0
+margin_top = 153.0
+margin_right = 1000.0
+margin_bottom = 351.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
-[node name="onRestart" parent="FSMControl/Transitions" index="1" instance=ExtResource( 10 )]
+[connection signal="pressed" from="EndTurn" to="Control/Transitions/OnEndTurn" method="_on_EndTurn_pressed"]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/GameOver") ]
-path2TargetState = NodePath("../../States/Playing")
+[connection signal="timeout" from="Control/States/PreAction/Timer" to="Control/Transitions/PreActionFinished" method="_on_Timer_timeout"]
 
-[connection signal="timeout" from="FSMControl/States/GameOver/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Control/States/EndTurn/Timer" to="Control/States/EndTurn" method="_on_Timer_timeout"]
+
+[connection signal="pressed" from="Control/States/CardSelection/Button" to="Control/Transitions/OnCardActivation" method="_on_Button_pressed"]
 
 

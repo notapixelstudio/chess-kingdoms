@@ -8,4 +8,4 @@ export_presets.cfg
 .directory
 *~
 release/*
-don't know if it is good or not
+.vscode

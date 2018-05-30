@@ -11,12 +11,18 @@ config_version=3
 [application]
 
 config/name="Kingdoms of Shadoran"
-run/main_scene="res://screens/splash_screen/splash_screen.tscn"
+run/main_scene="res://screens/game_screen/Game.tscn"
 config/icon="res://assets/chess/pieces/chess_piece_0_centurion.png"
 
 [autoload]
 
 model="*res://globals/Model.gd"
+view="*res://globals/UI.gd"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
 
 [editor_plugins]
 

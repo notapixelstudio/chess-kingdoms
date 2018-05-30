@@ -2,6 +2,25 @@
 # Global singleton that have the state of the grid. And its changing state.
 extends Node
 
+# powers:
+
+var powers_definition = {
+	"shield": "protected from forward attacks",
+	"restless": "can move twice",
+	"swarm": "when summoned, can move immediately after",
+	"quick": "use half of the unit time cost"
+}
+
+# MANA and TIME UNIT
+const MANA = "mana"
+const TIME_UNIT = "time_unit"
+const MAX_MANA = 9
+const MAX_TIME = 6 # it is actually 3 
+var mana_count
+var current_mana_count
+var unit_count
+var current_unit_count
+
 var grid_size = Vector2(8, 8)
 var grid = []
 var piece_defs = {}
@@ -11,8 +30,10 @@ const MOVES = "moves"
 const PIECE_DEF_JSON = "res://assets/logic/piece_def.json_data"
 
 onready var Piece = preload("res://actors/characters/character.tscn")
+
 var player1 
 var player2
+var players_struct = {}
 
 var rand_dir = [-1, 0, 1]
 enum players {PLAYER1,PLAYER2}
@@ -22,10 +43,18 @@ var turn = 0
 
 const MOVE = "move"
 const ATTACK = "take"
+const SUMMON = "summon"
 const MAX_COUNT = 20
 var playing
 
+
+var selected_card
+
 func _ready():
+	mana_count = 2
+	current_mana_count = mana_count
+	unit_count = 1
+	current_unit_count = unit_count
 	randomize()
 	# list characters
 	# Create the grid Array with null in it.
@@ -39,17 +68,26 @@ func _ready():
 	for k in piece_defs.keys():
 		if k != "king":
 			list_piece_name.append(k)
+	
+	# TODO: We need to get this information directly from the King CARD
 	player1 = Piece.instance()
 	player1.piece_name = "king"
 	player1.side = PLAYER1
-	player1.pos_in_the_grid = Vector2(4,7)
+	player1.pos_in_the_grid = Vector2(7,4)
+	player1.kingdom = "amber"
+	player1.sprite = load("res://assets/chess/pixel_pieces/ruby_king.png")
 	
+	players_struct[PLAYER1] = {"king":player1, MANA: mana_count, TIME_UNIT: unit_count}
 	# REMEMBER to add_child to the root
 	
 	player2 = Piece.instance()
 	player2.piece_name = "king"
 	player2.side = PLAYER2
-	player2.pos_in_the_grid = Vector2(4,0)
+	player2.kingdom = "emerald"
+	player2.pos_in_the_grid = Vector2(0,4)
+	player2.sprite = load("res://assets/chess/pixel_pieces/ruby_king.png")
+
+	players_struct[PLAYER2] = {"king":player2, MANA: mana_count, TIME_UNIT: unit_count}
 
 	# add players to the grid
 	grid[player1.pos_in_the_grid.x][player1.pos_in_the_grid.y] = player1
@@ -58,21 +96,32 @@ func _ready():
 
 func change_turn():
 	turn = (turn + 1) % 2
+	players_struct[turn][MANA] = min(players_struct[turn][MANA] + 1, MAX_MANA)
+	players_struct[turn][TIME_UNIT] = min(players_struct[turn][TIME_UNIT] + 1, MAX_TIME)
+	current_unit_count = players_struct[turn][TIME_UNIT]
 
+	current_mana_count = players_struct[turn][MANA]
 
 func get_moves(piece_name):
 	# function that get the json for the legal moves. 
 	# return array of cells where the piece can move.
 	return piece_defs[piece_name][MOVES]
 
-
+func get_legal_summon(piece):
+	var legal_moves = []
+	for pos in piece.moves:
+		var step = Vector2(pos["step"].back()*sign_of_moves[piece.side], pos["step"].front()*sign_of_moves[piece.side])
+		if is_cell_vacant(piece.pos_in_the_grid, step):
+			legal_moves.append({"step":step, "action":SUMMON})
+	return legal_moves
+	
 func get_legal_moves(piece):
 	# TODO: we don't like repetition of code
 	var legal_moves = []
 	var pos_to_check = Vector2()
 
 	for pos in piece.moves:
-		var step = Vector2(pos["step"].front()*sign_of_moves[piece.side], pos["step"].back()*sign_of_moves[piece.side])
+		var step = Vector2(pos["step"].back()*sign_of_moves[piece.side], pos["step"].front()*sign_of_moves[piece.side])
 		if pos.has("repeat"):
 			var repeated_step = Vector2()
 			# we just need one multiplier
@@ -84,27 +133,28 @@ func get_legal_moves(piece):
 				if is_cell_vacant(piece.pos_in_the_grid, repeated_step):
 					legal_moves.append({"step":repeated_step, "action":MOVE})
 				else:
-					print("someone is on the way")
 					pos_to_check = piece.pos_in_the_grid + repeated_step
 					if is_within_the_grid(pos_to_check):
 						if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
-							legal_moves.append({"step":repeated_step, "action":ATTACK})
-						else: 
-							print("it is our friend")
+							if "shield" in grid[pos_to_check.x][pos_to_check.y].powers and piece.pos_in_the_grid.y == pos_to_check.y:
+								print("this piece is protected")
+							else:
+								legal_moves.append({"step":repeated_step, "action":ATTACK})
+						
 					break
 		else: 
 			if is_cell_vacant(piece.pos_in_the_grid, step):
 				
 				legal_moves.append({"step":step, "action":MOVE})
 			else:
-				print("someone is on the way")
 				pos_to_check = piece.pos_in_the_grid + step
 				if is_within_the_grid(pos_to_check):
 					if grid[pos_to_check.x][pos_to_check.y].side != piece.side:
-						legal_moves.append({"step":step, "action":ATTACK})
-					else: 
-						print("it is our friend")
-	print(legal_moves)
+						if "shield" in grid[pos_to_check.x][pos_to_check.y].powers and piece.pos_in_the_grid.y == pos_to_check.y:
+							print("this piece is protected")
+						else:
+							legal_moves.append({"step":step, "action":ATTACK})
+					
 	return legal_moves
 
 # return the piece that occupies the cell, if hit the boundaries, return null
@@ -132,11 +182,13 @@ func move(piece, new_pos):
 	
 	grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = null
 	var taken_piece = null
+
+	current_unit_count -= piece.time_unit_cost
+	
 	if grid[new_pos.x][new_pos.y]:
 		taken_piece = take_piece(piece, grid[new_pos.x][new_pos.y])
 	grid[new_pos.x][new_pos.y] = piece
 	piece.pos_in_the_grid = new_pos
-	change_turn()
 	return taken_piece
 	
 # from https://godotengine.org/qa/2547/how-to-randomize-a-list-array
@@ -151,30 +203,37 @@ func shuffleList(list):
 		indexList.remove(x)
 		list.remove(x)
 	list = tmp_list
-	print(tmp_list)
 	return shuffledList
 
-func summon(king, piece_name):
+func summon(king, card, target_pos = null):
 	var piece = Piece.instance()
+	var piece_name = card.piece_name
 	piece.piece_name = piece_name
+	piece.kingdom = card.data.kingdom
+	piece.card = card
+	# TODO: depends where is the artwork
+	piece.sprite = card.data.artwork
 	piece.side = king.side 
+	for power in card.data.powers:
+		piece.powers.append(power)
 	var possible_direction = Vector2()
 	var all = []
-	rand_dir = shuffleList(rand_dir)
-	for x in rand_dir:
-		for y in rand_dir:
-			all.append(Vector2(x,y))
-	for pos in all:
-		
-		if is_cell_vacant(king.pos_in_the_grid, pos):
-			possible_direction = pos
-			break
-		
-		print(possible_direction)
+	if not target_pos:
+		rand_dir = shuffleList(rand_dir)
+		for x in rand_dir:
+			for y in rand_dir:
+				all.append(Vector2(x,y))
+		for pos in all:
+			if is_cell_vacant(king.pos_in_the_grid, pos):
+				possible_direction = pos
+				break
+	else:
+		possible_direction = target_pos	- king.pos_in_the_grid
 	if possible_direction:
 		piece.pos_in_the_grid = king.pos_in_the_grid + possible_direction
 		grid[piece.pos_in_the_grid.x][piece.pos_in_the_grid.y] = piece
-		change_turn()
+		current_mana_count -= card.mana_cost
+		# change_turn()
 		return piece
 	else:
 		return null
